@@ -1,0 +1,16 @@
+xterm*termName: xterm-color
+
+xterm*faceName: Ubuntu Mono
+xterm*faceSize: 12
+xterm*font: 8x16
+
+XTerm*saveLines: 1000
+XTerm*locale: true
+
+!TXT Normal, Normal, Cursor
+URxvt*foreground  : #c8c8c8
+URxvt*background  : #31363b
+URxvt*cursorColor : #c8c8c8
+XTerm*foreground  : #c8c8c8
+XTerm*background  : #31363b
+XTerm*cursorColor : #c8c8c8

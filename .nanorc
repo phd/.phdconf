@@ -1,0 +1,17 @@
+# config version 1.00
+
+unset locking
+unset historylog
+bind ^S savefile main
+bind ^Z undo main
+bind ^Y redo main
+bind ^Q discardbuffer writeout
+bind ^F whereis main
+bind ^R replace main
+#bind ^I insert main
+bind ^G gotoline main
+bind F1 help all
+#bind ^Q "^O^Q"
+set tabsize 4
+#set tabstospaces
+#set linenumbers

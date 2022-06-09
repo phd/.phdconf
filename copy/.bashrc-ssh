@@ -1,0 +1,4 @@
+#!/bin/bash -e
+#
+# alias host='ssh -A user@host'
+#

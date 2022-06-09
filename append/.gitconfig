@@ -1,0 +1,8 @@
+
+#[user]
+#    email = ?
+#    name = ?
+
+[include]
+    path = ~/.gitconfig-phd
+

@@ -1,0 +1,331 @@
+#!/bin/bash -e
+# version 2.31
+
+[ -z "$__PROMPT_INDENT" ] && __PROMPT_INDENT='1'
+[ -z "$__CD_LS"         ] && __CD_LS='1'
+[ -z "$__EDITOR"        ] && __EDITOR='nano'
+[ -z "$__XEDITOR"       ] && __XEDITOR='kwrite'
+[ -z "$__XEDITOR2"      ] && __XEDITOR2='kate'
+
+# colors
+C_NONE=$'\e[39m'
+C_BLACK=$'\e[30m'
+C_RED=$'\e[31m'
+C_GREEN=$'\e[32m'
+C_YELLOW=$'\e[33m'
+C_BLUE=$'\e[34m'
+C_MAGENTA=$'\e[35m'
+C_CYAN=$'\e[36m'
+C_LGRAY=$'\e[37m'
+C_DGRAY=$'\e[90m'
+C_LRED=$'\e[91m'
+C_LGREEN=$'\e[92m'
+C_LYELLOW=$'\e[93m'
+C_LBLUE=$'\e[94m'
+C_LMAGENTA=$'\e[95m'
+C_LCYAN=$'\e[96m'
+C_WHITE=$'\e[97m'
+B_NONE=$'\e[49m'
+B_BLACK=$'\e[40m'
+B_RED=$'\e[41m'
+B_GREEN=$'\e[42m'
+B_YELLOW=$'\e[43m'
+B_BLUE=$'\e[44m'
+B_MAGENTA=$'\e[45m'
+B_CYAN=$'\e[46m'
+B_LGRAY=$'\e[47m'
+B_DGRAY=$'\e[100m'
+B_LRED=$'\e[101m'
+B_LGREEN=$'\e[102m'
+B_LYELLOW=$'\e[103m'
+B_LBLUE=$'\e[104m'
+B_LMAGENTA=$'\e[105m'
+B_LCYAN=$'\e[106m'
+B_WHITE=$'\e[107m'
+BC_NONE="${B_NONE}${C_NONE}"
+BC_RESET=$'\e[0m'
+F_BOLD_ON=$'\e[1m'
+F_BOLD_OFF=$'\e[21m'
+F_DIM_ON=$'\e[2m'
+F_DIM_OFF=$'\e[22m'
+F_ITALIC_ON=$'\e[3m'
+F_ITALIC_OFF=$'\e[23m'
+F_UNDERLINE_ON=$'\e[4m'
+F_UNDERLINE_OFF=$'\e[24m'
+F_BLINKING_ON=$'\e[5m'
+F_BLINKING_OFF=$'\e[25m'
+F_REVERSE_ON=$'\e[7m'
+F_REVERSE_OFF=$'\e[27m'
+F_HIDDEN_ON=$'\e[8m'
+F_HIDDEN_OFF=$'\e[28m'
+F_STRIKETHROUGH_ON=$'\e[9m'
+F_STRIKETHROUGH_OFF=$'\e[29m'
+T_CURSOR_OFF=$'\e[?25l'
+T_CURSOR_ON=$'\e[?25h'
+
+function colorpwd {
+    PWD=$(pwd)
+    echo ${PWD//\//${C_YELLOW}\/${C_NONE}}
+}
+
+if [ -f /usr/lib/git-core/git-sh-prompt ]; then
+    . /usr/lib/git-core/git-sh-prompt
+fi
+
+GIT_PS1_SHOWDIRTYSTATE=1
+GIT_PS1_SHOWUNTRACKEDFILES=1
+GIT_PS1_SHOWUPSTREAM='auto'
+GIT_PS1_SHOWCOLORHINTS='true'
+GIT_PS1_STATESEPARATOR=''
+if [ "$(id -u)" -eq 0 ]; then
+    __prompt_sign='#'
+    __prompt_color="${C_RED}"
+    __prompt_color_bg="${B_RED}"
+else
+    __prompt_sign='$'
+    __prompt_color="${C_BLUE}"
+    __prompt_color_bg="${B_BLUE}"
+fi
+
+function __prompt_err {
+    local ERR="${PIPESTATUS[-1]}"
+    [ "${ERR}" -ne 0 ] && echo -ne " ${C_RED}[${ERR}]${C_NONE}"
+}
+function __git_head {
+    git rev-parse --short HEAD 2>/dev/null
+}
+function __prompt_git {
+    command -v __git_ps1 &>/dev/null && echo -n '$(__git_ps1 " ${C_GREEN}{%s,$(__git_head)}${C_NONE}")'
+}
+PS1="\[${__prompt_color_bg}\]  \[${B_NONE}\] \$(colorpwd) (\[${__prompt_color}\]\u\[${C_NONE}\]@\[${C_BLUE}\]\H\[${C_NONE}\])$(__prompt_git)\$(__prompt_err)\n\[${__prompt_color_bg}\] \[${B_NONE}\]\[${__prompt_color}\]${__prompt_sign}\[${C_NONE}\] "
+PS2="\[${__prompt_color_bg}\] \[${B_NONE}\]\[${__prompt_color}\]>\[${C_NONE}\] "
+
+if [ "${__PROMPT_INDENT}" -eq '0' ]; then
+    PS1="${debian_chroot:+($debian_chroot)}\[${__prompt_color}\]\u\[${C_NONE}\]@\H:\[${__prompt_color}\]\w\[${C_NONE}\]${__prompt_sign} "
+    PS2="> "
+fi
+
+export HISTFILE=~/.bash_history
+history -c
+history -w
+export HISTFILESIZE=32000
+export HISTSIZE=32000
+export HISTFILE=~/.bash_history-phd
+export HISTFILESIZE=32000
+export HISTSIZE=32000
+export HISTCONTROL='ignoredups:erasedups:ignorespace'
+touch "$HISTFILE"
+shopt -s histappend
+bind 'set revert-all-at-newline on'
+history_cleaned () {
+    awk \
+        '{ gsub(/^[ \t]+|[ \t]+$/, "", $0); lines[n++]=$0; seen[$0]++; } END { for (i=0; i<n; i++) { if (!(--seen[lines[i]])) { print(lines[i]); } } }' \
+        "$HISTFILE"
+}
+history_clean () {
+    echo "$(history_cleaned)" > "$HISTFILE"
+}
+history_append () {
+    history -a
+    history_clean
+}
+history_reload () {
+    history -c
+    history -r
+}
+export PROMPT_COMMAND="history_append; ${PROMPT_COMMAND}"
+alias h='history'            # show history
+alias hh='history_reload'    # reload common history from all shells
+alias hhh='e "$HISTFILE"'    # edit Bash history
+alias Ehhh='E "$HISTFILE"'   # edit Bash history in X
+alias h-='set +o history'    # temporarily disable history in this shell
+alias h+='set -o history'    # re-enable history in this shell
+
+export PROMPT_COMMAND="setterm -cursor on; ${PROMPT_COMMAND}"
+
+shopt -s autocd
+
+mkdircd () {
+    mkdir -p -- "$*" && cd -P -- "$*"
+}
+alias md='mkdir'
+alias mdc='mkdircd'
+alias rd='rmdir'
+alias rmF='rm -rf'
+
+alias ls='LC_COLLATE=en_US.utf8 ls --color=auto --group-directories-first'
+alias l='LC_COLLATE=en_US.utf8  ls --color=auto --group-directories-first -lvF'
+alias ll='LC_COLLATE=en_US.utf8 ls --color=auto --group-directories-first -lvFa'
+alias ll.='ll -I "[^.]*"'
+alias lll='ll.'
+alias cd..='cd ..'
+alias cd-='cd - &>/dev/null'
+alias c='cd'
+alias ..='cd ..'
+alias ....='cd ../..'
+alias ......='cd ../../..'
+alias ..2='cd ../..'
+alias ..3='cd ../../..'
+alias ..4='cd ../../../..'
+alias ..5='cd ../../../../..'
+alias ..6='cd ../../../../../..'
+alias ..7='cd ../../../../../../..'
+alias ..8='cd ../../../../../../../..'
+alias ..9='cd ../../../../../../../../..'
+alias ...='cd .'
+alias ~='cd ~'
+alias c~='cd ~'
+alias cd~='cd ~'
+alias -- -='cd -'
+alias s='sudo su'
+alias sk='sudo -k'
+alias sd='sudo'
+alias lessf='less -n +F'
+alias lessg='less -n +G'
+alias scr='screen -D -R'
+alias scrl='screen -list'
+alias exit='clear; exit'
+alias logout='clear; logout'
+alias q='clear; exit'
+alias top='top -d 0,5'
+alias git='LANG=en_US.UTF-8 git'
+alias g='git'
+alias gitgui='(git gui &) &>/dev/null '
+alias gg='gitgui'
+alias grep='grep --color=auto'
+alias axel='axel --user-agent="Mozilla/5.0 (Windows NT 10.0; rv:68.0) Gecko/20100101 Firefox/68.0"'
+alias axel2='axel -n 2'
+alias axel3='axel -n 3'
+alias axel4='axel -n 4'
+alias axel5='axel -n 5'
+alias axel10='axel -n 10'
+alias axel15='axel -n 15'
+alias axel20='axel -n 20'
+alias axel25='axel -n 25'
+alias axel30='axel -n 30'
+alias apkey='sudo apt-key adv --keyserver keyserver.ubuntu.com --recv'
+alias sedn='sed -e "1h;2,\$H;\$!d;g" -r'
+alias gitq='qgit'
+alias m='make'
+alias gk='gitk'
+alias k='gitk'
+alias ka='gitk --all'
+alias qg='qgit'
+alias gq='qgit'
+alias e="${__EDITOR}"
+alias E="x ${__XEDITOR}"
+alias EE="x ${__XEDITOR2}"
+alias K='x kate'
+alias KW='x kwrite'
+alias KD='x kdevelop'
+alias C='x codium'
+alias err='tee /dev/stderr'
+alias out='tee /dev/tty'
+alias t='tee /dev/tty'
+alias copy='xclip -sel c <'
+alias dm='sudo dmesg'
+alias dmw='sudo dmesg -w'
+alias psaux='ps aux'
+alias psauf='ps auf'
+alias psaufx='ps aufx'
+alias dfh='df -h'
+alias reboot?='[ -f /var/run/reboot-required ] && cat /var/run/reboot-required || echo No.'
+
+#which colormake &>/dev/null && alias make='colormake'
+
+function cd {
+    where="$@"
+    if [ -e "${where}" ] && [ ! -d "${where}" ]; then
+        where="$(dirname "${where}")"
+    fi
+    builtin cd ${where} || return "${?}"
+    # skip for Konsole KPart:
+    [ -n "${KONSOLE_VERSION}" ] && [ "${WINDOWID}" = '0' ] && return '0'
+    [ ! "${__CD_LS}" -eq '1' ] && return '0'
+    if [ "${__PROMPT_INDENT}" -eq '1' ]; then
+        echo "${B_GREEN}  ${B_NONE} $(colorpwd)"
+        LC_COLLATE=en_US.utf8 ls --group-directories-first -C -v --color=always | sed -e "s,^,${B_GREEN} ${B_NONE}  ,"
+    else
+        echo "=== $(pwd) ==="
+        LC_COLLATE=en_US.utf8 ls --group-directories-first -C -v --color=always
+    fi
+}
+
+function CD {
+    builtin cd "$@"
+}
+
+function b {
+    ( ${@} & disown ) &> /dev/null
+}
+
+function x {
+    args="$([ ! -t 0 ] && cat)"
+    (xargs $@ &>/dev/null <<<"${args}" & disown ) &>/dev/null
+}
+
+function wgetr {
+    wget --referer=${1:-} ${1:-}
+}
+
+function slowcat {
+    perl -pe "system 'sleep ${2:-.020}'" ${1:-}
+}
+
+function ap {
+    args="$@"
+    sudo bash -c "aptitude ${args} && apt-get --purge autoremove && apt-get clean"
+    sudo -K
+    echo -n 'Reboot: '; reboot?
+}
+
+function gitk {
+    git status; (nohup gitk $@ &) &>/dev/null
+}
+
+function ssha {
+    eval `ssh-agent`
+    ssh-add ~/.ssh/*.pem ~/.ssh/*_rsa
+}
+alias sshak='ssh-agent -k'
+
+function cb {
+    args="$@"
+    if [ -n "${args}" ]; then
+        xclip -sel c <<< "${args}"
+    elif [ ! -t 0 ]; then
+        xclip -sel c
+    else
+        xclip -sel c -o 2>/dev/null || true
+    fi
+}
+function CB {
+    args="$@"
+    if [ -n "${args}" ]; then
+        xclip -sel c <<< "${args}"
+    elif [ ! -t 0 ]; then
+        xclip -sel c
+    fi
+    xclip -sel c -o 2>/dev/null || true
+}
+
+export GCC_COLORS=true
+export GTK_USE_PORTAL=1
+# export GTK2_RC_FILES=~/.gtkrc-2.0
+# export QT_SELECT=5
+# export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel ${_JAVA_OPTIONS}"
+# export KWIN_TRIPLE_BUFFER=0
+# export vblank_mode=1
+# export __GL_SYNC_TO_VBLANK=1
+# export __GL_YIELD=USLEEP
+
+### POWERLINE:
+#if [ -f /usr/share/powerline/bindings/bash/powerline.sh ]; then
+#    POWERLINE_BASH_CONTINUATION=1
+#    POWERLINE_BASH_SELECT=1
+#    . /usr/share/powerline/bindings/bash/powerline.sh
+#fi
+
+if [ -f ~/.bashrc-ssh ]; then
+    . ~/.bashrc-ssh
+fi

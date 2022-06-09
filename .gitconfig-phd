@@ -1,0 +1,197 @@
+# version 2.08
+
+[alias]
+    s                    = status
+    st                   = status
+    stuno                = status -uno
+
+    co                   = checkout
+    cob                  = checkout -b
+    com                  = checkout master
+    coma                 = checkout main
+
+    cp                   = cherry-pick
+    cpc                  = cherry-pick --continue
+    cpa                  = cherry-pick --abort
+
+    log1                 = log --oneline
+
+    reset1               = reset HEAD~
+    resethard            = reset --hard
+    resethard1           = reset --hard HEAD~
+    resethardom          = reset --hard origin/master
+    resethardoma         = reset --hard origin/main
+    r                    = reset
+    r1                   = reset HEAD~
+    rh                   = reset --hard
+    rh1                  = reset --hard HEAD~
+    rhom                 = reset --hard origin/master
+    rhoma                = reset --hard origin/main
+    rm                   = reset --merge
+
+    ru                   = remote update
+
+    f                    = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { echo Fetching... && git fetch $@ && git status; }; _"
+    fa                   = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git f --all"
+    ft                   = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git f --tags"
+    fat                  = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git f --all --tags"
+
+    p                    = push
+    pf                   = push -f
+    pf                   = push -f
+
+    b                    = branch
+    branch-delete        = git push --delete
+
+    r                    = rebase
+    ri                   = rebase -i
+    ri1                  = rebase -i HEAD~1
+    ri2                  = rebase -i HEAD~2
+    ri3                  = rebase -i HEAD~3
+    ri4                  = rebase -i HEAD~4
+    ri5                  = rebase -i HEAD~5
+    ri6                  = rebase -i HEAD~6
+    ri7                  = rebase -i HEAD~7
+    ri8                  = rebase -i HEAD~8
+    ri9                  = rebase -i HEAD~9
+    ri10                 = rebase -i HEAD~10
+    ri15                 = rebase -i HEAD~15
+    ri20                 = rebase -i HEAD~20
+    ri25                 = rebase -i HEAD~25
+    ri30                 = rebase -i HEAD~30
+    ri35                 = rebase -i HEAD~35
+    ri40                 = rebase -i HEAD~40
+    ri45                 = rebase -i HEAD~45
+    ri50                 = rebase -i HEAD~50
+    ri60                 = rebase -i HEAD~60
+    ri70                 = rebase -i HEAD~70
+    ri80                 = rebase -i HEAD~80
+    ri90                 = rebase -i HEAD~90
+    ri100                = rebase -i HEAD~100
+    ri150                = rebase -i HEAD~150
+    ri200                = rebase -i HEAD~200
+    ri250                = rebase -i HEAD~250
+    ri300                = rebase -i HEAD~300
+    ri350                = rebase -i HEAD~350
+    ri400                = rebase -i HEAD~400
+    ri450                = rebase -i HEAD~450
+    ri500                = rebase -i HEAD~500
+    rc                   = rebase --continue
+    ra                   = rebase --abort
+    rdate                = rebase --committer-date-is-author-date
+
+    c                    = commit
+    ca                   = commit -a
+    cam                  = commit    --amend
+    caam                 = commit -a --amend
+    camd                 = commit    --amend --date
+    camdn                = commit    --amend --date=now
+    caamd                = commit -a --amend --date
+    caamdn               = commit -a --amend --date=now
+    cd                   = commit    --amend --date=now
+    cu                   = commit -a --amend --date=now
+
+    d                    = diff
+    dn                   = diff --name-only
+    dw                   = diff --color-words=.
+    dc                   = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git diff --check | cut -d: -f1 | sort -u"
+
+    l-work               = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git diff --name-only                 | xargs -r -L1 realpath --relative-to=$_DIR"
+    l-staged             = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git diff --name-only --cached        | xargs -r -L1 realpath --relative-to=$_DIR"
+    l-conflicts          = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git diff --name-only --diff-filter=U | xargs -r -L1 realpath --relative-to=$_DIR"
+    lg-work              = diff --name-only
+    lg-staged            = diff --name-only --cached
+    l-conflicts          = diff --name-only --diff-filter=U
+    l-all                = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git ls  && git l"
+    lg-all               = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git lgs && git lg"
+    l-commit             = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { git diff-tree -r --no-commit-id --name-only $1 | xargs -r -L1 realpath --relative-to=$_DIR; }; _"
+    lg-commit            = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { git diff-tree -r --no-commit-id --name-only $1                                            ; }; _"
+    l                    = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { [ -z $1 ] && git l-work  || git l-commit  $1; }; _"
+    lg                   = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { [ -z $1 ] && git lg-work || git lg-commit $1; }; _"
+    ls                   = l-staged
+    la                   = l-all
+    lc                   = l-conflicts
+    lgs                  = lg-staged
+    lga                  = lg-all
+    lgc                  = lg-conflicts
+    l-last               = l-commit HEAD
+    l-last2              = l-commit HEAD~1
+    l-last3              = l-commit HEAD~2
+    l-last4              = l-commit HEAD~3
+    l-last5              = l-commit HEAD~4
+    l-last6              = l-commit HEAD~5
+    l-last7              = l-commit HEAD~6
+    l-last8              = l-commit HEAD~7
+    l-last9              = l-commit HEAD~8
+    ll                   = l-last
+    ll2                  = l-last2
+    ll3                  = l-last3
+    ll4                  = l-last4
+    ll5                  = l-last5
+    ll6                  = l-last6
+    ll7                  = l-last7
+    ll8                  = l-last8
+    ll9                  = l-last9
+    lg-last              = lg-commit HEAD
+    lg-last2             = lg-commit HEAD~1
+    lg-last3             = lg-commit HEAD~2
+    lg-last4             = lg-commit HEAD~3
+    lg-last5             = lg-commit HEAD~4
+    lg-last6             = lg-commit HEAD~5
+    lg-last7             = lg-commit HEAD~6
+    lg-last8             = lg-commit HEAD~7
+    lg-last9             = lg-commit HEAD~8
+    lgl                  = lg-last
+    lgl2                 = lg-last2
+    lgl3                 = lg-last3
+    lgl4                 = lg-last4
+    lgl5                 = lg-last5
+    lgl6                 = lg-last6
+    lgl7                 = lg-last7
+    lgl8                 = lg-last8
+    lgl9                 = lg-last9
+
+    action               = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; bash -i -c '__git_ps1 %s\\|CLEAN | cut -d\\| -f2 | sed -E \"s,[^A-Za-z-],.,g\" | cut -d. -f1'"
+    what                 = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; bash -i -c '__git_ps1 %s\\|CLEAN | cut -d\\| -f2 | sed -E \"s,[^A-Za-z-],.,g\" | cut -d. -f1'"
+    w                    = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; bash -i -c '__git_ps1 %s\\|CLEAN | cut -d\\| -f2 | sed -E \"s,[^A-Za-z-],.,g\" | cut -d. -f1'"
+
+    abort                = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git abort-$(git action)"
+    abort-CLEAN          = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo 'Nothing to abort.'"
+    abort-CHERRY-PICKING = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git cherry-pick --abort && git cherry-pick --abort"
+    abort-REVERTING      = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git revert      --abort && git revert      --abort"
+    abort-REBASE-i       = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git rebase      --abort && git rebase      --abort"
+    abort-REBASE-m       = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git rebase      --abort && git rebase      --abort"
+    abort-REBASE         = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git rebase      --abort && git rebase      --abort"
+    abort-AM             = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git rebase      --abort && git rebase      --abort"
+    abort-AMREBASE       = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git rebase      --abort && git rebase      --abort"
+    abort-MERGING        = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git merge       --abort && git merge       --abort"
+    abort-BISECTING      = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git bisect      --abort && git bisect      --abort"
+
+    conf                 = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; nano .git/config"
+
+[init]
+    defaultBranch = master
+
+[core]
+    editor = nano
+[push]
+    default = simple
+[pull]
+    ff = only
+[gui]
+    fontui = -family \"Noto Sans\" -size 10 -weight normal -slant roman -underline 0 -overstrike 0
+    fontdiff = -family \"Ubuntu Mono\" -size 10 -weight normal -slant roman -underline 0 -overstrike 0
+    warndetachedcommit = true
+    spellingdictionary = en
+    tabsize = 4
+[cola]
+    spellcheck = false
+
+[url "git@invent.kde.org:"]
+    insteadOf = kde:
+[url "git@invent.kde.org:"]
+    pushInsteadOf = kde:
+[url "https://invent.kde.org/"]
+    insteadOf = kde:
+[url "ssh://git@invent.kde.org/"]
+    pushInsteadOf = kde:

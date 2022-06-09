@@ -1,0 +1,23 @@
+# config version 1.01
+
+# === INFO ===============================
+# '%{=b}%{G} Screen(s): '
+# This prints the window listing in blue:
+# '%{b}%w'
+# ========================================
+
+hardstatus alwayslastline
+hardstatus string "   %w"
+
+shelltitle ""
+
+startup_message off
+
+msgwait 0
+
+# Bind Function keys:
+bindkey -k k5 prev
+bindkey -k k6 next
+bindkey -k k7 screen
+bindkey -k k8 detach
+bindkey -k k9 kill

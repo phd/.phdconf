@@ -1,0 +1,17 @@
+# config version 1.01
+
+### Super + Scroll Up => Scroll Left
+"/usr/bin/xte 'mouseup 6' 'mouseclick 6' &"
+Mod4 + b:4
+
+### Super + Scroll Down => Scroll Right
+"/usr/bin/xte 'mouseup 7' 'mouseclick 7' &"
+Mod4 + b:5
+
+### mouse additional button Back => Ctrl + w
+"/usr/bin/xte 'keydown Control_L' 'key w' 'keyup Control_L' &"
+b:8
+
+### mouse additional button Forward => XF86Back
+"/usr/bin/xte 'key XF86Back' &"
+b:9
