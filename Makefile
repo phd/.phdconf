@@ -32,6 +32,7 @@ endef
 all: home root etc
 
 home:
+	$(call link                , ${DIR}                                , ${HOME}/.phdconf                     )
 	$(call link                , ${DIR}/.bashrc-phd                    , ${HOME}/.bashrc-phd                  )
 	$(call copy_if_doesnt_exist, ${DIR}/copy/.bashrc-ssh               , ${HOME}/.bashrc-ssh                  )
 	$(call copy_if_doesnt_exist, ${HOME}/.bash_history                 , ${HOME}/.bash_history-phd            )
