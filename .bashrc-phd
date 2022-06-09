@@ -202,7 +202,7 @@ alias axel15='axel -n 15'
 alias axel20='axel -n 20'
 alias axel25='axel -n 25'
 alias axel30='axel -n 30'
-alias apkey='sudo apt-key adv --keyserver keyserver.ubuntu.com --recv'
+alias ap-key='sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys'
 alias sedn='sed -e "1h;2,\$H;\$!d;g" -r'
 alias gitq='qgit'
 alias m='make'
@@ -229,6 +229,7 @@ alias psauf='ps auf'
 alias psaufx='ps aufx'
 alias dfh='df -h'
 alias reboot?='[ -f /var/run/reboot-required ] && cat /var/run/reboot-required || echo No.'
+alias demangle=c++filt
 
 #which colormake &>/dev/null && alias make='colormake'
 
@@ -306,6 +307,44 @@ function CB {
         xclip -sel c
     fi
     xclip -sel c -o 2>/dev/null || true
+}
+
+function mpv {
+    out=$(/usr/bin/mpv "$@")
+    err="$?"
+    if [ "$err" -ne '0' ]; then
+        kdialog --title 'MPV' --error "Running MPV failed.\n\n$out"
+    fi
+    return "$err"
+}
+
+function topcpu {
+    echo `ps x -o pid=,pcpu=,comm= --sort -pcpu | head -n 1`
+}
+
+function topmem {
+    echo `ps x -o pid=,rss=,comm= --sort -rss | head -n 1`
+}
+
+function wgets {
+    k=1
+    while read url; do
+        name="$(basename "${url}")"
+        name="${k} - ${name}"
+        wget -c --referer "${url}" "${url}" -O "${name}" || true
+        ((k++)) || true
+    done
+}
+
+function find-case-duplicated-files {
+    find . | tr 'A-Z' 'a-z' | sort | uniq -D | sort -u
+}
+
+function wine-remove-extensions {
+    rm -f ~/.local/share/mime/packages/x-wine*
+    rm -f ~/.local/share/applications/wine-extension*
+    rm -f ~/.local/share/icons/hicolor/*/*/application-x-wine-extension*
+    rm -f ~/.local/share/mime/application/x-wine-extension*
 }
 
 export GCC_COLORS=true
