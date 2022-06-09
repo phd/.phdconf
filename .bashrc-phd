@@ -1,5 +1,4 @@
 #!/bin/bash -e
-# version 2.31
 
 [ -z "$__PROMPT_INDENT" ] && __PROMPT_INDENT='1'
 [ -z "$__CD_LS"         ] && __CD_LS='1'

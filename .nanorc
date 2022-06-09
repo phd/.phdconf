@@ -1,5 +1,3 @@
-# config version 1.00
-
 unset locking
 unset historylog
 bind ^S savefile main
