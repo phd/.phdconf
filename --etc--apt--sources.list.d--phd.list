@@ -66,8 +66,8 @@ deb     [arch=amd64] http://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/ impish univ
 #deb     [arch=amd64] http://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/ jammy universe
 
 #--- VS Codium
-#deb     https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/debs/ vscodium main
-deb     https://download.vscodium.com/debs vscodium main
+#deb     https://download.vscodium.com/debs vscodium main
+deb      https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/debs vscodium main
 
 #--- Atom
 #deb     http://ppa.launchpad.net/webupd8team/atom/ubuntu bionic main
