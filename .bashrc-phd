@@ -63,7 +63,7 @@ T_CURSOR_OFF=$'\e[?25l'
 T_CURSOR_ON=$'\e[?25h'
 
 function colorpwd {
-    PWD=$(pwd)
+    local PWD=$(pwd)
     echo ${PWD//\//${C_YELLOW}\/${C_NONE}}
 }
 
@@ -234,7 +234,7 @@ alias demangle=c++filt
 #which colormake &>/dev/null && alias make='colormake'
 
 function cd {
-    where="$@"
+    local where="$@"
     if [ -e "${where}" ] && [ ! -d "${where}" ]; then
         where="$(dirname "${where}")"
     fi
@@ -260,7 +260,7 @@ function b {
 }
 
 function x {
-    args="$([ ! -t 0 ] && cat)"
+    local args="$([ ! -t 0 ] && cat)"
     (xargs $@ &>/dev/null <<<"${args}" & disown ) &>/dev/null
 }
 
@@ -273,7 +273,7 @@ function slowcat {
 }
 
 function ap {
-    args="$@"
+    local args="$@"
     sudo bash -c "aptitude ${args} && apt-get --purge autoremove && apt-get clean"
     sudo -K
     echo -n 'Reboot: '; reboot?
@@ -290,7 +290,7 @@ function ssha {
 alias sshak='ssh-agent -k'
 
 function cb {
-    args="$@"
+    local args="$@"
     if [ -n "${args}" ]; then
         xclip -sel c <<< "${args}"
     elif [ ! -t 0 ]; then
@@ -300,7 +300,7 @@ function cb {
     fi
 }
 function CB {
-    args="$@"
+    local args="$@"
     if [ -n "${args}" ]; then
         xclip -sel c <<< "${args}"
     elif [ ! -t 0 ]; then
@@ -310,8 +310,8 @@ function CB {
 }
 
 function mpv {
-    out=$(/usr/bin/mpv "$@")
-    err="$?"
+    local out=$(/usr/bin/mpv "$@")
+    local err="$?"
     if [ "$err" -ne '0' ]; then
         kdialog --title 'MPV' --error "Running MPV failed.\n\n$out"
     fi
@@ -327,11 +327,11 @@ function topmem {
 }
 
 function wgets {
-    k=1
+    local k=1
     while read url; do
-        name="$(basename "${url}")"
-        name="${k} - ${name}"
-        wget -c --referer "${url}" "${url}" -O "${name}" || true
+        local name="$(basename "${url}")"
+        local kname="${k} - ${name}"
+        wget -c --referer "${url}" "${url}" -O "${kname}" || true
         ((k++)) || true
     done
 }
