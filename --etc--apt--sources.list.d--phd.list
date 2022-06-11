@@ -34,12 +34,12 @@ deb-src http://ppa.launchpad.net/phd/chromium-browser/ubuntu jammy main
 deb     http://ppa.launchpad.net/phd/firefox/ubuntu jammy main
 deb-src http://ppa.launchpad.net/phd/firefox/ubuntu jammy main
 
-#--- Librewolf
-deb     [arch=amd64] http://deb.librewolf.net jammy main
-
-#--- Mozilla Team
+#--- Firefox & Thunderbird (Mozilla Team)
 deb     http://ppa.launchpad.net/mozillateam/ppa/ubuntu jammy main
 deb-src http://ppa.launchpad.net/mozillateam/ppa/ubuntu jammy main
+
+#--- Librewolf
+deb     [arch=amd64] http://deb.librewolf.net jammy main
 
 #=== TOP SOFTWARE:
 

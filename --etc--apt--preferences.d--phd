@@ -9,3 +9,7 @@ Pin-Priority: 1001
 Package: *
 Pin: release o=LP-PPA-phd-firefox
 Pin-Priority: 1001
+
+Package: *
+Pin: release o=LP-PPA-mozillateam
+Pin-Priority: 1001
