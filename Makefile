@@ -4,12 +4,14 @@ SHELL := /bin/bash
 DIR   := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 
 define link
-	rm -f "$(strip $(2))"
-	ln -s -n -T --force "$(strip $(1))" "$(strip $(2))" || true
+	[ ! -e "$(strip $(2))" -o -L "$(strip $(2))" -o -f "$(strip $(2))" ] \
+		&& rm -f "$(strip $(2))"                                         \
+		&& ln -s -n -T --force "$(strip $(1))" "$(strip $(2))"           \
+	|| true
 endef
 
 define link_with_backup
-	[ -L "$(strip $(2))" -o ! -e "$(strip $(2))" ] \
+	[ ! -e "$(strip $(2))" -o -L "$(strip $(2))" ] \
 		&& rm -f "$(strip $(2))"                   \
 		|| mv "$(strip $(2))" "$(strip $(2))~"     \
 		|| true
