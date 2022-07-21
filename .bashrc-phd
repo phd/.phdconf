@@ -229,6 +229,7 @@ alias psauf='ps auf'
 alias psaufx='ps aufx'
 alias dfh='df -h'
 alias reboot?='[ -f /var/run/reboot-required ] && cat /var/run/reboot-required || echo No.'
+alias reboot!='sudo reboot'
 alias demangle=c++filt
 
 #which colormake &>/dev/null && alias make='colormake'
