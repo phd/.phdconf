@@ -212,6 +212,7 @@ alias ka='gitk --all'
 alias qg='qgit'
 alias gq='qgit'
 alias e="${__EDITOR}"
+alias se="sudo ${__EDITOR}"
 alias E="x ${__XEDITOR}"
 alias EE="x ${__XEDITOR2}"
 alias K='x kate'
