@@ -21,6 +21,9 @@ deb     http://ppa.launchpad.net/kubuntu-ppa/backports/ubuntu jammy main
 deb     http://ppa.launchpad.net/kubuntu-ppa/backports/ubuntu jammy main/debug
 deb-src http://ppa.launchpad.net/kubuntu-ppa/backports/ubuntu jammy main
 
+#--- Webmin
+deb     https://download.webmin.com/download/repository sarge contrib
+
 #=== BROWSERS:
 
 #--- Brave
