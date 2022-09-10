@@ -280,6 +280,13 @@ function ap {
     sudo -K
     echo -n 'Reboot: '; reboot?
 }
+function ap-fix {
+    sudo bash -c "dpkg --configure -a; apt-get update --fix-missing; apt-get install -f; apt-get clean"
+}
+function ap! {
+    ap-fix
+    ap
+}
 
 function gitk {
     git status; (nohup gitk $@ &) &>/dev/null
