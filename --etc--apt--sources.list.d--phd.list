@@ -17,9 +17,12 @@ deb     http://ppa.launchpad.net/ubuntu-x-swat/updates/ubuntu jammy main
 deb-src http://ppa.launchpad.net/ubuntu-x-swat/updates/ubuntu jammy main
 
 #--- kubuntu-ppa backports
-deb     http://ppa.launchpad.net/kubuntu-ppa/backports/ubuntu jammy main
-deb     http://ppa.launchpad.net/kubuntu-ppa/backports/ubuntu jammy main/debug
-deb-src http://ppa.launchpad.net/kubuntu-ppa/backports/ubuntu jammy main
+deb     http://ppa.launchpad.net/kubuntu-ppa/backports/ubuntu       jammy main
+deb     http://ppa.launchpad.net/kubuntu-ppa/backports/ubuntu       jammy main/debug
+deb-src http://ppa.launchpad.net/kubuntu-ppa/backports/ubuntu       jammy main
+deb     http://ppa.launchpad.net/kubuntu-ppa/backports-extra/ubuntu jammy main
+deb     http://ppa.launchpad.net/kubuntu-ppa/backports-extra/ubuntu jammy main/debug
+deb-src http://ppa.launchpad.net/kubuntu-ppa/backports-extra/ubuntu jammy main
 
 #--- Webmin
 deb     https://download.webmin.com/download/repository sarge contrib
