@@ -27,6 +27,9 @@ deb-src http://ppa.launchpad.net/kubuntu-ppa/backports-extra/ubuntu jammy main
 #--- Webmin
 deb     https://download.webmin.com/download/repository sarge contrib
 
+#--- Conda
+deb [arch=amd64] https://repo.anaconda.com/pkgs/misc/debrepo/conda stable main
+
 #=== BROWSERS:
 
 #--- Brave
