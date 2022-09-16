@@ -8,6 +8,10 @@ deb     http://ddebs.ubuntu.com jammy-updates main restricted universe multivers
 deb     http://ppa.launchpad.net/damentz/liquorix/ubuntu jammy main
 deb-src http://ppa.launchpad.net/damentz/liquorix/ubuntu jammy main
 
+#--- XanMod kernel
+deb     http://deb.xanmod.org releases main
+deb-src http://deb.xanmod.org releases main
+
 #--- graphics-drivers
 deb     http://ppa.launchpad.net/graphics-drivers/ppa/ubuntu jammy main
 deb-src http://ppa.launchpad.net/graphics-drivers/ppa/ubuntu jammy main
