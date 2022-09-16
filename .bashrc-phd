@@ -240,7 +240,7 @@ function cd {
     if [ -e "${where}" ] && [ ! -d "${where}" ]; then
         where="$(dirname "${where}")"
     fi
-    builtin cd ${where} || return "${?}"
+    builtin cd "${where}" || return "${?}"
     # skip for Konsole KPart:
     [ -n "${KONSOLE_VERSION}" ] && [ "${WINDOWID}" = '0' ] && return '0'
     [ ! "${__CD_LS}" -eq '1' ] && return '0'
