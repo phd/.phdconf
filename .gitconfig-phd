@@ -168,7 +168,7 @@
 
     conf                 = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; nano .git/config"
 
-    init2                = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; cd "${_DIR}"; [ -d '.git' ] && echo 'Already initialized!' && exit 1; git init; git commit --allow-empty -m 'init'; git branch 'init'"
+    init2                = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { cd "${_DIR}"; [ -d '.git' ] && echo 'Already initialized!' && exit 1; git init $@; git commit --allow-empty -m 'init'; git branch 'init'; }; _"
 
 [init]
     defaultBranch = master
