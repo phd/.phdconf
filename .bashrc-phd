@@ -67,6 +67,13 @@ function colorpwd {
     echo ${PWD//\//${C_YELLOW}\/${C_NONE}}
 }
 
+function trim {
+  var="$@"
+  var="${var#"${var%%[![:space:]]*}"}"
+  var="${var%"${var##*[![:space:]]}"}"
+  echo -n "${var}"
+}
+
 if [ -f /usr/lib/git-core/git-sh-prompt ]; then
     . /usr/lib/git-core/git-sh-prompt
 fi
@@ -337,9 +344,16 @@ function topmem {
 
 function wgets {
     local k=1
+    local url
     while read url; do
+        url=$(trim "${url}")
+        [ -z "${url}" ] && continue
         local name="$(basename "${url}")"
-        local kname="${k} - ${name}"
+        local kstr=''
+        if [ "$1" == '-n' ]; then
+            kstr="${k} - "
+        fi
+        local kname="${kstr}${name}"
         wget -c --referer "${url}" "${url}" -O "${kname}" || true
         ((k++)) || true
     done
