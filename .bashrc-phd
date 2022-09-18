@@ -152,7 +152,8 @@ export PROMPT_COMMAND="setterm -cursor on; ${PROMPT_COMMAND}"
 shopt -s autocd
 
 mkdircd () {
-    mkdir -p -- "$*" && cd -P -- "$*"
+    local name="$@"
+    mkdir -p -- "${name}" && cd "${name}"
 }
 alias md='mkdir'
 alias mdc='mkdircd'
