@@ -359,6 +359,7 @@ function wgets {
         ((k++)) || true
     done
 }
+alias wgetsn='wgets -n'
 
 function find-case-duplicated-files {
     find . | tr 'A-Z' 'a-z' | sort | uniq -D | sort -u
