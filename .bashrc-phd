@@ -242,7 +242,8 @@ alias duh='du -h'
 alias dfh='df -h'
 alias reboot?='[ -f /var/run/reboot-required ] && echo YES || echo no'
 alias reboot!='sudo reboot'
-alias demangle=c++filt
+alias demangle='c++filt'
+alias http-server='python -m http.server'
 
 #which colormake &>/dev/null && alias make='colormake'
 
