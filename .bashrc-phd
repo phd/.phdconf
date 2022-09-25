@@ -140,12 +140,14 @@ history_reload () {
     history -r
 }
 export PROMPT_COMMAND="history_append; ${PROMPT_COMMAND}"
-alias h='history'            # show history
-alias hh='history_reload'    # reload common history from all shells
-alias hhh='e "$HISTFILE"'    # edit Bash history
-alias Ehhh='E "$HISTFILE"'   # edit Bash history in X
-alias h-='set +o history'    # temporarily disable history in this shell
-alias h+='set -o history'    # re-enable history in this shell
+alias h='history'                       # show history
+alias hh='history_reload'               # reload common history from all shells
+alias hhh='e "$HISTFILE"'               # edit Bash history
+alias Ehhh='E "$HISTFILE"'              # edit Bash history in X
+alias h-='HISTFILE=/dev/null'           # temporarily disable history saving for this shell
+alias h+='HISTFILE=~/.bash_history-phd' # re-enable history saving for this shell
+alias H-='set +o history'               # temporarily disable history for this shell
+alias H+='set -o history'               # re-enable history for this shell
 
 export PROMPT_COMMAND="setterm -cursor on; ${PROMPT_COMMAND}"
 
