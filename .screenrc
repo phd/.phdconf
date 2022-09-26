@@ -1,21 +1,28 @@
-# === INFO ===============================
-# '%{=b}%{G} Screen(s): '
-# This prints the window listing in blue:
-# '%{b}%w'
-# ========================================
+startup_message off
+msgwait 0
 
-hardstatus alwayslastline
-hardstatus string "   %w"
+hardstatus alwaysignore ""
+caption always "%{= kW}%?%P%{= gW}%?%?%E%{= rW}%?   %-w%n*%+w%?  | %h%?"
 
 shelltitle ""
 
-startup_message off
-
-msgwait 0
-
 # Bind Function keys:
-bindkey -k k5 prev
-bindkey -k k6 next
-bindkey -k k7 screen
-bindkey -k k8 detach
-bindkey -k k9 kill
+bindkey -k k5 prev     # F5
+bindkey -k k6 next     # F6
+bindkey -k k7 screen   # F7
+bindkey -k k8 detach   # F8
+bindkey -k k9 kill     # F9
+
+# Scrolling:
+defscrollback 10000
+bindkey "^[[1;2A" eval "copy" "stuff k"    # Shift+Up
+bindkey "^[[1;2B" eval "copy" "stuff j"    # Shift+Down
+bindkey "^[[1;2D" eval "copy" "stuff h"    # Shift+Left
+bindkey "^[[1;2C" eval "copy" "stuff l"    # Shift+Right
+bindkey "^[[2;2A" eval "copy" "stuff k"    # Shift+Up
+bindkey "^[[2;2B" eval "copy" "stuff j"    # Shift+Down
+bindkey "^[[2;2D" eval "copy" "stuff h"    # Shift+Left
+bindkey "^[[2;2C" eval "copy" "stuff l"    # Shift+Right
+bindkey "^[[6;2~" eval "copy" "stuff ^b"   # Shift+PageUp
+bindkey "^[[5;2~" eval "copy" "stuff ^f"   # Shift+PageDown
+#termcapinfo xterm* ti@:te@
