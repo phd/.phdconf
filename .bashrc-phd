@@ -251,7 +251,9 @@ alias http-server='python -m http.server'
 
 function cd {
     local where="$@"
-    if [ -e "${where}" ] && [ ! -d "${where}" ]; then
+    if [ -z "${where}" ]; then
+        where="${HOME}"
+    elif [ -e "${where}" ] && [ ! -d "${where}" ]; then
         where="$(dirname "${where}")"
     fi
     builtin cd "${where}" || return "${?}"
