@@ -2,7 +2,7 @@ startup_message off
 msgwait 0
 
 hardstatus alwaysignore ""
-caption always "%{= kW}%?%P%{= gW}%?%?%E%{= rW}%?   %-w%n*%+w%?  | %h%?"
+caption always "%{=r}%?%P%{.g}%?%?%E%{.r}%?   %-w%n*%+w%?  | %h%?"
 
 shelltitle ""
 
