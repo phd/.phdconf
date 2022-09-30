@@ -334,6 +334,10 @@ function CB {
     xclip -sel c -o 2>/dev/null || true
 }
 
+function kman {
+    konqueror "man:/$@"
+}
+
 function mpv {
     local out=$(/usr/bin/mpv "$@")
     local err="$?"
