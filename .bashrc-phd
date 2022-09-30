@@ -199,7 +199,7 @@ alias q='clear; exit'
 alias top='top -d 0,5'
 alias git='LANG=en_US.UTF-8 git'
 alias g='git'
-alias gitgui='(git gui &) &>/dev/null '
+alias gitgui='x git gui'
 alias gg='gitgui'
 alias grep='grep --color=auto'
 alias axel='axel --user-agent="Mozilla/5.0 (Windows NT 10.0; rv:68.0) Gecko/20100101 Firefox/68.0"'
@@ -269,6 +269,10 @@ function cd {
     fi
 }
 
+function C! {
+    command ${@}
+}
+
 function CD {
     builtin cd "$@"
 }
@@ -305,7 +309,7 @@ function ap! {
 }
 
 function gitk {
-    git status; (nohup gitk $@ &) &>/dev/null
+    git status; x gitk $@
 }
 
 function ssha {
