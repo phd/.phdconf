@@ -371,7 +371,10 @@ function wgets {
             kstr="${k} - "
         fi
         local kname="${kstr}${name}"
-        wget -c --referer "${url}" "${url}" -O "${kname}" || true
+        wget                                                                       \
+             --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t 0 \
+             -c --referer "${url}" "${url}" -O "${kname}"                          \
+             || true
         ((k++)) || true
     done
 }
