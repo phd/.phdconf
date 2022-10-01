@@ -65,5 +65,7 @@ else
 	$(call link, ${DIR}                                            , /etc/.phdconf                     )
 	$(call link, /etc/.phdconf/--etc--apt--preferences.d--phd      , /etc/apt/preferences.d/phd        )
 	$(call link, /etc/.phdconf/--etc--apt--sources.list.d--phd.list, /etc/apt/sources.list.d/phd.list  )
+	$(call link, /etc/.phdconf/--etc--reniced.conf                 , /etc/reniced.conf                 )
+	$(call link, /etc/.phdconf/--etc--cron.d--reniced              , /etc/cron.d/reniced               )
 	$(call link, /dev/null                                         , /etc/apt/sources.list.d/steam.list)
 endif

@@ -1,0 +1,4 @@
+* * * * * root                  /usr/bin/reniced
+* * * * * root /bin/sleep 15 && /usr/bin/reniced
+* * * * * root /bin/sleep 30 && /usr/bin/reniced
+* * * * * root /bin/sleep 45 && /usr/bin/reniced
