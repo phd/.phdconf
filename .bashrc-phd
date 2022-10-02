@@ -103,7 +103,7 @@ function __git_head {
 function __prompt_git {
     command -v __git_ps1 &>/dev/null && echo -n '$(__git_ps1 " ${C_GREEN}{%s,$(__git_head)}${C_NONE}")'
 }
-PS1="\[${__prompt_color_bg}\]  \[${B_NONE}\] \$(colorpwd) [\[${__prompt_color}\]\u\[${C_NONE}\]@\[${C_BLUE}\]\H\[${C_NONE}\]]$(__prompt_git)\$(__prompt_err)\n\[${__prompt_color_bg}\] \[${B_NONE}\]\[${__prompt_color}\]${__prompt_sign}\[${C_NONE}\] "
+PS1="\[${__prompt_color_bg}\]  \[${B_NONE}\] \$(colorpwd) \[${C_BLUE}\][\[${__prompt_color}\]\u\[${C_BLUE}\]@\H]\[${C_NONE}\]$(__prompt_git)\$(__prompt_err)\n\[${__prompt_color_bg}\] \[${B_NONE}\]\[${__prompt_color}\]${__prompt_sign}\[${C_NONE}\] "
 PS2="\[${__prompt_color_bg}\] \[${B_NONE}\]\[${__prompt_color}\]>\[${C_NONE}\] "
 
 if [ "${__PROMPT_INDENT}" -eq '0' ]; then
