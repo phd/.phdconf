@@ -245,7 +245,6 @@ alias dfh='df -h'
 alias reboot?='[ -f /var/run/reboot-required ] && echo YES || echo no'
 alias reboot!='sudo reboot'
 alias demangle='c++filt'
-alias http-server='python -m http.server'
 
 #which colormake &>/dev/null && alias make='colormake'
 
@@ -379,6 +378,16 @@ function wgets {
     done
 }
 alias wgetsn='wgets -n'
+
+function server-http {
+    python -m http.server "$@"
+}
+
+function server-http-php {
+    local port="${1:-8000}"
+    shift
+    php -S "0.0.0.0:${port}" "$@"
+}
 
 function find-case-duplicated-files {
     find . | tr 'A-Z' 'a-z' | sort | uniq -D | sort -u
