@@ -319,7 +319,8 @@ function ssha {
     eval `ssh-agent`
     ssh-add ~/.ssh/*.pem ~/.ssh/*_rsa
 }
-alias sshak='ssh-agent -k'
+alias sshal='ssh-add -l'
+alias sshak='eval `ssh-agent -k`'
 
 function cb {
     local args="$@"
