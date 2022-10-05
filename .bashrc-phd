@@ -268,12 +268,16 @@ function cd {
     fi
 }
 
-function C! {
-    command ${@}
-}
-
 function CD {
     builtin cd "$@"
+}
+
+function . {
+    [ -z "$@" ] && cd . || source "$@"
+}
+
+function C! {
+    command ${@}
 }
 
 function b {
