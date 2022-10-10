@@ -5,34 +5,34 @@ deb     http://ddebs.ubuntu.com jammy         main restricted universe multivers
 deb     http://ddebs.ubuntu.com jammy-updates main restricted universe multiverse
 
 #--- Liquorix kernel
-deb     http://ppa.launchpad.net/damentz/liquorix/ubuntu jammy main
-deb-src http://ppa.launchpad.net/damentz/liquorix/ubuntu jammy main
+deb     https://ppa.launchpadcontent.net/damentz/liquorix/ubuntu jammy main
+deb-src https://ppa.launchpadcontent.net/damentz/liquorix/ubuntu jammy main
 
 #--- XanMod kernel
-deb     http://deb.xanmod.org releases main
-deb-src http://deb.xanmod.org releases main
+deb     https://deb.xanmod.org releases main
+deb-src https://deb.xanmod.org releases main
 
 #--- graphics-drivers
-deb     http://ppa.launchpad.net/graphics-drivers/ppa/ubuntu jammy main
-deb-src http://ppa.launchpad.net/graphics-drivers/ppa/ubuntu jammy main
+deb     https://ppa.launchpadcontent.net/graphics-drivers/ppa/ubuntu jammy main
+deb-src https://ppa.launchpadcontent.net/graphics-drivers/ppa/ubuntu jammy main
 
 #--- Ubuntu X SWAT
-deb     http://ppa.launchpad.net/ubuntu-x-swat/updates/ubuntu jammy main
-deb-src http://ppa.launchpad.net/ubuntu-x-swat/updates/ubuntu jammy main
+deb     https://ppa.launchpadcontent.net/ubuntu-x-swat/updates/ubuntu jammy main
+deb-src https://ppa.launchpadcontent.net/ubuntu-x-swat/updates/ubuntu jammy main
 
 #--- kubuntu-ppa backports
-deb     http://ppa.launchpad.net/kubuntu-ppa/backports/ubuntu       jammy main
-deb     http://ppa.launchpad.net/kubuntu-ppa/backports/ubuntu       jammy main/debug
-deb-src http://ppa.launchpad.net/kubuntu-ppa/backports/ubuntu       jammy main
-deb     http://ppa.launchpad.net/kubuntu-ppa/backports-extra/ubuntu jammy main
-deb     http://ppa.launchpad.net/kubuntu-ppa/backports-extra/ubuntu jammy main/debug
-deb-src http://ppa.launchpad.net/kubuntu-ppa/backports-extra/ubuntu jammy main
+deb     https://ppa.launchpadcontent.net/kubuntu-ppa/backports/ubuntu       jammy main
+deb     https://ppa.launchpadcontent.net/kubuntu-ppa/backports/ubuntu       jammy main/debug
+deb-src https://ppa.launchpadcontent.net/kubuntu-ppa/backports/ubuntu       jammy main
+deb     https://ppa.launchpadcontent.net/kubuntu-ppa/backports-extra/ubuntu jammy main
+deb     https://ppa.launchpadcontent.net/kubuntu-ppa/backports-extra/ubuntu jammy main/debug
+deb-src https://ppa.launchpadcontent.net/kubuntu-ppa/backports-extra/ubuntu jammy main
 
 #--- Webmin
 deb     https://download.webmin.com/download/repository sarge contrib
 
 #--- Conda
-deb [arch=amd64] https://repo.anaconda.com/pkgs/misc/debrepo/conda stable main
+deb     [arch=amd64] https://repo.anaconda.com/pkgs/misc/debrepo/conda stable main
 
 #=== BROWSERS:
 
@@ -40,25 +40,25 @@ deb [arch=amd64] https://repo.anaconda.com/pkgs/misc/debrepo/conda stable main
 deb     [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main
 
 #--- Chromium Browser (phd)
-deb     http://ppa.launchpad.net/phd/chromium-browser/ubuntu jammy main
-deb-src http://ppa.launchpad.net/phd/chromium-browser/ubuntu jammy main
+deb     https://ppa.launchpadcontent.net/phd/chromium-browser/ubuntu jammy main
+deb-src https://ppa.launchpadcontent.net/phd/chromium-browser/ubuntu jammy main
 
 #--- Firefox (phd)
-deb     http://ppa.launchpad.net/phd/firefox/ubuntu jammy main
-deb-src http://ppa.launchpad.net/phd/firefox/ubuntu jammy main
+deb     https://ppa.launchpadcontent.net/phd/firefox/ubuntu jammy main
+deb-src https://ppa.launchpadcontent.net/phd/firefox/ubuntu jammy main
 
 #--- Firefox & Thunderbird (Mozilla Team)
-deb     http://ppa.launchpad.net/mozillateam/ppa/ubuntu jammy main
-deb-src http://ppa.launchpad.net/mozillateam/ppa/ubuntu jammy main
+deb     https://ppa.launchpadcontent.net/mozillateam/ppa/ubuntu jammy main
+deb-src https://ppa.launchpadcontent.net/mozillateam/ppa/ubuntu jammy main
 
 #--- Librewolf
-deb     [arch=amd64] http://deb.librewolf.net jammy main
+deb     [arch=amd64] https://deb.librewolf.net jammy main
 
 #=== TOP SOFTWARE:
 
 #--- LibreOffice
-deb     http://ppa.launchpad.net/libreoffice/ppa/ubuntu jammy main
-deb-src http://ppa.launchpad.net/libreoffice/ppa/ubuntu jammy main
+deb     https://ppa.launchpadcontent.net/libreoffice/ppa/ubuntu jammy main
+deb-src https://ppa.launchpadcontent.net/libreoffice/ppa/ubuntu jammy main
 
 #--- Wine
 deb     https://dl.winehq.org/wine-builds/ubuntu/ jammy main
@@ -68,42 +68,42 @@ deb     https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/xUbun
 #=== SOFTWARE:
 
 #--- VirtualBox
-deb     [arch=amd64] http://download.virtualbox.org/virtualbox/debian jammy contrib
+deb     [arch=amd64] https://download.virtualbox.org/virtualbox/debian jammy contrib
 
 #--- Steam
 deb     [arch=amd64,i386] https://repo.steampowered.com/steam/ stable steam
 deb-src [arch=amd64,i386] https://repo.steampowered.com/steam/ stable steam
 
 ## TeXmacs
-deb     [arch=amd64] http://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/ impish universe
-#deb     [arch=amd64] http://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/ jammy universe
+deb     [arch=amd64] https://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/ impish universe
+#deb     [arch=amd64] https://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/ jammy universe
 
 #--- VS Codium
 #deb     https://download.vscodium.com/debs vscodium main
-deb      https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/debs vscodium main
+deb     https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/debs vscodium main
 
 #--- Atom
-#deb     http://ppa.launchpad.net/webupd8team/atom/ubuntu bionic main
-#deb-src http://ppa.launchpad.net/webupd8team/atom/ubuntu bionic main
+#deb     https://ppa.launchpadcontent.net/webupd8team/atom/ubuntu bionic main
+#deb-src https://ppa.launchpadcontent.net/webupd8team/atom/ubuntu bionic main
 
 #=== OTHER:
 
 #--- google-drive-ocamlfuse
-deb     http://ppa.launchpad.net/alessandro-strada/ppa/ubuntu jammy main
-deb-src http://ppa.launchpad.net/alessandro-strada/ppa/ubuntu jammy main
+deb     https://ppa.launchpadcontent.net/alessandro-strada/ppa/ubuntu jammy main
+deb-src https://ppa.launchpadcontent.net/alessandro-strada/ppa/ubuntu jammy main
 
 #--- Cryptomator.org
-#deb     http://ppa.launchpad.net/sebastian-stenzel/cryptomator/ubuntu jammy main
-#deb-src http://ppa.launchpad.net/sebastian-stenzel/cryptomator/ubuntu jammy main
+#deb     https://ppa.launchpadcontent.net/sebastian-stenzel/cryptomator/ubuntu jammy main
+#deb-src https://ppa.launchpadcontent.net/sebastian-stenzel/cryptomator/ubuntu jammy main
 
 #--- mkusb
-#deb     http://ppa.launchpad.net/mkusb/ppa/ubuntu jammy main
-#deb-src http://ppa.launchpad.net/mkusb/ppa/ubuntu jammy main
+#deb     https://ppa.launchpadcontent.net/mkusb/ppa/ubuntu jammy main
+#deb-src https://ppa.launchpadcontent.net/mkusb/ppa/ubuntu jammy main
 
 #--- ROS
-#deb     http://packages.ros.org/ros/ubuntu              focal main
-#deb     http://packages.ros.org/ros-shadow-fixed/ubuntu focal main
+#deb     https://packages.ros.org/ros/ubuntu              focal main
+#deb     https://packages.ros.org/ros-shadow-fixed/ubuntu focal main
 
 #--- Cool Retro Term
-#deb     http://ppa.launchpad.net/bugs-launchpad-net-falkensweb/cool-retro-term/ubuntu artful main
-#deb-src http://ppa.launchpad.net/bugs-launchpad-net-falkensweb/cool-retro-term/ubuntu artful main
+#deb     https://ppa.launchpadcontent.net/bugs-launchpad-net-falkensweb/cool-retro-term/ubuntu artful main
+#deb-src https://ppa.launchpadcontent.net/bugs-launchpad-net-falkensweb/cool-retro-term/ubuntu artful main
