@@ -51,6 +51,10 @@ deb-src https://ppa.launchpadcontent.net/phd/firefox/ubuntu jammy main
 deb     https://ppa.launchpadcontent.net/mozillateam/ppa/ubuntu jammy main
 deb-src https://ppa.launchpadcontent.net/mozillateam/ppa/ubuntu jammy main
 
+#--- Firefox Beta (Mozilla Team)
+#deb     https://ppa.launchpadcontent.net/mozillateam/firefox-next/ubuntu jammy main
+#deb-src https://ppa.launchpadcontent.net/mozillateam/firefox-next/ubuntu jammy main
+
 #--- Librewolf
 deb     [arch=amd64] https://deb.librewolf.net jammy main
 
