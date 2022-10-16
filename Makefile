@@ -22,6 +22,11 @@ define copy_if_doesnt_exist
 	[ ! -e "$(strip $(2))" ] && [ -e "$(strip $(1))" ] && cp "$(strip $(1))" "$(strip $(2))" || true
 endef
 
+define mkdir
+	[ -e "$(strip $(1))" ] && [ ! -d "$(strip $(1))" ] && rm -f "$(strip $(1))" || true
+	mkdir -p "$(strip $(1))" || true
+endef
+
 define append
 	cat "$(strip $(1))" >> "$(strip $(2))" || true
 endef
@@ -50,7 +55,7 @@ home:
 	$(call link_with_backup    , ${HOME}/.phdconf/.xbindkeysrc                   , ${HOME}/.xbindkeysrc                 )
 	$(call link_with_backup    , ${HOME}/.phdconf/.Xresources                    , ${HOME}/.Xresources                  )
 	$(call link_with_backup    , ${HOME}/.phdconf/XTerm                          , ${HOME}/XTerm                        )
-	mkdir -p ${HOME}/.config/fontconfig
+	$(call mkdir               , ${HOME}/.config/fontconfig                                                             )
 	$(call link_with_backup    , ${HOME}/.phdconf/.config--fontconfig--fonts.conf, ${HOME}/.config/fontconfig/fonts.conf)
 	$(call link_with_backup    , ${HOME}/.phdconf/.config--mpv                   , ${HOME}/.config/mpv                  )
 	nano ${HOME}/.gitconfig
@@ -62,10 +67,10 @@ etc:
 ifneq ($(shell id -u), 0)
 	sudo make $@
 else
-	$(call link, ${DIR}                                            , /etc/.phdconf                     )
-	$(call link, /etc/.phdconf/--etc--apt--preferences.d--phd      , /etc/apt/preferences.d/phd        )
-	$(call link, /etc/.phdconf/--etc--apt--sources.list.d--phd.list, /etc/apt/sources.list.d/phd.list  )
-	$(call link, /etc/.phdconf/--etc--reniced.conf                 , /etc/reniced.conf                 )
-	$(call link, /etc/.phdconf/--etc--cron.d--reniced              , /etc/cron.d/reniced               )
-	$(call link, /dev/null                                         , /etc/apt/sources.list.d/steam.list)
+	$(call link , ${DIR}                                            , /etc/.phdconf                     )
+	$(call link , /etc/.phdconf/--etc--apt--preferences.d--phd      , /etc/apt/preferences.d/phd        )
+	$(call link , /etc/.phdconf/--etc--apt--sources.list.d--phd.list, /etc/apt/sources.list.d/phd.list  )
+	$(call link , /etc/.phdconf/--etc--reniced.conf                 , /etc/reniced.conf                 )
+	$(call link , /etc/.phdconf/--etc--cron.d--reniced              , /etc/cron.d/reniced               )
+	$(call mkdir, /etc/apt/sources.list.d/steam.list                                                    )
 endif
