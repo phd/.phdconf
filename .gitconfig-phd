@@ -187,6 +187,12 @@
     warndetachedcommit = true
     spellingdictionary = en
     tabsize = 4
+[guitool "gitk"]
+    cmd = gitk
+    noconsole = yes
+[guitool "gitk --all"]
+    cmd = gitk --all
+    noconsole = yes
 [cola]
     spellcheck = false
 
