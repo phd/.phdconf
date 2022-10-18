@@ -2,7 +2,7 @@
 Description=reniced
 
 [Service]
-ExecStart=/bin/bash -c 'while true; do /usr/bin/reniced; sleep 10; done'
+ExecStart=/etc/.phdconf/run/reniced.sh
 
 [Install]
 WantedBy=multi-user.target

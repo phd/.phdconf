@@ -18,6 +18,10 @@ define link_with_backup
 	ln -s -n -T --force "$(strip $(1))" "$(strip $(2))" || true
 endef
 
+define copy
+	rm -f "$(strip $(2))" && cp "$(strip $(1))" "$(strip $(2))" || true
+endef
+
 define copy_if_doesnt_exist
 	[ ! -e "$(strip $(2))" ] && [ -e "$(strip $(1))" ] && cp "$(strip $(1))" "$(strip $(2))" || true
 endef
@@ -45,9 +49,8 @@ define rmdir
 endef
 
 define systemctl_enable
-	ln -s "/lib/systemd/system/$(strip $(1))" "/etc/systemd/system/"                         || true
-	ln -s "/lib/systemd/system/$(strip $(1))" "/etc/systemd/system/multi-user.target.wants/" || true
 	systemctl daemon-reload || true
+	systemctl enable  "$(strip $(1))" || true
 	systemctl restart "$(strip $(1))" || true
 endef
 
@@ -82,12 +85,13 @@ etc:
 ifneq ($(shell id -u), 0)
 	sudo make $@
 else
-	$(call link            , ${DIR}                                                   , /etc/.phdconf                      )
-	$(call link            , /etc/.phdconf/___etc___apt___preferences.d___phd         , /etc/apt/preferences.d/phd         )
-	$(call link            , /etc/.phdconf/___etc___apt___sources.list.d___phd.list   , /etc/apt/sources.list.d/phd.list   )
-	$(call link            , /etc/.phdconf/___etc___reniced.conf                      , /etc/reniced.conf                  )
-	$(call link            , /etc/.phdconf/___lib___systemd___system___reniced.service, /lib/systemd/system/reniced.service)
-	$(call systemctl_enable,                                                            reniced.service                    )
-	$(call rm              ,                                                            /etc/cron.d/reniced                )
-	$(call mkdir           ,                                                            /etc/apt/sources.list.d/steam.list )
+	$(call link            , ${DIR}                                                        , /etc/.phdconf                      )
+	$(call link            , /etc/.phdconf/___etc___apt___preferences.d___phd              , /etc/apt/preferences.d/phd         )
+	$(call link            , /etc/.phdconf/___etc___apt___sources.list.d___phd.list        , /etc/apt/sources.list.d/phd.list   )
+	$(call link            , /etc/.phdconf/___etc___reniced.conf                           , /etc/reniced.conf                  )
+	$(call copy            , /etc/.phdconf/copy/___etc___systemd___system___reniced.service, /etc/systemd/system/reniced.service)
+	$(call systemctl_enable,                                                                 reniced.service                    )
+	$(call rm              ,                                                                 /etc/cron.d/reniced                )
+	$(call rm              ,                                                                 /lib/systemd/system/reniced.service)
+	$(call mkdir           ,                                                                 /etc/apt/sources.list.d/steam.list )
 endif
