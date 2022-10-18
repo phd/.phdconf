@@ -1,0 +1,8 @@
+[Unit]
+Description=reniced
+
+[Service]
+ExecStart=/bin/bash -c 'while true; do /usr/bin/reniced; sleep 10; done'
+
+[Install]
+WantedBy=multi-user.target

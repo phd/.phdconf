@@ -36,6 +36,21 @@ define append_if_not_test
 		( $(call append, $(strip $(1)), $(strip $(2))) )
 endef
 
+define rm
+	rm -f "$(strip $(1))" || true
+endef
+
+define rmdir
+	rm -rf "$(strip $(1))" || true
+endef
+
+define systemctl_enable
+	ln -s "/lib/systemd/system/$(strip $(1))" "/etc/systemd/system/"                         || true
+	ln -s "/lib/systemd/system/$(strip $(1))" "/etc/systemd/system/multi-user.target.wants/" || true
+	systemctl daemon-reload || true
+	systemctl restart "$(strip $(1))" || true
+endef
+
 all: home root etc
 
 home:
@@ -55,7 +70,7 @@ home:
 	$(call link_with_backup    , ${HOME}/.phdconf/.xbindkeysrc                     , ${HOME}/.xbindkeysrc                 )
 	$(call link_with_backup    , ${HOME}/.phdconf/.Xresources                      , ${HOME}/.Xresources                  )
 	$(call link_with_backup    , ${HOME}/.phdconf/XTerm                            , ${HOME}/XTerm                        )
-	$(call mkdir               , ${HOME}/.config/fontconfig                                                               )
+	$(call mkdir               ,                                                     ${HOME}/.config/fontconfig           )
 	$(call link_with_backup    , ${HOME}/.phdconf/.config___fontconfig___fonts.conf, ${HOME}/.config/fontconfig/fonts.conf)
 	$(call link_with_backup    , ${HOME}/.phdconf/.config___mpv                    , ${HOME}/.config/mpv                  )
 	nano ${HOME}/.gitconfig
@@ -67,10 +82,12 @@ etc:
 ifneq ($(shell id -u), 0)
 	sudo make $@
 else
-	$(call link , ${DIR}                                                , /etc/.phdconf                     )
-	$(call link , /etc/.phdconf/___etc___apt___preferences.d___phd      , /etc/apt/preferences.d/phd        )
-	$(call link , /etc/.phdconf/___etc___apt___sources.list.d___phd.list, /etc/apt/sources.list.d/phd.list  )
-	$(call link , /etc/.phdconf/___etc___reniced.conf                   , /etc/reniced.conf                 )
-	$(call link , /etc/.phdconf/___etc___cron.d___reniced               , /etc/cron.d/reniced               )
-	$(call mkdir, /etc/apt/sources.list.d/steam.list                                                        )
+	$(call link            , ${DIR}                                                   , /etc/.phdconf                      )
+	$(call link            , /etc/.phdconf/___etc___apt___preferences.d___phd         , /etc/apt/preferences.d/phd         )
+	$(call link            , /etc/.phdconf/___etc___apt___sources.list.d___phd.list   , /etc/apt/sources.list.d/phd.list   )
+	$(call link            , /etc/.phdconf/___etc___reniced.conf                      , /etc/reniced.conf                  )
+	$(call link            , /etc/.phdconf/___lib___systemd___system___reniced.service, /lib/systemd/system/reniced.service)
+	$(call systemctl_enable,                                                            reniced.service                    )
+	$(call rm              ,                                                            /etc/cron.d/reniced                )
+	$(call mkdir           ,                                                            /etc/apt/sources.list.d/steam.list )
 endif
