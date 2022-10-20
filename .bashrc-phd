@@ -246,6 +246,7 @@ alias xargs1='xargs -r -n1'
 alias reboot?='[ -f /var/run/reboot-required ] && echo YES || echo no'
 alias reboot!='sudo reboot'
 alias demangle='c++filt'
+alias bashtrack='strace -e execve -b execve -f -qqv -e signal="!all" bash'
 
 #which colormake &>/dev/null && alias make='colormake'
 
