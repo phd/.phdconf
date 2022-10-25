@@ -158,7 +158,11 @@ mkdircd () {
     mkdir -p -- "${name}" && cd "${name}"
 }
 alias md='mkdir'
+alias mkd='mkdir'
 alias mdc='mkdircd'
+alias mdcd='mkdircd'
+alias mkdc='mkdircd'
+alias mkdcd='mkdircd'
 alias rd='rmdir'
 alias rmF='rm -rf'
 
