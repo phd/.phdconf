@@ -86,13 +86,14 @@ etc:
 ifneq ($(shell id -u), 0)
 	sudo make $@
 else
-	$(call link            , ${DIR}                                                                 , /etc/.phdconf                      )
-	$(call link            , /etc/.phdconf/__etc__apt__preferences.d__phd                           , /etc/apt/preferences.d/phd         )
-	$(call link            , /etc/.phdconf/__etc__apt__sources.list.d__phd.list--${DISTRIB_CODENAME}, /etc/apt/sources.list.d/phd.list   )
-	$(call link            , /etc/.phdconf/__etc__reniced.conf                                      , /etc/reniced.conf                  )
-	$(call copy            , /etc/.phdconf/copy/__etc__systemd__system__reniced.service             , /etc/systemd/system/reniced.service)
-	$(call systemctl_enable,                                                                          reniced.service                    )
-	$(call rm              ,                                                                          /etc/cron.d/reniced                )
-	$(call rm              ,                                                                          /lib/systemd/system/reniced.service)
-	$(call mkdir           ,                                                                          /etc/apt/sources.list.d/steam.list )
+	$(call link            , ${DIR}                                                                 , /etc/.phdconf                             )
+	$(call link            , /etc/.phdconf/__etc__apt__preferences.d__phd                           , /etc/apt/preferences.d/phd                )
+	$(call link            , /etc/.phdconf/__etc__apt__sources.list.d__phd.list--${DISTRIB_CODENAME}, /etc/apt/sources.list.d/phd.list          )
+	$(call link            , /etc/.phdconf/__etc__reniced.conf                                      , /etc/reniced.conf                         )
+	$(call copy            , /etc/.phdconf/copy/__etc__systemd__system__reniced.service             , /etc/systemd/system/reniced.service       )
+	$(call systemctl_enable,                                                                          reniced.service                           )
+	$(call rm              ,                                                                          /etc/cron.d/reniced                       )
+	$(call rm              ,                                                                          /lib/systemd/system/reniced.service       )
+	$(call mkdir           ,                                                                          /etc/apt/sources.list.d/steam.list        )
+	$(call mkdir           ,                                                                          /etc/apt/sources.list.d/google-chrome.list)
 endif
