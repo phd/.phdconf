@@ -383,6 +383,7 @@ function wgets {
         local kname="${kstr}${name}"
         wget                                                                       \
              --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t 0 \
+             --retry-on-http-error=503,429                                         \
              -c --referer "${url}" "${url}" -O "${kname}"                          \
              || true
         ((k++)) || true
