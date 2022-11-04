@@ -83,9 +83,13 @@ deb     [arch=amd64] https://download.virtualbox.org/virtualbox/debian jammy con
 deb     [arch=amd64,i386] https://repo.steampowered.com/steam/ stable steam
 deb-src [arch=amd64,i386] https://repo.steampowered.com/steam/ stable steam
 
-## TeXmacs
+#--- TeXmacs
 deb     [arch=amd64] https://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/ impish universe
 #deb     [arch=amd64] https://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/ kinetic universe
+
+#--- IntelliJ IDEA
+deb     https://ppa.launchpadcontent.net/mmk2410/intellij-idea/ubuntu kinetic main
+deb-src https://ppa.launchpadcontent.net/mmk2410/intellij-idea/ubuntu kinetic main
 
 #--- VS Codium
 #deb     https://download.vscodium.com/debs vscodium main
