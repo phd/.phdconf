@@ -1,0 +1,4 @@
+3c3
+< PRUNEPATHS="/tmp /var/spool /media /var/lib/os-prober /var/lib/ceph /home/.ecryptfs /var/lib/schroot"
+---
+> PRUNEPATHS="/tmp /var/spool /media /var/lib/os-prober /var/lib/ceph /home/.ecryptfs /var/lib/schroot /home /root /mnt /.ecryptfs /ecryptfs /encrypted /enc"

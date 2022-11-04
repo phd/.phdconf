@@ -49,6 +49,10 @@ define rmdir
 	rm -rf "$(strip $(1))" || true
 endef
 
+define patch_diff
+	patch -s -r- -N -n -i "$(strip $(1))" "$(strip $(2))" || true
+endef
+
 define systemctl_enable
 	systemctl daemon-reload || true
 	systemctl enable  "$(strip $(1))" || true
@@ -91,6 +95,7 @@ else
 	$(call link            , /etc/.phdconf/__etc__apt__sources.list.d__phd.list--${DISTRIB_CODENAME}, /etc/apt/sources.list.d/phd.list          )
 	$(call link            , /etc/.phdconf/__etc__ssh__sshd_config.d__phd                           , /etc/ssh/sshd_config.d/phd                )
 	$(call link            , /etc/.phdconf/__etc__reniced.conf                                      , /etc/reniced.conf                         )
+	$(call patch_diff      , /etc/.phdconf/diff/__etc__updatedb.conf.diff                           , /etc/updatedb.conf                        )
 	$(call copy            , /etc/.phdconf/copy/__etc__systemd__system__reniced.service             , /etc/systemd/system/reniced.service       )
 	$(call systemctl_enable,                                                                          reniced.service                           )
 	$(call rm              ,                                                                          /etc/cron.d/reniced                       )
