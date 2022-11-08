@@ -2,7 +2,7 @@
 Description=reniced
 
 [Service]
-ExecStart=/etc/.phdconf/run/reniced.sh
+ExecStart=/etc/.phdconf/bin/reniced.sh
 
 [Install]
 WantedBy=multi-user.target
