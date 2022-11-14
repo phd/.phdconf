@@ -103,6 +103,9 @@ function __git_head {
 function __prompt_git {
     command -v __git_ps1 &>/dev/null && echo -n '$(__git_ps1 " ${C_GREEN}{%s,$(__git_head)}${C_NONE}")'
 }
+function __prompt_git_eval {
+    eval "echo \"$(__prompt_git)\""
+}
 PS1="\[${__prompt_color_bg}\]  \[${B_NONE}\] \$(colorpwd) \[${C_BLUE}\][\[${__prompt_color}\]\u\[${C_BLUE}\]@\H]\[${C_NONE}\]$(__prompt_git)\$(__prompt_err)\n\[${__prompt_color_bg}\] \[${B_NONE}\]\[${__prompt_color}\]${__prompt_sign}\[${C_NONE}\] "
 PS2="\[${__prompt_color_bg}\] \[${B_NONE}\]\[${__prompt_color}\]>\[${C_NONE}\] "
 
@@ -267,7 +270,7 @@ function cd {
     [ -n "${KONSOLE_VERSION}" ] && [ "${WINDOWID}" = '0' ] && return '0'
     [ ! "${__CD_LS}" -eq '1' ] && return '0'
     if [ "${__PROMPT_INDENT}" -eq '1' ]; then
-        echo "${B_GREEN}  ${B_NONE} $(colorpwd)"
+        echo "${B_GREEN}  ${B_NONE} $(colorpwd)$(__prompt_git_eval)"
         LC_COLLATE='en_US.utf8' COLUMNS="$((${COLUMNS}-3))" ls --group-directories-first -C --color=always | sed -e "s,^,${B_GREEN} ${B_NONE}  ,"
     else
         echo "=== $(pwd) ==="
