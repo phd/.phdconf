@@ -94,7 +94,71 @@
     d                    = diff
     dn                   = diff --name-only
     dw                   = diff --color-words=.
-    dc                   = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git diff --check | cut -d: -f1 | sort -u"
+    dc                   = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { git diff --check $@ | cut -d: -f1 | sort -u; }; _"
+    d2                   = d HEAD~1..HEAD
+    d3                   = d HEAD~2..HEAD~1
+    d4                   = d HEAD~3..HEAD~2
+    d5                   = d HEAD~4..HEAD~3
+    d6                   = d HEAD~5..HEAD~4
+    d7                   = d HEAD~6..HEAD~5
+    d8                   = d HEAD~7..HEAD~6
+    d9                   = d HEAD~8..HEAD~7
+    d2-                  = d HEAD~1
+    d3-                  = d HEAD~2
+    d4-                  = d HEAD~3
+    d5-                  = d HEAD~4
+    d6-                  = d HEAD~5
+    d7-                  = d HEAD~6
+    d8-                  = d HEAD~7
+    d9-                  = d HEAD~8
+    dn2                  = dn HEAD~1..HEAD
+    dn3                  = dn HEAD~2..HEAD~1
+    dn4                  = dn HEAD~3..HEAD~2
+    dn5                  = dn HEAD~4..HEAD~3
+    dn6                  = dn HEAD~5..HEAD~4
+    dn7                  = dn HEAD~6..HEAD~5
+    dn8                  = dn HEAD~7..HEAD~6
+    dn9                  = dn HEAD~8..HEAD~7
+    dn2-                 = dn HEAD~1
+    dn3-                 = dn HEAD~2
+    dn4-                 = dn HEAD~3
+    dn5-                 = dn HEAD~4
+    dn6-                 = dn HEAD~5
+    dn7-                 = dn HEAD~6
+    dn8-                 = dn HEAD~7
+    dn9-                 = dn HEAD~8
+    dw2                  = dw HEAD~1..HEAD
+    dw3                  = dw HEAD~2..HEAD~1
+    dw4                  = dw HEAD~3..HEAD~2
+    dw5                  = dw HEAD~4..HEAD~3
+    dw6                  = dw HEAD~5..HEAD~4
+    dw7                  = dw HEAD~6..HEAD~5
+    dw8                  = dw HEAD~7..HEAD~6
+    dw9                  = dw HEAD~8..HEAD~7
+    dw2-                 = dw HEAD~1
+    dw3-                 = dw HEAD~2
+    dw4-                 = dw HEAD~3
+    dw5-                 = dw HEAD~4
+    dw6-                 = dw HEAD~5
+    dw7-                 = dw HEAD~6
+    dw8-                 = dw HEAD~7
+    dw9-                 = dw HEAD~8
+    dc2                  = dc HEAD~1..HEAD
+    dc3                  = dc HEAD~2..HEAD~1
+    dc4                  = dc HEAD~3..HEAD~2
+    dc5                  = dc HEAD~4..HEAD~3
+    dc6                  = dc HEAD~5..HEAD~4
+    dc7                  = dc HEAD~6..HEAD~5
+    dc8                  = dc HEAD~7..HEAD~6
+    dc9                  = dc HEAD~8..HEAD~7
+    dc2-                 = dc HEAD~1
+    dc3-                 = dc HEAD~2
+    dc4-                 = dc HEAD~3
+    dc5-                 = dc HEAD~4
+    dc6-                 = dc HEAD~5
+    dc7-                 = dc HEAD~6
+    dc8-                 = dc HEAD~7
+    dc9-                 = dc HEAD~8
 
     l-work               = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git diff --name-only                 | xargs -r -L1 realpath --relative-to=$_DIR"
     l-staged             = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git diff --name-only --cached        | xargs -r -L1 realpath --relative-to=$_DIR"
