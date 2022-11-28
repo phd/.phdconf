@@ -242,7 +242,6 @@ alias I='x intellij-idea-community'
 alias err='tee /dev/stderr'
 alias out='tee /dev/tty'
 alias t='tee /dev/tty'
-alias copy='xclip -sel c <'
 alias dm='sudo dmesg'
 alias dmw='sudo dmesg -w'
 alias psaux='ps aux'
@@ -331,6 +330,10 @@ function ssha {
 }
 alias sshal='ssh-add -l'
 alias sshak='eval `ssh-agent -k`'
+
+function copy {
+    cat "$@" | xclip -sel c
+}
 
 function cb {
     local args="$@"
