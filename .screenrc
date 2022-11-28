@@ -2,7 +2,7 @@ startup_message off
 msgwait 0
 
 hardstatus alwaysignore ""
-caption always "%{=r}%?%P%{.g}%?%?%E%{.r}%?   %-w%n*%+w%?  | %h%?"
+caption always "%{=r}%?%P%{.g}%?%?%E%{.r}%?   %-w%n*%+w%?  | %h%?%?%P  |  Space: select/copy  Ctrl+Insert: paste  q: back%?%?%E  |  ?: help  q: back%?"
 
 shelltitle ""
 
@@ -13,8 +13,9 @@ bindkey -k k7 screen   # F7
 bindkey -k k8 detach   # F8
 bindkey -k k9 kill     # F9
 
-# Scrolling:
+# Scrolling, copy, paste:
 defscrollback 10000
+bindkey "^[[2;7~" copy                     # Ctrl+Alt+Insert
 bindkey "^[[1;2A" eval "copy" "stuff k"    # Shift+Up
 bindkey "^[[1;2B" eval "copy" "stuff j"    # Shift+Down
 bindkey "^[[1;2D" eval "copy" "stuff h"    # Shift+Left
@@ -25,4 +26,5 @@ bindkey "^[[2;2D" eval "copy" "stuff h"    # Shift+Left
 bindkey "^[[2;2C" eval "copy" "stuff l"    # Shift+Right
 bindkey "^[[6;2~" eval "copy" "stuff ^b"   # Shift+PageUp
 bindkey "^[[5;2~" eval "copy" "stuff ^f"   # Shift+PageDown
+bindkey "^[[2;5~" paste .                  # Ctrl+Insert
 #termcapinfo xterm* ti@:te@
