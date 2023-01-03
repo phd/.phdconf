@@ -63,6 +63,8 @@ define systemctl_enable
 	systemctl restart "$(strip $(1))" || true
 endef
 
+default: home
+
 all: home root etc
 
 home:
