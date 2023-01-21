@@ -312,6 +312,7 @@ function ap {
     sudo -K
     echo -n 'Reboot: '; reboot?
 }
+alias ap-fo='ap -o Dpkg::Options::="--force-overwrite"'
 function ap-fix {
     sudo bash -c "dpkg --configure -a; apt-get update --fix-missing; apt-get install -f; apt-get clean"
 }
