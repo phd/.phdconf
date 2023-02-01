@@ -308,7 +308,7 @@ function slowcat {
 
 function ap {
     local args="$@"
-    sudo bash -c "aptitude ${args} && uname -sr && apt-get --purge autoremove && apt-get clean"
+    sudo bash -c "aptitude ${args} && (uname -sr | (boxes -d stone 2>/dev/null || cat)) && apt-get --purge autoremove && apt-get clean"
     sudo -K
     echo -n 'Reboot: '; reboot?
 }
