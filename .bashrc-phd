@@ -261,13 +261,22 @@ alias bashtrack='strace -e execve -b execve -f -qqv -e signal="!all" bash'
 #which colormake &>/dev/null && alias make='colormake'
 
 function cd {
+    local args=''
+    while [[ "$1" == '-'* ]]; do
+        if [ "$1" == '--' ]; then
+            shift
+            break
+        fi
+        args+=" $1"
+        shift
+    done
     local where="$@"
     if [ -z "${where}" ]; then
         where="${HOME}"
     elif [ -e "${where}" ] && [ ! -d "${where}" ]; then
         where="$(dirname "${where}")"
     fi
-    builtin cd "${where}" || return "${?}"
+    builtin cd $args -- "${where}" || return "${?}"
     # skip for Konsole KPart:
     [ -n "${KONSOLE_VERSION}" ] && [ "${WINDOWID}" = '0' ] && return '0'
     [ ! "${__CD_LS}" -eq '1' ] && return '0'
