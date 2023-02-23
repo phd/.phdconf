@@ -70,7 +70,7 @@ deb-src https://ppa.launchpadcontent.net/libreoffice/ppa/ubuntu jammy main
 #--- Wine
 deb     https://dl.winehq.org/wine-builds/ubuntu/ jammy main
 deb-src https://dl.winehq.org/wine-builds/ubuntu/ jammy main
-deb     https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/xUbuntu_22.04/ ./
+#deb     https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/xUbuntu_22.04/ ./
 
 #=== SOFTWARE:
 

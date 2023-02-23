@@ -71,7 +71,7 @@ deb-src https://ppa.launchpadcontent.net/libreoffice/ppa/ubuntu kinetic main
 #--- Wine
 deb     https://dl.winehq.org/wine-builds/ubuntu/ kinetic main
 deb-src https://dl.winehq.org/wine-builds/ubuntu/ kinetic main
-deb     https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/xUbuntu_22.10/ ./
+#deb     https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/xUbuntu_22.10/ ./
 
 #=== SOFTWARE:
 
