@@ -1,8 +1,11 @@
 `cd ~`
 
-`git clone https://github.com/phd/.phdconf.git`
+`git clone https://github.com/phd/.phdconf`
 
 `cd .phdconf`
 
-`make home` (default) / `make root` / `make etc`<br>
+`make home` (default),<br>
+`make root`,<br>
+`make etc`,<br>
 or `make all` to install everything
+
