@@ -26,6 +26,8 @@
     rh1                  = reset --hard HEAD~
     rhom                 = reset --hard origin/master
     rhoma                = reset --hard origin/main
+    rhum                 = reset --hard upstream/master
+    rhuma                = reset --hard upstream/main
     rm                   = reset --merge
 
     ru                   = remote update
