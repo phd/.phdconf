@@ -1,7 +1,7 @@
 xterm*termName: xterm-color
 
-xterm*faceName: Ubuntu Mono
-xterm*faceSize: 12
+xterm*faceName: Liberation Mono
+xterm*faceSize: 10
 xterm*font: 8x16
 
 XTerm*saveLines: 1000
