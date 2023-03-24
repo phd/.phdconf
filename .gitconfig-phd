@@ -38,13 +38,16 @@
     fat                  = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git f --all --tags"
 
     p                    = push
+    pusha                = push --all
     pa                   = push --all
+    pushf                = push       -f
     pf                   = push       -f
-    ps                   = push          --set-upstream
+    pushu                = push          --set-upstream
+    pu                   = push          --set-upstream
     paf                  = push --all -f
-    pas                  = push --all    --set-upstream
-    pafs                 = push --all -f --set-upstream
-    pfs                  = push       -f --set-upstream
+    pau                  = push --all    --set-upstream
+    pfu                  = push       -f --set-upstream
+    pafu                 = push --all -f --set-upstream
 
     b                    = branch
     branch-delete        = git push --delete
