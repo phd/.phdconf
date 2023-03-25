@@ -59,6 +59,8 @@ F_HIDDEN_ON=$'\e[8m'
 F_HIDDEN_OFF=$'\e[28m'
 F_STRIKETHROUGH_ON=$'\e[9m'
 F_STRIKETHROUGH_OFF=$'\e[29m'
+F_ALL_OFF="${F_BOLD_OFF}${F_DIM_OFF}${F_ITALIC_OFF}${F_UNDERLINE_OFF}${F_BLINKING_OFF}${F_REVERSE_OFF}${F_HIDDEN_OFF}${F_STRIKETHROUGH_OFF}"
+F_RESET="${F_ALL_OFF}${BC_RESET}"
 T_CURSOR_OFF=$'\e[?25l'
 T_CURSOR_ON=$'\e[?25h'
 
@@ -106,11 +108,11 @@ function __prompt_git {
 function __prompt_git_eval {
     eval "echo \"$(__prompt_git)\""
 }
-PS1="\[${__prompt_color_bg}\]  \[${B_NONE}\] \$(colorpwd) \[${__prompt_color}\][\u@\H]\[${C_NONE}\]$(__prompt_git)\$(__prompt_err)\n\[${__prompt_color_bg}\] \[${B_NONE}\]\[${__prompt_color}\]${__prompt_sign}\[${C_NONE}\] "
+PS1="\[${F_RESET}\]\[${__prompt_color_bg}\]  \[${B_NONE}\] \$(colorpwd) \[${__prompt_color}\][\u@\H]\[${C_NONE}\]$(__prompt_git)\$(__prompt_err)\n\[${__prompt_color_bg}\] \[${B_NONE}\]\[${__prompt_color}\]${__prompt_sign}\[${C_NONE}\] "
 PS2="\[${__prompt_color_bg}\] \[${B_NONE}\]\[${__prompt_color}\]>\[${C_NONE}\] "
 
 if [ "${__PROMPT_INDENT}" -eq '0' ]; then
-    PS1="${debian_chroot:+($debian_chroot)}\[${__prompt_color}\]\u\[${C_NONE}\]@\H:\[${__prompt_color}\]\w\[${C_NONE}\]${__prompt_sign} "
+    PS1="\[${F_RESET}\]${debian_chroot:+($debian_chroot)}\[${__prompt_color}\]\u\[${C_NONE}\]@\H:\[${__prompt_color}\]\w\[${C_NONE}\]${__prompt_sign} "
     PS2="> "
 fi
 
