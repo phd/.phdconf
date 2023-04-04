@@ -439,16 +439,6 @@ function wine-remove-extensions {
     rm -f ~/.local/share/mime/application/x-wine-extension*
 }
 
-export GCC_COLORS=true
-export GTK_USE_PORTAL=1
-# export GTK2_RC_FILES=~/.gtkrc-2.0
-# export QT_SELECT=5
-# export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel ${_JAVA_OPTIONS}"
-# export KWIN_TRIPLE_BUFFER=0
-# export vblank_mode=1
-# export __GL_SYNC_TO_VBLANK=1
-# export __GL_YIELD=USLEEP
-
 if [ -f ~/.bashrc-ssh ]; then
     . ~/.bashrc-ssh
 fi
