@@ -94,6 +94,7 @@ else
     __prompt_color="${C_BLUE}"
     __prompt_color_bg="${B_BLUE}"
 fi
+__PROMPT_SIGN="${__prompt_sign}"
 
 function __prompt_err {
     local ERR="${PIPESTATUS[-1]}"
@@ -108,13 +109,19 @@ function __prompt_git {
 function __prompt_git_eval {
     eval "echo \"$(__prompt_git)\""
 }
-PS1="\[${F_RESET}\]\[${__prompt_color_bg}\]  \[${B_NONE}\] \$(colorpwd) \[${__prompt_color}\][\u@\H]\[${C_NONE}\]$(__prompt_git)\$(__prompt_err)\n\[${__prompt_color_bg}\] \[${B_NONE}\]\[${__prompt_color}\]${__prompt_sign}\[${C_NONE}\] "
+PS1="\[${F_RESET}\]\[${__prompt_color_bg}\]  \[${B_NONE}\] \$(colorpwd) \[${__prompt_color}\][\u@\H]\[${C_NONE}\]$(__prompt_git)\$(__prompt_err)\n\[${__prompt_color_bg}\] \[${B_NONE}\]\[${__prompt_color}\]\${__PROMPT_SIGN}\[${C_NONE}\] "
 PS2="\[${__prompt_color_bg}\] \[${B_NONE}\]\[${__prompt_color}\]>\[${C_NONE}\] "
 
 if [ "${__PROMPT_INDENT}" -eq '0' ]; then
     PS1="\[${F_RESET}\]${debian_chroot:+($debian_chroot)}\[${__prompt_color}\]\u\[${C_NONE}\]@\H:\[${__prompt_color}\]\w\[${C_NONE}\]${__prompt_sign} "
     PS2="> "
 fi
+
+function __prompt_sign_update {
+    __PROMPT_SIGN="${__prompt_sign}"
+    test -o history || __PROMPT_SIGN='-' || true
+    [ "${HISTFILE}" == '/dev/null' ] && __PROMPT_SIGN='-' || true
+}
 
 export HISTFILE=~/.bash_history
 history -c
@@ -128,32 +135,34 @@ export HISTCONTROL='ignoredups:erasedups:ignorespace'
 touch "$HISTFILE"
 shopt -s histappend
 bind 'set revert-all-at-newline on'
-history_cleaned () {
+function __history_cleaned {
     awk \
         '{ gsub(/^[ \t]+|[ \t]+$/, "", $0); lines[n++]=$0; seen[$0]++; } END { for (i=0; i<n; i++) { if (!(--seen[lines[i]])) { print(lines[i]); } } }' \
         "$HISTFILE"
 }
-history_clean () {
-    echo "$(history_cleaned)" > "$HISTFILE"
+function __history_clean {
+    echo "$(__history_cleaned)" > "$HISTFILE"
 }
-history_append () {
+function __history_append {
     history -a
-    history_clean
+    __history_clean
 }
-history_reload () {
+function __history_reload {
     history -c
     history -r
 }
-export PROMPT_COMMAND="history_append; ${PROMPT_COMMAND}"
-alias h='history'                       # show history
-alias hh='history_reload'               # reload common history from all shells
-alias hhh='e "$HISTFILE"'               # edit Bash history
-alias HHH='E "$HISTFILE"'               # edit Bash history in X
-alias Ehhh='E "$HISTFILE"'              # edit Bash history in X
-alias h-='HISTFILE=/dev/null'           # temporarily disable history saving for this shell
-alias h+='HISTFILE=~/.bash_history-phd' # re-enable history saving for this shell
-alias H-='set +o history'               # temporarily disable history for this shell
-alias H+='set -o history'               # re-enable history for this shell
+export PROMPT_COMMAND="__history_append; ${PROMPT_COMMAND}"
+alias h='history'                                             # print history
+alias hh='__history_reload'                                   # reload common history from all shells
+alias hhh='e "$HISTFILE"'                                     # edit Bash history
+alias HHH='E "$HISTFILE"'                                     # edit Bash history in X
+alias Ehhh='E "$HISTFILE"'                                    # edit Bash history in X
+alias h-='HISTFILE=/dev/null          ; __prompt_sign_update' # temporarily disable history saving for this shell
+alias h+='HISTFILE=~/.bash_history-phd; __prompt_sign_update' # re-enable history saving for this shell
+alias H-='set +o history              ; __prompt_sign_update' # temporarily disable history for this shell
+alias H+='set -o history              ; __prompt_sign_update' # re-enable history for this shell
+
+__prompt_sign_update
 
 export PROMPT_COMMAND="setterm -cursor on; ${PROMPT_COMMAND}"
 
