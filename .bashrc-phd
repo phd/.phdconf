@@ -448,13 +448,6 @@ export GTK_USE_PORTAL=1
 # export __GL_SYNC_TO_VBLANK=1
 # export __GL_YIELD=USLEEP
 
-### POWERLINE:
-#if [ -f /usr/share/powerline/bindings/bash/powerline.sh ]; then
-#    POWERLINE_BASH_CONTINUATION=1
-#    POWERLINE_BASH_SELECT=1
-#    . /usr/share/powerline/bindings/bash/powerline.sh
-#fi
-
 if [ -f ~/.bashrc-ssh ]; then
     . ~/.bashrc-ssh
 fi
