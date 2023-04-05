@@ -65,10 +65,8 @@ deb     [arch=amd64] https://deb.librewolf.net jammy main
 #=== TOP SOFTWARE:
 
 #--- LibreOffice
-deb     https://ppa.launchpadcontent.net/libreoffice/ppa/ubuntu kinetic main
-deb-src https://ppa.launchpadcontent.net/libreoffice/ppa/ubuntu kinetic main
-#deb     https://ppa.launchpadcontent.net/libreoffice/ppa/ubuntu lunar main
-#deb-src https://ppa.launchpadcontent.net/libreoffice/ppa/ubuntu lunar main
+deb     https://ppa.launchpadcontent.net/libreoffice/ppa/ubuntu lunar main
+deb-src https://ppa.launchpadcontent.net/libreoffice/ppa/ubuntu lunar main
 
 #--- Wine
 deb     https://dl.winehq.org/wine-builds/ubuntu/ kinetic main
