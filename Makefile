@@ -100,6 +100,8 @@ else
 	$(call link            , /etc/.phdconf/__etc__apt__preferences.d__phd                           , /etc/apt/preferences.d/phd                )
 	$(call link            , /etc/.phdconf/__etc__apt__sources.list.d__phd.list--${DISTRIB_CODENAME}, /etc/apt/sources.list.d/phd.list          )
 	$(call mkdir           ,                                                                          /etc/apt/sources.list.d/steam.list        )
+	$(call mkdir           ,                                                                          /etc/apt/sources.list.d/steam-stable.list )
+	$(call mkdir           ,                                                                          /etc/apt/sources.list.d/steam-beta.list   )
 	$(call mkdir           ,                                                                          /etc/apt/sources.list.d/google-chrome.list)
 	$(call exec            , /etc/.phdconf/exec/apt-key.sh                                                                                      )
 	$(call link            , /etc/.phdconf/__etc__ssh__sshd_config.d__phd                           , /etc/ssh/sshd_config.d/phd                )
