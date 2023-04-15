@@ -448,6 +448,24 @@ function wine-remove-extensions {
     rm -f ~/.local/share/mime/application/x-wine-extension*
 }
 
+function ovh-dyndns {
+    local HOST="${1:-${HOSTNAME}}"
+    read -e -p 'Hostname: ' -i "${HOST}" HOST
+    local SUB="${HOST%.*.*}"
+    local DOMAIN="${HOST:${#SUB}+1}"
+    local USER="${DOMAIN}-${SUB}"
+    read -e -p 'Username: ' -i "${USER}" USER
+    local IP="${2}"
+    read -e -p 'IP: ' -i "${IP}" IP
+    local REPLY=$(LANG=C wget                                                      \
+        --quiet                                                                    \
+        --ask-password                                                             \
+        --user "${USER}"                                                           \
+        "https://www.ovh.com/nic/update?system=dyndns&hostname=${HOST}&myip=${IP}" \
+        -O- || echo 'Error.')
+    echo "$REPLY"
+}
+
 if [ -f ~/.bashrc-ssh ]; then
     . ~/.bashrc-ssh
 fi
