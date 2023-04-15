@@ -448,6 +448,15 @@ function wine-remove-extensions {
     rm -f ~/.local/share/mime/application/x-wine-extension*
 }
 
+function whatismyip {
+    while true; do
+        dig @resolver4.opendns.com myip.opendns.com +short             \
+            | grep -E --color=never '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$' \
+            && break || true
+        sleep 1
+    done
+}
+
 function ovh-dyndns {
     local HOST="${1:-${HOSTNAME}}"
     read -e -p 'Hostname: ' -i "${HOST}" HOST
@@ -455,7 +464,7 @@ function ovh-dyndns {
     local DOMAIN="${HOST:${#SUB}+1}"
     local USER="${DOMAIN}-${SUB}"
     read -e -p 'Username: ' -i "${USER}" USER
-    local IP="${2}"
+    local IP="${2:-$(whatismyip)}"
     read -e -p 'IP: ' -i "${IP}" IP
     local REPLY=$(LANG=C wget                                                      \
         --quiet                                                                    \
