@@ -270,6 +270,9 @@
 [cola]
     spellcheck = false
 
+[credential "https://github.com"]
+    helper = !gh auth git-credential
+
 [url "git@invent.kde.org:"]
     insteadOf = kde:
 [url "git@invent.kde.org:"]
