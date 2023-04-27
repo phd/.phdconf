@@ -24,9 +24,9 @@ deb-src https://ppa.launchpadcontent.net/graphics-drivers/ppa/ubuntu lunar main
 deb     https://ppa.launchpadcontent.net/kubuntu-ppa/backports/ubuntu       lunar main
 deb     https://ppa.launchpadcontent.net/kubuntu-ppa/backports/ubuntu       lunar main/debug
 deb-src https://ppa.launchpadcontent.net/kubuntu-ppa/backports/ubuntu       lunar main
-#deb     https://ppa.launchpadcontent.net/kubuntu-ppa/backports-extra/ubuntu lunar main
-#deb     https://ppa.launchpadcontent.net/kubuntu-ppa/backports-extra/ubuntu lunar main/debug
-#deb-src https://ppa.launchpadcontent.net/kubuntu-ppa/backports-extra/ubuntu lunar main
+deb     https://ppa.launchpadcontent.net/kubuntu-ppa/backports-extra/ubuntu lunar main
+deb     https://ppa.launchpadcontent.net/kubuntu-ppa/backports-extra/ubuntu lunar main/debug
+deb-src https://ppa.launchpadcontent.net/kubuntu-ppa/backports-extra/ubuntu lunar main
 
 #--- Webmin
 deb     https://download.webmin.com/download/repository sarge contrib
@@ -69,10 +69,8 @@ deb     https://ppa.launchpadcontent.net/libreoffice/ppa/ubuntu lunar main
 deb-src https://ppa.launchpadcontent.net/libreoffice/ppa/ubuntu lunar main
 
 #--- Wine
-deb     https://dl.winehq.org/wine-builds/ubuntu/ kinetic main
-deb-src https://dl.winehq.org/wine-builds/ubuntu/ kinetic main
-#deb     https://dl.winehq.org/wine-builds/ubuntu/ lunar main
-#deb-src https://dl.winehq.org/wine-builds/ubuntu/ lunar main
+deb     https://dl.winehq.org/wine-builds/ubuntu/ lunar main
+deb-src https://dl.winehq.org/wine-builds/ubuntu/ lunar main
 #deb     https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/xUbuntu_23.04/ ./
 
 #=== SOFTWARE:
@@ -111,8 +109,6 @@ deb     https://ppa.launchpadcontent.net/alessandro-strada/ppa/ubuntu lunar main
 deb-src https://ppa.launchpadcontent.net/alessandro-strada/ppa/ubuntu lunar main
 
 #--- Cryptomator.org
-#deb     https://ppa.launchpadcontent.net/sebastian-stenzel/cryptomator/ubuntu kinetic main
-#deb-src https://ppa.launchpadcontent.net/sebastian-stenzel/cryptomator/ubuntu kinetic main
 #deb     https://ppa.launchpadcontent.net/sebastian-stenzel/cryptomator/ubuntu lunar main
 #deb-src https://ppa.launchpadcontent.net/sebastian-stenzel/cryptomator/ubuntu lunar main
 
