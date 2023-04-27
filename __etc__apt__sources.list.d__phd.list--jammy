@@ -93,6 +93,9 @@ deb-src https://ppa.launchpadcontent.net/mmk2410/intellij-idea/ubuntu jammy main
 #deb     https://download.vscodium.com/debs vscodium main
 deb     https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/debs vscodium main
 
+#--- Microsoft Teams
+#deb     [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main
+
 #--- Atom
 #deb     https://ppa.launchpadcontent.net/webupd8team/atom/ubuntu bionic main
 #deb-src https://ppa.launchpadcontent.net/webupd8team/atom/ubuntu bionic main
