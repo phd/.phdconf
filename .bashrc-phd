@@ -273,6 +273,7 @@ alias reboot!='sudo reboot'
 alias reboot?!='[ -f /var/run/reboot-required ] && (echo YES; sudo reboot || true) || echo no'
 alias demangle='c++filt'
 alias bashtrack='strace -e execve -b execve -f -qqv -e signal="!all" bash'
+alias lsb-release='cat /etc/lsb-release'
 
 #which colormake &>/dev/null && alias make='colormake'
 
