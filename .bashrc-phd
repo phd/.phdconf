@@ -279,7 +279,7 @@ alias lsb-release='cat /etc/lsb-release'
 
 function cd {
     local args=''
-    while [[ "$1" == '-'* ]]; do
+    while [[ "$1" == '-'?* ]]; do
         if [ "$1" == '--' ]; then
             shift
             break
