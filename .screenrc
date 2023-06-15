@@ -4,6 +4,9 @@ msgwait 0
 hardstatus alwaysignore ""
 caption always "%{=r}%?%P%{.g}%?%?%E%{.r}%?   %-w%n*%+w%?  | %h%?%?%P  |  Space: select/copy  Ctrl+Insert: paste  q: back%?%?%E  |  ?: help  q: back%?"
 
+shell -bash
+defshell -bash
+
 shelltitle ""
 
 # Bind Function keys:
