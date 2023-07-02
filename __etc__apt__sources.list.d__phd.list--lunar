@@ -42,13 +42,16 @@ deb     [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main
 #--- Chrome
 deb     [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main
 
+#--- Chromium Browser (phd, Mint packages)
+deb     https://freeshell.de/phd/chromium/lunar /
+
 #--- Chromium Browser (phd)
-deb     https://ppa.launchpadcontent.net/phd/chromium-browser/ubuntu lunar main
-deb-src https://ppa.launchpadcontent.net/phd/chromium-browser/ubuntu lunar main
+#deb     https://ppa.launchpadcontent.net/phd/chromium-browser/ubuntu lunar main
+#deb-src https://ppa.launchpadcontent.net/phd/chromium-browser/ubuntu lunar main
 
 #--- Firefox (phd)
-deb     https://ppa.launchpadcontent.net/phd/firefox/ubuntu lunar main
-deb-src https://ppa.launchpadcontent.net/phd/firefox/ubuntu lunar main
+#deb     https://ppa.launchpadcontent.net/phd/firefox/ubuntu lunar main
+#deb-src https://ppa.launchpadcontent.net/phd/firefox/ubuntu lunar main
 
 #--- Firefox & Thunderbird (Mozilla Team)
 deb     https://ppa.launchpadcontent.net/mozillateam/ppa/ubuntu lunar main
