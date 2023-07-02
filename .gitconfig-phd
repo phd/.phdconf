@@ -38,6 +38,8 @@
     fat                  = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git f --all --tags"
 
     p                    = push
+    push-f               = push       -f
+
     pusha                = push --all
     pa                   = push --all
     pushf                = push       -f
