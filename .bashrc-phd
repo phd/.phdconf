@@ -353,6 +353,23 @@ function x {
     (xargs $@ &>/dev/null <<<"${args}" & disown ) &>/dev/null
 }
 
+function F {
+    find . -name "$@"
+}
+
+function G {
+    grep -r --color=auto        "$@" .
+}
+function GE {
+    grep -r --color=auto  -E    "$@" .
+}
+function Gl {
+    grep -r --color=never    -l "$@" .
+}
+function GEl {
+    grep -r --color=never -E -l "$@" .
+}
+
 function wgetr {
     wget --referer=${1:-} ${1:-}
 }
