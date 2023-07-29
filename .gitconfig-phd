@@ -66,7 +66,15 @@
     ri8                  = rebase -i HEAD~8
     ri9                  = rebase -i HEAD~9
     ri10                 = rebase -i HEAD~10
+    ri11                 = rebase -i HEAD~11
+    ri12                 = rebase -i HEAD~12
+    ri13                 = rebase -i HEAD~13
+    ri14                 = rebase -i HEAD~14
     ri15                 = rebase -i HEAD~15
+    ri16                 = rebase -i HEAD~16
+    ri17                 = rebase -i HEAD~17
+    ri18                 = rebase -i HEAD~18
+    ri19                 = rebase -i HEAD~19
     ri20                 = rebase -i HEAD~20
     ri25                 = rebase -i HEAD~25
     ri30                 = rebase -i HEAD~30
