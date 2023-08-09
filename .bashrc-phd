@@ -64,11 +64,6 @@ F_RESET="${F_ALL_OFF}${BC_RESET}"
 T_CURSOR_OFF=$'\e[?25l'
 T_CURSOR_ON=$'\e[?25h'
 
-function colorpwd {
-    local PWD=$(pwd)
-    echo ${PWD//\//${C_YELLOW}\/${C_NONE}}
-}
-
 function trim {
   var="$@"
   var="${var#"${var%%[![:space:]]*}"}"
@@ -96,6 +91,12 @@ else
 fi
 __PROMPT_SIGN="${__prompt_sign}"
 
+function colorpwd {
+    echo "${PWD//\//${C_YELLOW}\/${C_NONE}}"
+}
+function __color_pwd {
+    echo '${PWD//\//${C_YELLOW}\/${C_NONE}}'
+}
 function __prompt_err {
     local ERR="${PIPESTATUS[-1]}"
     [ "${ERR}" -ne 0 ] && echo -ne " ${C_RED}(${ERR})${C_NONE}"
@@ -109,7 +110,7 @@ function __prompt_git {
 function __prompt_git_eval {
     eval "echo \"$(__prompt_git)\""
 }
-PS1="\[${F_RESET}\]\[${__prompt_color_bg}\]  \[${B_NONE}\] \$(colorpwd) \[${__prompt_color}\][\u@\H]\[${C_NONE}\]$(__prompt_git)\$(__prompt_err)\n\[${__prompt_color_bg}\] \[${B_NONE}\]\[${__prompt_color}\]\${__PROMPT_SIGN}\[${C_NONE}\] "
+PS1="\[${F_RESET}\]\[${__prompt_color_bg}\]  \[${B_NONE}\] $(__color_pwd) \[${__prompt_color}\][\u@\H]\[${C_NONE}\]$(__prompt_git)\$(__prompt_err)\n\[${__prompt_color_bg}\] \[${B_NONE}\]\[${__prompt_color}\]\${__PROMPT_SIGN}\[${C_NONE}\] "
 PS2="\[${__prompt_color_bg}\] \[${B_NONE}\]\[${__prompt_color}\]>\[${C_NONE}\] "
 
 if [ "${__PROMPT_INDENT}" -eq '0' ]; then
