@@ -82,6 +82,7 @@ home:
 	$(call link_with_backup    , ${HOME}/.phdconf/.screenrc                      , ${HOME}/.screenrc                    )
 	$(call link_with_backup    , ${HOME}/.phdconf/.wgetrc                        , ${HOME}/.wgetrc                      )
 	$(call link_with_backup    , ${HOME}/.phdconf/.xbindkeysrc                   , ${HOME}/.xbindkeysrc                 )
+	$(call link_with_backup    , ${HOME}/.phdconf/.Xmodmap                       , ${HOME}/.Xmodmap                     )
 	$(call link_with_backup    , ${HOME}/.phdconf/.Xresources                    , ${HOME}/.Xresources                  )
 	$(call link_with_backup    , ${HOME}/.phdconf/XTerm                          , ${HOME}/XTerm                        )
 	$(call mkdir               ,                                                   ${HOME}/.config/fontconfig           )
