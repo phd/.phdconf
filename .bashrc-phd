@@ -381,12 +381,19 @@ function C! {
 }
 
 function b {
-    ( ${@} & disown ) &> /dev/null
+    (
+        exec &>/dev/null
+        ${@} & disown
+    )
 }
 
 function x {
-    local args="$([ ! -t 0 ] && cat)"
-    (xargs $@ &>/dev/null <<<"${args}" & disown ) &>/dev/null
+    local args="$@"
+    local input="$([ ! -t 0 ] && cat)"
+    (
+        exec &>/dev/null
+        xargs ${args} <<<"${input}" & disown
+    )
 }
 
 function F {
@@ -465,14 +472,14 @@ function CB {
 }
 
 function kman {
-    konqueror "man:/$@"
+    x konqueror "man:/$@"
 }
 
 function mpv {
-    local out=$(/usr/bin/mpv "$@")
+    /usr/bin/mpv "$@"
     local err="$?"
     if [ "$err" -ne '0' ]; then
-        kdialog --title 'MPV' --error "Running MPV failed.\n\n$out"
+        kdialog --title 'MPV' --error "Running MPV failed."
     fi
     return "$err"
 }
