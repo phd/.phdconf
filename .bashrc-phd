@@ -64,6 +64,9 @@ F_RESET="${F_ALL_OFF}${BC_RESET}"
 T_CURSOR_OFF=$'\e[?25l'
 T_CURSOR_ON=$'\e[?25h'
 
+export LS_COLORS="${LS_COLORS}:so=01;37;42:"
+bind 'set show-all-if-ambiguous on'
+
 function trim {
   var="$@"
   var="${var#"${var%%[![:space:]]*}"}"
