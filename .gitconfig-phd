@@ -39,6 +39,8 @@
     ft                   = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git f --tags"
     fat                  = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git f --all --tags"
 
+    pullr                = pull --rebase
+
     p                    = push
 
     push-a               = push --all
