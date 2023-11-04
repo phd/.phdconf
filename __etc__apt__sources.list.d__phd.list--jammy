@@ -85,7 +85,7 @@ deb     [arch=amd64,i386] https://repo.steampowered.com/steam/ stable steam
 deb-src [arch=amd64,i386] https://repo.steampowered.com/steam/ stable steam
 
 #--- TeXmacs
-deb     [arch=amd64] https://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/ impish universe
+#deb     [arch=amd64] https://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/ impish universe
 #deb     [arch=amd64] https://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/ jammy universe
 
 #--- IntelliJ IDEA
