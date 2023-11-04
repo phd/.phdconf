@@ -111,7 +111,7 @@ deb     https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/debs vscodium main
 deb     https://ppa.launchpadcontent.net/alessandro-strada/ppa/ubuntu kinetic main
 deb-src https://ppa.launchpadcontent.net/alessandro-strada/ppa/ubuntu kinetic main
 
-#--- Cryptomator.org
+#--- Cryptomator
 #deb     https://ppa.launchpadcontent.net/sebastian-stenzel/cryptomator/ubuntu kinetic main
 #deb-src https://ppa.launchpadcontent.net/sebastian-stenzel/cryptomator/ubuntu kinetic main
 

@@ -68,10 +68,8 @@ deb     https://ppa.launchpadcontent.net/libreoffice/ppa/ubuntu mantic main
 deb-src https://ppa.launchpadcontent.net/libreoffice/ppa/ubuntu mantic main
 
 #--- Wine
-deb     https://dl.winehq.org/wine-builds/ubuntu/ lunar main
-deb-src https://dl.winehq.org/wine-builds/ubuntu/ lunar main
-#deb     https://dl.winehq.org/wine-builds/ubuntu/ mantic main
-#deb-src https://dl.winehq.org/wine-builds/ubuntu/ mantic main
+deb     https://dl.winehq.org/wine-builds/ubuntu/ mantic main
+deb-src https://dl.winehq.org/wine-builds/ubuntu/ mantic main
 #deb     https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/xUbuntu_23.10/ ./
 
 #=== SOFTWARE:
@@ -113,9 +111,7 @@ deb-src https://ppa.launchpadcontent.net/alessandro-strada/ppa/ubuntu lunar main
 #deb     https://ppa.launchpadcontent.net/alessandro-strada/ppa/ubuntu mantic main
 #deb-src https://ppa.launchpadcontent.net/alessandro-strada/ppa/ubuntu mantic main
 
-#--- Cryptomator.org
-#deb     https://ppa.launchpadcontent.net/sebastian-stenzel/cryptomator/ubuntu lunar main
-#deb-src https://ppa.launchpadcontent.net/sebastian-stenzel/cryptomator/ubuntu lunar main
+#--- Cryptomator
 #deb     https://ppa.launchpadcontent.net/sebastian-stenzel/cryptomator/ubuntu mantic main
 #deb-src https://ppa.launchpadcontent.net/sebastian-stenzel/cryptomator/ubuntu mantic main
 
