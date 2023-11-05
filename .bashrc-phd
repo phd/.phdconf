@@ -458,6 +458,10 @@ function ssha {
 alias sshal='ssh-add -l'
 alias sshak='eval `ssh-agent -k`'
 
+function ssh-server-keys {
+    ssh-keyscan ${1:-localhost} 2>/dev/null | ssh-keygen -lf - | column -t
+}
+
 function copy {
     cat "$@" | xclip -sel c
 }
