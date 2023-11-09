@@ -112,8 +112,8 @@ deb     https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/debs vscodium main
 #=== OTHER:
 
 #--- google-drive-ocamlfuse
-deb     https://ppa.launchpadcontent.net/alessandro-strada/ppa/ubuntu lunar main
-deb-src https://ppa.launchpadcontent.net/alessandro-strada/ppa/ubuntu lunar main
+deb     https://ppa.launchpadcontent.net/alessandro-strada/ppa/ubuntu mantic main
+deb-src https://ppa.launchpadcontent.net/alessandro-strada/ppa/ubuntu mantic main
 #deb     https://ppa.launchpadcontent.net/alessandro-strada/ppa/ubuntu noble main
 #deb-src https://ppa.launchpadcontent.net/alessandro-strada/ppa/ubuntu noble main
 
