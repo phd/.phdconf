@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 48 48" width="64" height="64">
+  <g fill="blue" transform="translate(24, 24)">
+    <polygon points="-10 -20  10 -20  10 0  0 0  0 20  -10 20" />
+    <text x="5" y="10" text-anchor="middle" dominant-baseline="central" font-size="20" font-family="monospace" font-weight="normal">$</text>
+  </g>
+</svg>
