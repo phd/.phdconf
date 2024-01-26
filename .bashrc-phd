@@ -351,9 +351,6 @@ alias a-rwx='chmod a-rwx'
 alias demangle='c++filt'
 alias bashtrack='strace -e execve -b execve -f -qqv -e signal="!all" bash'
 alias lsb-release='cat /etc/lsb-release'
-alias nv='__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia'
-alias nvsh='nv bash'
-alias nvbash='nv bash'
 
 #which colormake &>/dev/null && alias make='colormake'
 
@@ -500,10 +497,10 @@ function kman {
 function mpv {
     /usr/bin/mpv "$@"
     local err="$?"
-    if [ "$err" -ne '0' ]; then
+    if [ "${err}" -ne '0' ]; then
         kdialog --title 'MPV' --error "Running MPV failed."
     fi
-    return "$err"
+    return "${err}"
 }
 
 function topcpu {
@@ -535,6 +532,11 @@ function wgets {
     done
 }
 alias wgetsn='wgets -n'
+
+function nv {
+    local args="$@"
+    __NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia ${args:-bash}
+}
 
 function server-http {
     python -m http.server "$@"
