@@ -91,6 +91,10 @@ else
     __prompt_sign='$'
     __prompt_color="${C_BLUE}"
     __prompt_color_bg="${B_BLUE}"
+    if [ "${__NV_PRIME_RENDER_OFFLOAD}" == '1' ] && [ "${__GLX_VENDOR_LIBRARY_NAME}" == 'nvidia' ]; then
+        __prompt_color="${C_GREEN}"
+        __prompt_color_bg="${B_GREEN}"
+    fi
 fi
 __PROMPT_SIGN="${__prompt_sign}"
 
@@ -347,6 +351,9 @@ alias a-rwx='chmod a-rwx'
 alias demangle='c++filt'
 alias bashtrack='strace -e execve -b execve -f -qqv -e signal="!all" bash'
 alias lsb-release='cat /etc/lsb-release'
+alias nv='__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia'
+alias nvsh='nv bash'
+alias nvbash='nv bash'
 
 #which colormake &>/dev/null && alias make='colormake'
 
