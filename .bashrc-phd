@@ -513,13 +513,18 @@ function topmem {
 
 function wgets {
     local k=1
+    local numbered=0
+    if [ "$1" == '-n' ]; then
+        numbered=1
+        shift
+    fi
     local url
     while read url; do
         url=$(trim "${url}")
         [ -z "${url}" ] && continue
         local name="$(basename "${url}")"
         local kstr=''
-        if [ "$1" == '-n' ]; then
+        if [ "${numbered}" == 1 ]; then
             kstr="${k} - "
         fi
         local kname="${kstr}${name}"
@@ -529,7 +534,7 @@ function wgets {
              -c --referer "${url}" "${url}" -O "${kname}"                          \
              || true
         ((k++)) || true
-    done
+    done < <(echo $@ | tr ' ' '\n'; cat)
 }
 alias wgetsn='wgets -n'
 
