@@ -559,6 +559,32 @@ function find-case-duplicated-files {
     find . | tr 'A-Z' 'a-z' | sort | uniq -D | sort -u
 }
 
+function cp2tree {
+    to="${@: -1}"
+    [ -z "${to}" ] && return 1
+    while [ "$#" -ge 2 ]; do
+        from="${1}"
+        shift
+        as="${to}/${from}"
+        echo "${as}"
+        if [ -d "${from}" ]; then
+            mkdir -p "${as}"
+        else
+            path=$(dirname "${as}")
+            mkdir -p "${path}"
+            cp -a "${from}" "${as}"
+        fi
+    done
+}
+
+function cptree {
+    local to="${1}"
+    shift
+    local args="$@"
+    [ -z "${to}" ] && return 1
+    find . ${args} | while read from; do cp2tree "${from}" "${to}"; done
+}
+
 function wine-remove-extensions {
     rm -f ~/.local/share/mime/packages/x-wine*
     rm -f ~/.local/share/applications/wine-extension*
