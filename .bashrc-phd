@@ -353,6 +353,8 @@ alias a-rwx='chmod a-rwx'
 alias demangle='c++filt'
 alias bashtrack='strace -e execve -b execve -f -qqv -e signal="!all" bash'
 alias lsb-release='cat /etc/lsb-release'
+alias apt-list-installed='LANG=C sudo apt list --installed'
+alias apt-list-installed-local='LANG=C sudo apt list --installed | grep "/now "'
 
 #which colormake &>/dev/null && alias make='colormake'
 
