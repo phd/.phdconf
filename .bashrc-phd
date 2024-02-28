@@ -548,6 +548,20 @@ function nv {
     local args="$@"
     __NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia ${args:-bash}
 }
+function nvcomp+ {
+    nvidia-settings --assign CurrentMetaMode='nvidia-auto-select +0+0 { ForceCompositionPipeline = On }'
+}
+function nvcomp- {
+    nvidia-settings --assign CurrentMetaMode='nvidia-auto-select +0+0 { ForceCompositionPipeline = Off }'
+}
+function vsync+ {
+    local args="$@"
+    __GL_SYNC_TO_VBLANK=1 vblank_mode=1 ${args:-bash}
+}
+function vsync- {
+    local args="$@"
+    __GL_SYNC_TO_VBLANK=0 vblank_mode=0 ${args:-bash}
+}
 
 function server-http {
     python -m http.server "$@"
