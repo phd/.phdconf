@@ -17,4 +17,7 @@ export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswi
 
 #export KWIN_FORCE_LANCZOS=1
 
+#export QT_OPENGL=software
+#export QT_QUICK_BACKEND=software
+
 #export MOZ_X11_EGL=1
