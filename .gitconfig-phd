@@ -282,8 +282,8 @@
 [pull]
     ff = only
 [gui]
-    fontui = -family \"Noto Sans\" -size 10 -weight normal -slant roman -underline 0 -overstrike 0
-    fontdiff = -family \"Ubuntu Mono\" -size 10 -weight normal -slant roman -underline 0 -overstrike 0
+    fontui   = -family \"Liberation Sans\" -size 10 -weight normal -slant roman -underline 0 -overstrike 0
+    fontdiff = -family \"Liberation Mono\" -size  9 -weight normal -slant roman -underline 0 -overstrike 0
     warndetachedcommit = true
     spellingdictionary = en
     tabsize = 4
