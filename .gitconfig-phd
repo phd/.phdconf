@@ -272,6 +272,8 @@
     init2                = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { cd \"${_DIR}\"; [ -d '.git'                        ] && echo 'Already initialized!' && exit 1; git init $@; git commit --allow-empty -m 'init'   ; git branch 'init'; }; _"
     commit-init2         = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { cd \"${_DIR}\"; [ -n \"$(git rev-list -n1 --all)\" ] && echo 'Already initialized!' && exit 1;              git commit --allow-empty -m 'init' $@; git branch 'init'; }; _"
 
+    find-repos           = "!bash -i -c '(trap \"echo && builtin exit 0\" SIGINT; shopt -s nullglob; G=\"/*\"; while true; do find . -path \".$G\" -not -path \"*/.*/*\" -exec false {} '+' -quit && break; echo -n .$G/.git | xargs -n1 -r dirname; G=\"$G/*\"; done)'"
+
 [init]
     defaultBranch = master
 
