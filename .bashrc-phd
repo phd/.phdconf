@@ -604,6 +604,11 @@ function cptree {
     find . ${args} | while read from; do cp2tree "${from}" "${to}"; done
 }
 
+function forward-port { # $1=local-port $2=remote-ssh-server $3=remote-port
+    while true; do ssh -NR $3:localhost:$1 $2 -o ExitOnForwardFailure=yes; sleep 5; done
+}
+alias forward-ssh='forward-port 22'
+
 function wine-remove-extensions {
     rm -f ~/.local/share/mime/packages/x-wine*
     rm -f ~/.local/share/applications/wine-extension*
