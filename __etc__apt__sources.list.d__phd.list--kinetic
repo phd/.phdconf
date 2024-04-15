@@ -108,8 +108,8 @@
     deb-src [arch=amd64,i386] https://repo.steampowered.com/steam/ stable steam
 
 ### TeXmacs
-    deb     [arch=amd64] https://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/ kinetic universe
- #  deb     https://download.opensuse.org/repositories/home:/slowphil:/texmacs-devel/xUbuntu_22.04/ /
+ #  deb     [arch=amd64] https://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/ kinetic universe
+    deb     https://download.opensuse.org/repositories/home:/slowphil:/texmacs-devel/xUbuntu_22.04/ /
  #- deb     https://download.opensuse.org/repositories/home:/slowphil:/texmacs-devel/xUbuntu_22.10/ /
 
 ### IntelliJ IDEA (X)

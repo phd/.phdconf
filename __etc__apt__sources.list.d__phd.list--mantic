@@ -99,8 +99,8 @@
     deb-src [arch=amd64,i386] https://repo.steampowered.com/steam/ stable steam
 
 ### TeXmacs
-    deb     [arch=amd64] https://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/ mantic universe
- #  deb     https://download.opensuse.org/repositories/home:/slowphil:/texmacs-devel/xUbuntu_23.10/ /
+ #  deb     [arch=amd64] https://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/ mantic universe
+    deb     https://download.opensuse.org/repositories/home:/slowphil:/texmacs-devel/xUbuntu_23.10/ /
 
 ### IntelliJ IDEA
     deb     https://ppa.launchpadcontent.net/mmk2410/intellij-idea/ubuntu jammy  main
