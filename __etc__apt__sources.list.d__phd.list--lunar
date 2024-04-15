@@ -1,137 +1,155 @@
-##============================##
-##  Ubuntu 23.04 Lunar (EOL)  ##
-##============================##
+###============================#
+###  Ubuntu 23.04 Lunar (EOL)  #
+###============================#
 
-#=== SYSTEM:
+###-----------#
+###  SYSTEM:  #
+###-----------#
 
-#--- DDEBS
-deb     http://ddebs.ubuntu.com lunar         main restricted universe multiverse
-deb     http://ddebs.ubuntu.com lunar-updates main restricted universe multiverse
+### DDEBS
+    deb     http://ddebs.ubuntu.com lunar         main restricted universe multiverse
+    deb     http://ddebs.ubuntu.com lunar-updates main restricted universe multiverse
 
-#--- Liquorix kernel
-deb     https://ppa.launchpadcontent.net/damentz/liquorix/ubuntu lunar main
-deb-src https://ppa.launchpadcontent.net/damentz/liquorix/ubuntu lunar main
+### Liquorix kernel
+    deb     https://ppa.launchpadcontent.net/damentz/liquorix/ubuntu lunar main
+    deb-src https://ppa.launchpadcontent.net/damentz/liquorix/ubuntu lunar main
 
-#--- XanMod kernel
-deb     https://deb.xanmod.org releases main
-deb-src https://deb.xanmod.org releases main
+### XanMod kernel
+    deb     https://deb.xanmod.org releases main
+    deb-src https://deb.xanmod.org releases main
 
-#--- graphics-drivers
-deb     https://ppa.launchpadcontent.net/graphics-drivers/ppa/ubuntu lunar main
-deb-src https://ppa.launchpadcontent.net/graphics-drivers/ppa/ubuntu lunar main
+### graphics-drivers
+    deb     https://ppa.launchpadcontent.net/graphics-drivers/ppa/ubuntu lunar main
+    deb-src https://ppa.launchpadcontent.net/graphics-drivers/ppa/ubuntu lunar main
 
-#--- Ubuntu X SWAT
-#deb     https://ppa.launchpadcontent.net/ubuntu-x-swat/updates/ubuntu lunar main
-#deb-src https://ppa.launchpadcontent.net/ubuntu-x-swat/updates/ubuntu lunar main
+### Ubuntu X SWAT
+ #- deb     https://ppa.launchpadcontent.net/ubuntu-x-swat/updates/ubuntu lunar main
+ #- deb-src https://ppa.launchpadcontent.net/ubuntu-x-swat/updates/ubuntu lunar main
 
-#--- kubuntu-ppa backports
-deb     https://ppa.launchpadcontent.net/kubuntu-ppa/backports/ubuntu       lunar main
-deb     https://ppa.launchpadcontent.net/kubuntu-ppa/backports/ubuntu       lunar main/debug
-deb-src https://ppa.launchpadcontent.net/kubuntu-ppa/backports/ubuntu       lunar main
-deb     https://ppa.launchpadcontent.net/kubuntu-ppa/backports-extra/ubuntu lunar main
-deb     https://ppa.launchpadcontent.net/kubuntu-ppa/backports-extra/ubuntu lunar main/debug
-deb-src https://ppa.launchpadcontent.net/kubuntu-ppa/backports-extra/ubuntu lunar main
+### kubuntu-ppa backports
+    deb     https://ppa.launchpadcontent.net/kubuntu-ppa/backports/ubuntu       lunar main
+    deb     https://ppa.launchpadcontent.net/kubuntu-ppa/backports/ubuntu       lunar main/debug
+    deb-src https://ppa.launchpadcontent.net/kubuntu-ppa/backports/ubuntu       lunar main
+    deb     https://ppa.launchpadcontent.net/kubuntu-ppa/backports-extra/ubuntu lunar main
+    deb     https://ppa.launchpadcontent.net/kubuntu-ppa/backports-extra/ubuntu lunar main/debug
+    deb-src https://ppa.launchpadcontent.net/kubuntu-ppa/backports-extra/ubuntu lunar main
 
-#--- Trinity TDE3 desktop
-#deb     http://mirror.ppa.trinitydesktop.org/trinity/deb/trinity-r14.1.x lunar main deps
-#deb-src http://mirror.ppa.trinitydesktop.org/trinity/deb/trinity-r14.1.x lunar main deps
+### Trinity TDE3 desktop
+ #  deb     http://mirror.ppa.trinitydesktop.org/trinity/deb/trinity-r14.1.x lunar main deps
+ #  deb-src http://mirror.ppa.trinitydesktop.org/trinity/deb/trinity-r14.1.x lunar main deps
 
-#--- Webmin
-deb     https://download.webmin.com/download/repository sarge contrib
+### Webmin
+    deb     https://download.webmin.com/download/repository sarge contrib
 
-#--- Conda
-deb     [arch=amd64] https://repo.anaconda.com/pkgs/misc/debrepo/conda stable main
+### Conda
+    deb     [arch=amd64] https://repo.anaconda.com/pkgs/misc/debrepo/conda stable main
 
-#=== BROWSERS:
+###-------------#
+###  BROWSERS:  #
+###-------------#
 
-#--- Brave
-deb     [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main
+### Brave
+    deb     [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main
 
-#--- Chrome
-deb     [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main
+### Chrome
+    deb     [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main
 
-#--- Chromium Browser (phd, Mint packages)
-deb     https://freeshell.de/phd/chromium/lunar /
+### Chromium Browser (phd, Mint packages)
+    deb     https://freeshell.de/phd/chromium/lunar /
 
-#--- Chromium Browser (phd)
-#deb     https://ppa.launchpadcontent.net/phd/chromium-browser/ubuntu lunar main
-#deb-src https://ppa.launchpadcontent.net/phd/chromium-browser/ubuntu lunar main
+### Chromium Browser (phd) (X)
+ #X deb     https://ppa.launchpadcontent.net/phd/chromium-browser/ubuntu lunar main
+ #X deb-src https://ppa.launchpadcontent.net/phd/chromium-browser/ubuntu lunar main
 
-#--- Firefox (phd)
-#deb     https://ppa.launchpadcontent.net/phd/firefox/ubuntu lunar main
-#deb-src https://ppa.launchpadcontent.net/phd/firefox/ubuntu lunar main
+### Firefox (phd) (X)
+ #X deb     https://ppa.launchpadcontent.net/phd/firefox/ubuntu lunar main
+ #X deb-src https://ppa.launchpadcontent.net/phd/firefox/ubuntu lunar main
 
-#--- Firefox & Thunderbird (Mozilla Team)
-deb     https://ppa.launchpadcontent.net/mozillateam/ppa/ubuntu lunar main
-deb-src https://ppa.launchpadcontent.net/mozillateam/ppa/ubuntu lunar main
+### Firefox & Thunderbird (Mozilla Team)
+    deb     https://ppa.launchpadcontent.net/mozillateam/ppa/ubuntu lunar main
+    deb-src https://ppa.launchpadcontent.net/mozillateam/ppa/ubuntu lunar main
 
-#--- Firefox Beta (Mozilla Team)
-#deb     https://ppa.launchpadcontent.net/mozillateam/firefox-next/ubuntu lunar main
-#deb-src https://ppa.launchpadcontent.net/mozillateam/firefox-next/ubuntu lunar main
+### Firefox Beta (Mozilla Team)
+ #  deb     https://ppa.launchpadcontent.net/mozillateam/firefox-next/ubuntu lunar main
+ #  deb-src https://ppa.launchpadcontent.net/mozillateam/firefox-next/ubuntu lunar main
 
-#--- Librewolf
-deb     [arch=amd64] https://deb.librewolf.net jammy main
-#deb     [arch=amd64] https://deb.librewolf.net lunar main
+### Librewolf
+    deb     [arch=amd64] https://deb.librewolf.net jammy main
+ #- deb     [arch=amd64] https://deb.librewolf.net lunar main
 
-#=== TOP SOFTWARE:
+###---------------------#
+###  DESKTOP SOFTWARE:  #
+###---------------------#
 
-#--- LibreOffice
-deb     https://ppa.launchpadcontent.net/libreoffice/ppa/ubuntu lunar main
-deb-src https://ppa.launchpadcontent.net/libreoffice/ppa/ubuntu lunar main
+### LibreOffice
+    deb     https://ppa.launchpadcontent.net/libreoffice/ppa/ubuntu lunar main
+    deb-src https://ppa.launchpadcontent.net/libreoffice/ppa/ubuntu lunar main
 
-#--- Wine
-deb     https://dl.winehq.org/wine-builds/ubuntu/ lunar main
-deb-src https://dl.winehq.org/wine-builds/ubuntu/ lunar main
-#deb     https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/xUbuntu_23.04/ ./
+### Wine (X)
+    deb     https://dl.winehq.org/wine-builds/ubuntu/ lunar main
+    deb-src https://dl.winehq.org/wine-builds/ubuntu/ lunar main
+ #^ deb     https://dl.winehq.org/wine-builds/ubuntu/ jammy main
+ #^ deb-src https://dl.winehq.org/wine-builds/ubuntu/ jammy main
+ #^ deb     https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/xUbuntu_22.04/ ./
+ #- deb     https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/xUbuntu_23.04/ ./
 
-#=== SOFTWARE:
+###-------------------#
+###  OTHER SOFTWARE:  #
+###-------------------#
 
-#--- VirtualBox
-deb     [arch=amd64] https://download.virtualbox.org/virtualbox/debian jammy contrib
-#deb     [arch=amd64] https://download.virtualbox.org/virtualbox/debian lunar contrib
+### VirtualBox
+    deb     [arch=amd64] https://download.virtualbox.org/virtualbox/debian jammy contrib
+ #- deb     [arch=amd64] https://download.virtualbox.org/virtualbox/debian lunar contrib
 
-#--- Steam
-deb     [arch=amd64,i386] https://repo.steampowered.com/steam/ stable steam
-deb-src [arch=amd64,i386] https://repo.steampowered.com/steam/ stable steam
+### Steam
+    deb     [arch=amd64,i386] https://repo.steampowered.com/steam/ stable steam
+    deb-src [arch=amd64,i386] https://repo.steampowered.com/steam/ stable steam
 
-#--- TeXmacs
-#deb     [arch=amd64] https://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/ impish universe
-#deb     [arch=amd64] https://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/ lunar universe
-deb     https://download.opensuse.org/repositories/home:/slowphil:/texmacs-devel/xUbuntu_23.04/ /
+### TeXmacs
+    deb     [arch=amd64] https://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/ lunar universe
+ #  deb     https://download.opensuse.org/repositories/home:/slowphil:/texmacs-devel/xUbuntu_23.04/ /
 
-#--- IntelliJ IDEA
-deb     https://ppa.launchpadcontent.net/mmk2410/intellij-idea/ubuntu lunar main
-deb-src https://ppa.launchpadcontent.net/mmk2410/intellij-idea/ubuntu lunar main
+### IntelliJ IDEA (X)
+    deb     https://ppa.launchpadcontent.net/mmk2410/intellij-idea/ubuntu lunar main
+    deb-src https://ppa.launchpadcontent.net/mmk2410/intellij-idea/ubuntu lunar main
+ #^ deb     https://ppa.launchpadcontent.net/mmk2410/intellij-idea/ubuntu jammy main
+ #^ deb-src https://ppa.launchpadcontent.net/mmk2410/intellij-idea/ubuntu jammy main
 
-#--- VS Codium
-#deb     https://download.vscodium.com/debs vscodium main
-deb     https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/debs vscodium main
+### VS Codium
+ #  deb     https://download.vscodium.com/debs vscodium main
+    deb     https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/debs vscodium main
 
-#--- Microsoft Teams
-#deb     [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main
+### Microsoft Teams
+ #  deb     [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main
 
-#--- Atom
-#deb     https://ppa.launchpadcontent.net/webupd8team/atom/ubuntu bionic main
-#deb-src https://ppa.launchpadcontent.net/webupd8team/atom/ubuntu bionic main
+### Atom
+ #X deb     https://ppa.launchpadcontent.net/webupd8team/atom/ubuntu bionic main
+ #X deb-src https://ppa.launchpadcontent.net/webupd8team/atom/ubuntu bionic main
 
-#=== OTHER:
+###---------#
+###  MISC:  #
+###---------#
 
-#--- google-drive-ocamlfuse
-deb     https://ppa.launchpadcontent.net/alessandro-strada/ppa/ubuntu lunar main
-deb-src https://ppa.launchpadcontent.net/alessandro-strada/ppa/ubuntu lunar main
+### google-drive-ocamlfuse (X)
+    deb     https://ppa.launchpadcontent.net/alessandro-strada/ppa/ubuntu lunar main
+    deb-src https://ppa.launchpadcontent.net/alessandro-strada/ppa/ubuntu lunar main
+ #^ deb     https://ppa.launchpadcontent.net/alessandro-strada/ppa/ubuntu jammy main
+ #^ deb-src https://ppa.launchpadcontent.net/alessandro-strada/ppa/ubuntu jammy main
 
-#--- Cryptomator
-#deb     https://ppa.launchpadcontent.net/sebastian-stenzel/cryptomator/ubuntu lunar main
-#deb-src https://ppa.launchpadcontent.net/sebastian-stenzel/cryptomator/ubuntu lunar main
+### Cryptomator (X)
+ #  deb     https://ppa.launchpadcontent.net/sebastian-stenzel/cryptomator/ubuntu lunar main
+ #  deb-src https://ppa.launchpadcontent.net/sebastian-stenzel/cryptomator/ubuntu lunar main
+ #^ deb     https://ppa.launchpadcontent.net/sebastian-stenzel/cryptomator/ubuntu jammy main
+ #^ deb-src https://ppa.launchpadcontent.net/sebastian-stenzel/cryptomator/ubuntu jammy main
 
-#--- mkusb
-#deb     https://ppa.launchpadcontent.net/mkusb/ppa/ubuntu lunar main
-#deb-src https://ppa.launchpadcontent.net/mkusb/ppa/ubuntu lunar main
+### mkusb
+ #  deb     https://ppa.launchpadcontent.net/mkusb/ppa/ubuntu lunar main
+ #  deb-src https://ppa.launchpadcontent.net/mkusb/ppa/ubuntu lunar main
 
-#--- ROS
-#deb     https://packages.ros.org/ros/ubuntu              focal main
-#deb     https://packages.ros.org/ros-shadow-fixed/ubuntu focal main
+### ROS
+ #  deb     https://packages.ros.org/ros/ubuntu              focal main
+ #  deb     https://packages.ros.org/ros-shadow-fixed/ubuntu focal main
 
-#--- Cool Retro Term
-#deb     https://ppa.launchpadcontent.net/bugs-launchpad-net-falkensweb/cool-retro-term/ubuntu artful main
-#deb-src https://ppa.launchpadcontent.net/bugs-launchpad-net-falkensweb/cool-retro-term/ubuntu artful main
+### Cool Retro Term
+ #X deb     https://ppa.launchpadcontent.net/bugs-launchpad-net-falkensweb/cool-retro-term/ubuntu artful main
+ #X deb-src https://ppa.launchpadcontent.net/bugs-launchpad-net-falkensweb/cool-retro-term/ubuntu artful main
