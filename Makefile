@@ -12,9 +12,9 @@ define link
 endef
 
 define link_with_backup
-	[ ! -e "$(strip $(2))" -o -L "$(strip $(2))" ]            \
+	[ -e "$(strip $(2))" -a ! -L "$(strip $(2))" ]            \
 		&& chattr -i "$(strip $(2))" && rm -f "$(strip $(2))" \
-		|| mv "$(strip $(2))" "$(strip $(2))~"                \
+		&& mv "$(strip $(2))" "$(strip $(2))~"                \
 		|| true
 	ln -s -n -T --force "$(strip $(1))" "$(strip $(2))" || true
 endef
