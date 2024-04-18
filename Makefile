@@ -6,45 +6,53 @@ DISTRIB_CODENAME := $(shell source /etc/lsb-release && echo $$DISTRIB_CODENAME)
 
 define link
 	[ ! -e "$(strip $(2))" -o -L "$(strip $(2))" -o -f "$(strip $(2))" ] \
-		&& chattr -i "$(strip $(2))" && rm -f "$(strip $(2))"            \
+		&& (chattr -i "$(strip $(2))" || true)                           \
+		&& rm -rf "$(strip $(2))"                                        \
 		&& ln -s -n -T --force "$(strip $(1))" "$(strip $(2))"           \
 		|| true
 endef
 
 define link_with_backup
-	[ -e "$(strip $(2))" -a ! -L "$(strip $(2))" ]            \
-		&& chattr -i "$(strip $(2))" && rm -f "$(strip $(2))" \
-		&& mv "$(strip $(2))" "$(strip $(2))~"                \
+	chattr -i "$(strip $(2))~" || true
+	rm -rf "$(strip $(2))~"
+	[ -e "$(strip $(2))" -a ! -L "$(strip $(2))" ] \
+		&& (chattr -i "$(strip $(2))" || true)     \
+		&& mv "$(strip $(2))" "$(strip $(2))~"     \
 		|| true
 	ln -s -n -T --force "$(strip $(1))" "$(strip $(2))" || true
 endef
 
 define copy
-	chattr -i "$(strip $(2))" && rm -f "$(strip $(2))" \
+	chattr -i "$(strip $(2))" || true
+	rm -rf "$(strip $(2))"
+	cp "$(strip $(1))" "$(strip $(2))" || true
+endef
+
+define copy_if_doesnt_exist
+	[ ! -e "$(strip $(2))" ] && [ -e "$(strip $(1))" ] \
 		&& cp "$(strip $(1))" "$(strip $(2))"          \
 		|| true
 endef
 
-define copy_if_doesnt_exist
-	[ ! -e "$(strip $(2))" ] && [ -e "$(strip $(1))" ] && cp "$(strip $(1))" "$(strip $(2))" || true
-endef
-
 define mkdir
-	[ -e "$(strip $(1))" ] && [ ! -d "$(strip $(1))" ]        \
-		&& chattr -i "$(strip $(1))" && rm -f "$(strip $(1))" \
+	[ -e "$(strip $(1))" ] && [ ! -d "$(strip $(1))" ] \
+		&& (chattr -i "$(strip $(1))" || true)         \
+		&& rm -f "$(strip $(1))"                       \
 		|| true
 	mkdir -p "$(strip $(1))" || true
 endef
 
 define create_immutable
 	[ -e "$(strip $(1))" ] && (lsattr -d "$(strip $(1))" | grep -q -E '^[^i]+ ') \
-		&& chattr -i "$(strip $(1))" && rm -rf "$(strip $(1))"                   \
+		&& (chattr -i "$(strip $(1))" || true)                                   \
+		&& rm -rf "$(strip $(1))"                                                \
 		|| true
 	touch "$(strip $(1))" || true
 	chattr +i "$(strip $(1))" || true
 endef
 
 define append
+	chattr -i "$(strip $(2))" || true
 	cat "$(strip $(1))" >> "$(strip $(2))" || true
 endef
 
@@ -54,11 +62,8 @@ define append_if_not_test
 endef
 
 define rm
-	chattr -i "$(strip $(1))" && rm -f "$(strip $(1))" || true
-endef
-
-define rmdir
-	chattr -i "$(strip $(1))" && rm -rf "$(strip $(1))" || true
+	chattr -i "$(strip $(1))" || true
+	rm -rf "$(strip $(1))"
 endef
 
 define patch_diff
