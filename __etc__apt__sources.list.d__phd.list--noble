@@ -35,10 +35,8 @@
     deb-src https://ppa.launchpadcontent.net/kubuntu-ppa/backports-extra/ubuntu noble main
 
 ### Trinity TDE3 desktop
- #  deb     http://mirror.ppa.trinitydesktop.org/trinity/deb/trinity-r14.1.x mantic main deps
- #  deb-src http://mirror.ppa.trinitydesktop.org/trinity/deb/trinity-r14.1.x mantic main deps
- #- deb     http://mirror.ppa.trinitydesktop.org/trinity/deb/trinity-r14.1.x noble  main deps
- #- deb-src http://mirror.ppa.trinitydesktop.org/trinity/deb/trinity-r14.1.x noble  main deps
+ #  deb     http://mirror.ppa.trinitydesktop.org/trinity/deb/trinity-r14.1.x noble  main deps
+ #  deb-src http://mirror.ppa.trinitydesktop.org/trinity/deb/trinity-r14.1.x noble  main deps
 
 ### Webmin
     deb     https://download.webmin.com/download/repository sarge contrib
@@ -84,12 +82,9 @@
     deb-src https://ppa.launchpadcontent.net/libreoffice/ppa/ubuntu noble main
 
 ### Wine
-    deb     https://dl.winehq.org/wine-builds/ubuntu/ mantic main
-    deb-src https://dl.winehq.org/wine-builds/ubuntu/ mantic main
- #- deb     https://dl.winehq.org/wine-builds/ubuntu/ noble  main
- #- deb-src https://dl.winehq.org/wine-builds/ubuntu/ noble  main
- #  deb     https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/xUbuntu_23.10/ ./
- #- deb     https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/xUbuntu_24.04/ ./
+    deb     https://dl.winehq.org/wine-builds/ubuntu/ noble  main
+    deb-src https://dl.winehq.org/wine-builds/ubuntu/ noble  main
+ #  deb     https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/xUbuntu_24.04/ ./
 
 ###-------------------#
 ###  OTHER SOFTWARE:  #
