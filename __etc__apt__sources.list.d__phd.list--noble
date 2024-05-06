@@ -16,7 +16,6 @@
 
 ### XanMod kernel
     deb     https://deb.xanmod.org releases main
-    deb-src https://deb.xanmod.org releases main
 
 ### graphics-drivers
     deb     https://ppa.launchpadcontent.net/graphics-drivers/ppa/ubuntu noble main
