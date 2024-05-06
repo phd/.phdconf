@@ -248,7 +248,6 @@ alias axel25='axel -n 25'
 alias axel30='axel -n 30'
 alias aptu='sudo apt update'
 alias ap-u='sudo apt update'
-alias ap-key='sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys'
 alias sedn='sed -E -e "1h;2,\$H;\$!d;g"'
 alias sedne='sedn -e'
 alias gitq='qgit'
@@ -456,6 +455,13 @@ function ap-fix {
 function ap! {
     ap-fix
     ap
+}
+
+function ap-key {
+    while [ -n "$1" ]; do
+        sudo wget "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x$1" -O "/etc/apt/trusted.gpg.d/$1.asc" --no-verbose
+        shift
+    done
 }
 
 function gitk {
