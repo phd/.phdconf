@@ -90,8 +90,7 @@
 ###-------------------#
 
 ### VirtualBox
-    deb     [arch=amd64] https://download.virtualbox.org/virtualbox/debian jammy contrib
- #- deb     [arch=amd64] https://download.virtualbox.org/virtualbox/debian noble contrib
+    deb     [arch=amd64] https://download.virtualbox.org/virtualbox/debian noble contrib
 
 ### Steam
     deb     [arch=amd64,i386] https://repo.steampowered.com/steam/ stable steam
