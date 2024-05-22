@@ -2,9 +2,9 @@
 ###  Ubuntu 22.10 Kinetic (EOL)  #
 ###==============================#
 
-###-----------#
+###===========#
 ###  SYSTEM:  #
-###-----------#
+###===========#
 
 ### DDEBS
     deb     http://ddebs.ubuntu.com kinetic         main restricted universe multiverse
@@ -43,9 +43,9 @@
 ### Conda
     deb     [arch=amd64] https://repo.anaconda.com/pkgs/misc/debrepo/conda stable main
 
-###-------------#
+###=============#
 ###  BROWSERS:  #
-###-------------#
+###=============#
 
 ### Brave
     deb     [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main
@@ -76,9 +76,9 @@
     deb     [arch=amd64] https://deb.librewolf.net jammy   main
  #- deb     [arch=amd64] https://deb.librewolf.net kinetic main
 
-###---------------------#
+###=====================#
 ###  DESKTOP SOFTWARE:  #
-###---------------------#
+###=====================#
 
 ### LibreOffice (X)
     deb     https://ppa.launchpadcontent.net/libreoffice/ppa/ubuntu kinetic main
@@ -94,9 +94,9 @@
  #^ deb     https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/xUbuntu_22.04/ ./
  #- deb     https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/xUbuntu_22.10/ ./
 
-###-------------------#
+###===================#
 ###  OTHER SOFTWARE:  #
-###-------------------#
+###===================#
 
 ### VirtualBox
     deb     [arch=amd64] https://download.virtualbox.org/virtualbox/debian jammy   contrib
@@ -128,9 +128,9 @@
  #X deb     https://ppa.launchpadcontent.net/webupd8team/atom/ubuntu bionic main
  #X deb-src https://ppa.launchpadcontent.net/webupd8team/atom/ubuntu bionic main
 
-###---------#
+###=========#
 ###  MISC:  #
-###---------#
+###=========#
 
 ### google-drive-ocamlfuse (X)
     deb     https://ppa.launchpadcontent.net/alessandro-strada/ppa/ubuntu kinetic main
