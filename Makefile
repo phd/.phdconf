@@ -110,7 +110,7 @@ home:
 root:
 	sudo make home
 
-etc:
+etc: install
 ifneq ($(shell id -u), 0)
 	sudo make $@
 else
@@ -129,4 +129,12 @@ else
 	$(call systemctl_enable,                                                                          reniced.service                           )
 	$(call rm              ,                                                                          /etc/cron.d/reniced                       )
 	$(call rm              ,                                                                          /lib/systemd/system/reniced.service       )
+	sudo crudini --set /etc/bluetooth/main.conf General Experimental true || true
+endif
+
+install:
+ifneq ($(shell id -u), 0)
+	sudo make $@
+else
+	sudo apt-get install crudini
 endif
