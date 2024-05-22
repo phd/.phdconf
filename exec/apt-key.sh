@@ -29,8 +29,15 @@ declare -a KEYS=(
 'FCAE110B1118213C'
 )
 
-for key in "${KEYS[@]}"
-do
-    sudo apt-key del "${key}" 2>/dev/null
-    sudo wget "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x${key}" -O "/etc/apt/trusted.gpg.d/${key}.asc" --no-verbose
-done
+sudo mkdir -p /etc/apt/trusted.gpg.d
+cd /etc/apt/trusted.gpg.d
+for key in "${KEYS[@]}"; do
+    #sudo apt-key del "${key}" 2>/dev/null
+    echo "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x${key}"
+    echo "-o"
+    echo "${key}.asc"
+done | xargs                                                      \
+    -d '\n'                                                       \
+    sudo curl                                                     \
+        -w '%{filename_effective} %{response_code} %{errormsg}\n' \
+        --no-progress-meter
