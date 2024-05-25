@@ -422,15 +422,27 @@ function F {
 }
 
 function G {
-    grep -r --color=auto  -F    "$@" .
+    grep -r --exclude-dir='.?*' --color=auto  -F    "$@" .
 }
 function GE {
-    grep -r --color=auto  -E    "$@" .
+    grep -r --exclude-dir='.?*' --color=auto  -E    "$@" .
 }
 function Gl {
-    grep -r --color=never -F -l "$@" .
+    grep -r --exclude-dir='.?*' --color=never -F -l "$@" .
 }
 function GEl {
+    grep -r --exclude-dir='.?*' --color=never -E -l "$@" .
+}
+function G. {
+    grep -r --color=auto  -F    "$@" .
+}
+function GE. {
+    grep -r --color=auto  -E    "$@" .
+}
+function Gl. {
+    grep -r --color=never -F -l "$@" .
+}
+function GEl. {
     grep -r --color=never -E -l "$@" .
 }
 
