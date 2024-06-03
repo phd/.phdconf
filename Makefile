@@ -147,11 +147,11 @@ install:
 ifneq ($(shell id -u), 0)
 	sudo make $@
 else
-	sudo apt-get install crudini
+	sudo apt-get -y install crudini
 endif
 
 niced_install:
-	sudo apt-get install git python3 forkstat
+	sudo apt-get -y install git python3 forkstat
 	cd
 	[ -d niced ] || git clone https://github.com/phd/niced
 	cd niced
