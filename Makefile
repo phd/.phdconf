@@ -80,9 +80,15 @@ define systemctl_enable
 	systemctl restart "$(strip $(1))" || true
 endef
 
+define systemctl_disable
+	systemctl daemon-reload || true
+	systemctl stop    "$(strip $(1))" || true
+	systemctl disable "$(strip $(1))" || true
+endef
+
 default: home
 
-all: home root etc
+all: home root etc niced
 
 home:
 	$(call link                , ${DIR}                                          , ${HOME}/.phdconf                     )
@@ -114,26 +120,26 @@ etc: install
 ifneq ($(shell id -u), 0)
 	sudo make $@
 else
-	$(call link            , ${DIR}                                                                 , /etc/.phdconf                                )
-	$(call link            , /etc/.phdconf/__etc__apt__preferences.d__phd                           , /etc/apt/preferences.d/phd                   )
-	$(call rm              ,                                                                          /etc/apt/sources.list.d/phd.sources          )
-	$(call link            , /etc/.phdconf/__etc__apt__sources.list.d__phd.list--${DISTRIB_CODENAME}, /etc/apt/sources.list.d/phd.list             )
-	$(call create_immutable,                                                                          /etc/apt/sources.list.d/steam.list           )
-	$(call create_immutable,                                                                          /etc/apt/sources.list.d/steam.sources        )
-	$(call create_immutable,                                                                          /etc/apt/sources.list.d/steam-stable.list    )
-	$(call create_immutable,                                                                          /etc/apt/sources.list.d/steam-stable.sources )
-	$(call create_immutable,                                                                          /etc/apt/sources.list.d/steam-beta.list      )
-	$(call create_immutable,                                                                          /etc/apt/sources.list.d/steam-beta.sources   )
-	$(call create_immutable,                                                                          /etc/apt/sources.list.d/google-chrome.list   )
-	$(call create_immutable,                                                                          /etc/apt/sources.list.d/google-chrome.sources)
-	$(call exec            , /etc/.phdconf/exec/apt-key.sh                                                                                         )
-	$(call link            , /etc/.phdconf/__etc__ssh__sshd_config.d__phd                           , /etc/ssh/sshd_config.d/phd                   )
-	$(call link            , /etc/.phdconf/__etc__reniced.conf                                      , /etc/reniced.conf                            )
-	$(call patch_diff      , /etc/.phdconf/diff/__etc__updatedb.conf.diff                           , /etc/updatedb.conf                           )
-	$(call copy            , /etc/.phdconf/copy/__etc__systemd__system__reniced.service             , /etc/systemd/system/reniced.service          )
-	$(call systemctl_enable,                                                                          reniced.service                              )
-	$(call rm              ,                                                                          /etc/cron.d/reniced                          )
-	$(call rm              ,                                                                          /lib/systemd/system/reniced.service          )
+	$(call link             , ${DIR}                                                                 , /etc/.phdconf                                )
+	$(call link             , /etc/.phdconf/__etc__apt__preferences.d__phd                           , /etc/apt/preferences.d/phd                   )
+	$(call rm               ,                                                                          /etc/apt/sources.list.d/phd.sources          )
+	$(call link             , /etc/.phdconf/__etc__apt__sources.list.d__phd.list--${DISTRIB_CODENAME}, /etc/apt/sources.list.d/phd.list             )
+	$(call create_immutable ,                                                                          /etc/apt/sources.list.d/steam.list           )
+	$(call create_immutable ,                                                                          /etc/apt/sources.list.d/steam.sources        )
+	$(call create_immutable ,                                                                          /etc/apt/sources.list.d/steam-stable.list    )
+	$(call create_immutable ,                                                                          /etc/apt/sources.list.d/steam-stable.sources )
+	$(call create_immutable ,                                                                          /etc/apt/sources.list.d/steam-beta.list      )
+	$(call create_immutable ,                                                                          /etc/apt/sources.list.d/steam-beta.sources   )
+	$(call create_immutable ,                                                                          /etc/apt/sources.list.d/google-chrome.list   )
+	$(call create_immutable ,                                                                          /etc/apt/sources.list.d/google-chrome.sources)
+	$(call exec             , /etc/.phdconf/exec/apt-key.sh                                                                                         )
+	$(call link             , /etc/.phdconf/__etc__ssh__sshd_config.d__phd                           , /etc/ssh/sshd_config.d/phd                   )
+	$(call patch_diff       , /etc/.phdconf/diff/__etc__updatedb.conf.diff                           , /etc/updatedb.conf                           )
+	$(call link             , /etc/.phdconf/__etc__reniced.conf                                      , /etc/reniced.conf                            )
+	$(call copy             , /etc/.phdconf/copy/__etc__systemd__system__reniced.service             , /etc/systemd/system/reniced.service          )
+	$(call systemctl_disable,                                                                          reniced.service                              )
+	$(call rm               ,                                                                          /etc/cron.d/reniced                          )
+	$(call rm               ,                                                                          /lib/systemd/system/reniced.service          )
 	sudo crudini --set /etc/bluetooth/main.conf General Experimental true || true
 endif
 
@@ -143,3 +149,23 @@ ifneq ($(shell id -u), 0)
 else
 	sudo apt-get install crudini
 endif
+
+niced_install:
+	sudo apt-get install git python3 forkstat
+	cd
+	[ -d niced ] || git clone https://github.com/phd/niced
+	cd niced
+	git pull --rebase
+	sudo make install
+
+niced_configure:
+ifneq ($(shell id -u), 0)
+	sudo make $@
+else
+	$(call link            , /etc/.phdconf/__etc__niced.conf, /etc/niced.conf)
+	$(call systemctl_enable,                                  niced.service  )
+endif
+
+niced:
+	make niced_install
+	make niced_configure
