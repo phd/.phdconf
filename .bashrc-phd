@@ -418,6 +418,10 @@ function x {
 }
 
 function F {
+    find . -not -path '*/.*' -name "$@"
+}
+
+function F. {
     find . -name "$@"
 }
 
