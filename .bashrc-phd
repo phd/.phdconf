@@ -417,6 +417,20 @@ function x {
     )
 }
 
+function idle {
+    local child=''
+    case "$@" in
+        ''|*[!0-9]*)
+            ${@:-bash} &
+            child="$!"
+            ;;
+    esac
+    renice    -n 19    "${child:-$@}" &>/dev/null
+    chrt   -p -i  0    "${child:-$@}" &>/dev/null
+    ionice    -c  3 -p "${child:-$@}" &>/dev/null
+    [ -n "${child}" ] && fg &>/dev/null
+}
+
 function F {
     find . -not -path '*/.*' -name "$@"
 }
