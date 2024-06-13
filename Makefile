@@ -147,7 +147,7 @@ install:
 ifneq ($(shell id -u), 0)
 	sudo make $@
 else
-	sudo apt-get -y install crudini
+	sudo apt-get -y install crudini curl
 endif
 
 niced_install:
