@@ -641,7 +641,7 @@ function cptree {
 }
 
 function forward-port { # $1=local-port $2=remote-ssh-server $3=remote-port
-    while true; do ssh -NR $3:localhost:$1 $2 -o ExitOnForwardFailure=yes; sleep 5; done
+    while true; do ssh -NR $3:localhost:$1 $2 -o TCPKeepAlive=yes -o ExitOnForwardFailure=yes; sleep 5; done
 }
 alias forward-ssh='forward-port 22'
 
