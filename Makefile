@@ -88,7 +88,7 @@ endef
 
 default: home
 
-all: home root etc niced
+all: home root etc apt niced
 
 home:
 	$(call link                , ${DIR}                                          , ${HOME}/.phdconf                     )
@@ -121,18 +121,6 @@ ifneq ($(shell id -u), 0)
 	sudo -H make $@
 else
 	$(call link             , ${DIR}                                                                 , /etc/.phdconf                                )
-	$(call link             , /etc/.phdconf/__etc__apt__preferences.d__phd                           , /etc/apt/preferences.d/phd                   )
-	$(call rm               ,                                                                          /etc/apt/sources.list.d/phd.sources          )
-	$(call link             , /etc/.phdconf/__etc__apt__sources.list.d__phd.list--${DISTRIB_CODENAME}, /etc/apt/sources.list.d/phd.list             )
-	$(call create_immutable ,                                                                          /etc/apt/sources.list.d/steam.list           )
-	$(call create_immutable ,                                                                          /etc/apt/sources.list.d/steam.sources        )
-	$(call create_immutable ,                                                                          /etc/apt/sources.list.d/steam-stable.list    )
-	$(call create_immutable ,                                                                          /etc/apt/sources.list.d/steam-stable.sources )
-	$(call create_immutable ,                                                                          /etc/apt/sources.list.d/steam-beta.list      )
-	$(call create_immutable ,                                                                          /etc/apt/sources.list.d/steam-beta.sources   )
-	$(call create_immutable ,                                                                          /etc/apt/sources.list.d/google-chrome.list   )
-	$(call create_immutable ,                                                                          /etc/apt/sources.list.d/google-chrome.sources)
-	$(call exec             , /etc/.phdconf/exec/apt-key.sh                                                                                         )
 	$(call link             , /etc/.phdconf/__etc__ssh__sshd_config.d__phd                           , /etc/ssh/sshd_config.d/phd                   )
 	$(call patch_diff       , /etc/.phdconf/diff/__etc__updatedb.conf.diff                           , /etc/updatedb.conf                           )
 	$(call link             , /etc/.phdconf/__etc__reniced.conf                                      , /etc/reniced.conf                            )
@@ -141,6 +129,25 @@ else
 	$(call rm               ,                                                                          /etc/cron.d/reniced                          )
 	$(call rm               ,                                                                          /lib/systemd/system/reniced.service          )
 	sudo -H crudini --set /etc/bluetooth/main.conf General Experimental true || true
+endif
+
+apt: install
+ifneq ($(shell id -u), 0)
+	sudo -H make $@
+else
+	$(call link            , ${DIR}                                                                 , /etc/.phdconf                                )
+	$(call link            , /etc/.phdconf/__etc__apt__preferences.d__phd                           , /etc/apt/preferences.d/phd                   )
+	$(call create_immutable,                                                                          /etc/apt/sources.list.d/phd.sources          )
+	$(call link            , /etc/.phdconf/__etc__apt__sources.list.d__phd.list--${DISTRIB_CODENAME}, /etc/apt/sources.list.d/phd.list             )
+	$(call create_immutable,                                                                          /etc/apt/sources.list.d/steam.list           )
+	$(call create_immutable,                                                                          /etc/apt/sources.list.d/steam.sources        )
+	$(call create_immutable,                                                                          /etc/apt/sources.list.d/steam-stable.list    )
+	$(call create_immutable,                                                                          /etc/apt/sources.list.d/steam-stable.sources )
+	$(call create_immutable,                                                                          /etc/apt/sources.list.d/steam-beta.list      )
+	$(call create_immutable,                                                                          /etc/apt/sources.list.d/steam-beta.sources   )
+	$(call create_immutable,                                                                          /etc/apt/sources.list.d/google-chrome.list   )
+	$(call create_immutable,                                                                          /etc/apt/sources.list.d/google-chrome.sources)
+	$(call exec            , /etc/.phdconf/exec/apt-key.sh                                                                                         )
 endif
 
 install:
