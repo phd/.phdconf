@@ -114,11 +114,11 @@ home:
 	nano ${HOME}/.gitconfig
 
 root:
-	sudo make home
+	sudo -H make home
 
 etc: install
 ifneq ($(shell id -u), 0)
-	sudo make $@
+	sudo -H make $@
 else
 	$(call link             , ${DIR}                                                                 , /etc/.phdconf                                )
 	$(call link             , /etc/.phdconf/__etc__apt__preferences.d__phd                           , /etc/apt/preferences.d/phd                   )
@@ -140,27 +140,27 @@ else
 	$(call systemctl_disable,                                                                          reniced.service                              )
 	$(call rm               ,                                                                          /etc/cron.d/reniced                          )
 	$(call rm               ,                                                                          /lib/systemd/system/reniced.service          )
-	sudo crudini --set /etc/bluetooth/main.conf General Experimental true || true
+	sudo -H crudini --set /etc/bluetooth/main.conf General Experimental true || true
 endif
 
 install:
 ifneq ($(shell id -u), 0)
-	sudo make $@
+	sudo -H make $@
 else
-	sudo apt-get -y install crudini curl
+	sudo -H apt-get -y install crudini curl
 endif
 
 niced_install:
-	sudo apt-get -y install git python3 forkstat
+	sudo -H apt-get -y install git python3 forkstat
 	cd
 	[ -d niced ] || git clone https://github.com/phd/niced
 	cd niced
 	git pull --rebase
-	sudo make install
+	sudo -H make install
 
 niced_configure:
 ifneq ($(shell id -u), 0)
-	sudo make $@
+	sudo -H make $@
 else
 	$(call link            , /etc/.phdconf/__etc__niced.conf, /etc/niced.conf)
 	$(call systemctl_enable,                                  niced.service  )
