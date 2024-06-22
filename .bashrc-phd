@@ -640,10 +640,19 @@ function cptree {
     find . ${args} | while read from; do cp2tree "${from}" "${to}"; done
 }
 
-function forward-port { # $1=local-port $2=remote-ssh-server $3=remote-port
-    while true; do ssh -NR $3:localhost:$1 $2 -o TCPKeepAlive=yes -o ExitOnForwardFailure=yes; sleep 5; done
+function port-export { # $1=source-port $2=target-port $3=remote-ssh-server
+    while true; do ssh -NR $2:localhost:$1 $3 -o TCPKeepAlive=yes -o ExitOnForwardFailure=yes; sleep 5; done
 }
-alias forward-ssh='forward-port 22'
+alias port-export-ssh='port-export 22'
+alias port-export-http='port-export 80'
+function port-import { # $1=source-port $2=target-port $3=remote-ssh-server
+    while true; do ssh -NL $2:localhost:$1 $3 -o TCPKeepAlive=yes -o ExitOnForwardFailure=yes; sleep 5; done
+}
+alias port-import-ssh='port-import 22'
+alias port-import-http='port-import 80'
+function port-duplicate { # $1=source-port $2=target-port
+    socat TCP-LISTEN:$2,fork TCP:localhost:$1
+}
 
 function wine-remove-extensions {
     rm -f ~/.local/share/mime/packages/x-wine*
