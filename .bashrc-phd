@@ -112,7 +112,7 @@ function __git_head {
     git rev-parse --short HEAD 2>/dev/null
 }
 function __prompt_git {
-    command -v __git_ps1 &>/dev/null && echo -n '$(__git_ps1 " ${C_GREEN}{%s,$(__git_head)}${C_NONE}")'
+    command -v __git_ps1 &>/dev/null && echo -n '$(__git_ps1 " ${C_GREEN}{%s${C_GREEN},$(__git_head)}${C_NONE}")'
 }
 function __prompt_git_eval {
     eval "echo \"$(__prompt_git)\""
