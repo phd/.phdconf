@@ -464,6 +464,23 @@ function GEl. {
     grep -r --color=never -E -l "$@" .
 }
 
+function S {
+    (
+        echo 'Syncing...'
+        set +m
+        sync &
+        tput sc
+        while true; do
+            sleep 0.1
+            tput rc
+            grep --color=none -e 'Dirty:' -e 'Writeback:' /proc/meminfo
+            pgrep -P $BASHPID &>/dev/null || break
+            sleep 0.4
+        done
+        echo 'Done.'
+    )
+}
+
 function wgetr {
     wget --referer=${1:-} ${1:-}
 }
