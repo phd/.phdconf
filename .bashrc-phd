@@ -68,10 +68,17 @@ export LS_COLORS="${LS_COLORS}:so=01;37;42:"
 bind 'set show-all-if-ambiguous on'
 
 function trim {
-  var="$@"
-  var="${var#"${var%%[![:space:]]*}"}"
-  var="${var%"${var##*[![:space:]]}"}"
-  echo -n "${var}"
+    local var="$@"
+    var="${var#"${var%%[![:space:]]*}"}"
+    var="${var%"${var##*[![:space:]]}"}"
+    echo -n "${var}"
+}
+
+function decorate {
+    local line
+    while read line; do
+        echo "${1}${line}${2}"
+    done
 }
 
 if [ -f /usr/lib/git-core/git-sh-prompt ]; then
@@ -176,7 +183,7 @@ export PROMPT_COMMAND="setterm -cursor on; ${PROMPT_COMMAND}"
 
 shopt -s autocd
 
-mkdircd () {
+function mkdircd {
     local name="$@"
     mkdir -p -- "${name}" && cd "${name}"
 }
@@ -489,10 +496,18 @@ function slowcat {
     perl -pe "system 'sleep ${2:-.020}'" ${1:-}
 }
 
+function __ap {
+    local args="$@"
+    aptitude ${args} || return $?
+    echo "KERNELS:"
+    (builtin cd /boot; ls -1 vmlinu*-* | sort -V | decorate '     - ')
+    echo "CURRENT: $(uname -sr)"
+    apt-get --purge autoremove || return $?
+    apt-get clean || return $?
+}
 function ap {
     local args="$@"
-    sudo bash -c "aptitude ${args} && (uname -sr | (boxes -d stone 2>/dev/null || cat)) && apt-get --purge autoremove && apt-get clean"
-    sudo -K
+    sudo -N bash -i -c "__ap ${args}" || return $?
     echo -n 'Reboot: '; reboot?
 }
 alias ap-fo='ap -o Dpkg::Options::="--force-overwrite"'
