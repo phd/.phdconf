@@ -507,7 +507,8 @@ function __ap {
 }
 function ap {
     local args="$@"
-    sudo -N bash -i -c "__ap ${args}" || return $?
+    sudo bash -i -c "__ap ${args}" || return $?
+    sudo -k
     echo -n 'Reboot: '; reboot?
 }
 alias ap-fo='ap -o Dpkg::Options::="--force-overwrite"'
