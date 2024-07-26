@@ -496,12 +496,16 @@ function slowcat {
     perl -pe "system 'sleep ${2:-.020}'" ${1:-}
 }
 
-function __ap {
-    local args="$@"
-    aptitude ${args} || return $?
+function kernels {
     echo "KERNELS:"
     (builtin cd /boot; ls -1 vmlinu*-* | sort -V | decorate '     - ')
     echo "CURRENT: $(uname -sr)"
+}
+
+function __ap {
+    local args="$@"
+    aptitude ${args} || return $?
+    kernels
     apt-get --purge autoremove || return $?
     apt-get clean || return $?
 }
