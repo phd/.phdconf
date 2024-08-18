@@ -67,6 +67,8 @@ T_CURSOR_ON=$'\e[?25h'
 export LS_COLORS="${LS_COLORS}:so=01;37;42:"
 bind 'set show-all-if-ambiguous on'
 
+export GREP_COLORS='ms=01;37;42'
+
 function trim {
     local var="$@"
     var="${var#"${var%%[![:space:]]*}"}"
@@ -207,7 +209,6 @@ alias ll.='ll -I "[^.]*"'
 alias lll='ll.'
 alias cd..='cd ..'
 alias cd-='cd - &>/dev/null'
-alias c='cd'
 alias ..='cd ..'
 alias ....='cd ../..'
 alias ......='cd ../../..'
@@ -394,6 +395,17 @@ function cd {
         echo "=== $(pwd) ==="
         LC_COLLATE='en_US.utf8' COLUMNS="$((${COLUMNS}-3))" ls --group-directories-first -C --color=always
     fi
+}
+
+function c {
+    local args="$@"
+    local matches=$(find . -maxdepth 1 -mindepth 1 -type d -name "*${args}*" -printf "%P\n" | sort)
+    if [ -z "${matches}" ] || [ $(wc -l <<< "${matches}") -gt '1' ]; then
+        echo "${matches}" | ( [ -n "${args}" ] && GREP_COLORS='ms=01;37;42' grep --color=always "${args}" || cat ) | decorate '' '/'
+        return 1
+    fi
+    echo cd -- "'${matches}'"
+    cd -- "${matches}"
 }
 
 function CD {
