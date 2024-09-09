@@ -399,6 +399,7 @@ function cd {
 
 function c {
     local args="$@"
+    args="${args%/}"
     local matches=$(find . -maxdepth 1 -mindepth 1 -type d -name "*${args}*" -printf "%P\n" | sort)
     if [ -z "${matches}" ] || [ $(wc -l <<< "${matches}") -gt '1' ]; then
         echo "${matches}" | ( [ -n "${args}" ] && GREP_COLORS='ms=01;37;42' grep --color=always "${args}" || cat ) | decorate '' '/'
