@@ -10,10 +10,6 @@ Package: *
 Pin: release o=LP-PPA-phd-chromium-browser
 Pin-Priority: 1001
 
-Package: firefox firefox-* thunderbird thunderbird-*
-Pin: release o=Ubuntu
-Pin-Priority: -1
-
 Package: *
 Pin: release o=LP-PPA-phd-firefox
 Pin-Priority: 1001

@@ -1,0 +1,6 @@
+Unattended-Upgrade::Origins-Pattern {
+    "origin=*";
+};
+
+// Unattended-Upgrade::OnlyOnACPower "false";
+// Unattended-Upgrade::Skip-Updates-On-Metered-Connections "false";
