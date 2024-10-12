@@ -73,7 +73,7 @@
  #  deb-src https://ppa.launchpadcontent.net/mozillateam/firefox-next/ubuntu jammy main
 
 ### Librewolf
-    deb     [arch=amd64] https://deb.librewolf.net jammy main
+    deb     [arch=amd64] https://repo.librewolf.net/ librewolf main
 
 ###=====================#
 ###  DESKTOP SOFTWARE:  #
