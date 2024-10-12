@@ -101,10 +101,8 @@
     deb     https://download.opensuse.org/repositories/home:/slowphil:/texmacs-devel/xUbuntu_24.04/ /
 
 ### IntelliJ IDEA
-    deb     https://ppa.launchpadcontent.net/mmk2410/intellij-idea/ubuntu jammy main
-    deb-src https://ppa.launchpadcontent.net/mmk2410/intellij-idea/ubuntu jammy main
- #- deb     https://ppa.launchpadcontent.net/mmk2410/intellij-idea/ubuntu noble main
- #- deb-src https://ppa.launchpadcontent.net/mmk2410/intellij-idea/ubuntu noble main
+    deb     https://ppa.launchpadcontent.net/mmk2410/intellij-idea/ubuntu noble main
+    deb-src https://ppa.launchpadcontent.net/mmk2410/intellij-idea/ubuntu noble main
 
 ### VS Codium
  #  deb     https://download.vscodium.com/debs vscodium main
