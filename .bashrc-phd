@@ -233,6 +233,7 @@ alias l='LC_COLLATE=en_US.utf8  ls --color=auto --group-directories-first -lvF'
 alias ll='LC_COLLATE=en_US.utf8 ls --color=auto --group-directories-first -lvFa'
 alias ll.='ll -I "[^.]*"'
 alias lll='ll.'
+
 alias cd..='cd ..'
 alias cd-='cd - &>/dev/null'
 alias ..='cd ..'
@@ -251,46 +252,31 @@ alias ~='cd ~'
 alias c~='cd ~'
 alias cd~='cd ~'
 alias -- -='cd -'
+
 alias s='sudo su'
 alias sk='sudo -k'
 alias sd='sudo'
+
 alias lessf='less -n +F'
 alias lessg='less -n +G'
+
 alias scr='screen -D -R'
 alias scrr='screen -D -r'
 alias scrl='screen -list'
 alias scrw='screen -wipe'
+
 alias exit='clear; exit'
 alias logout='clear; logout'
 alias q='clear; exit'
-alias top='top -d 0,5'
-alias git='LANG=en_US.UTF-8 git'
-alias g='git'
-alias gitgui='x git gui'
-alias gg='gitgui'
+
 alias grep='grep --color=auto'
 alias grepE='grep -E'
-alias axel='axel --user-agent="Mozilla/5.0 (Windows NT 10.0; rv:68.0) Gecko/20100101 Firefox/68.0"'
-alias axel2='axel -n 2'
-alias axel3='axel -n 3'
-alias axel4='axel -n 4'
-alias axel5='axel -n 5'
-alias axel10='axel -n 10'
-alias axel15='axel -n 15'
-alias axel20='axel -n 20'
-alias axel25='axel -n 25'
-alias axel30='axel -n 30'
-alias aptu='sudo apt update'
-alias ap-u='sudo apt update'
+
 alias sedn='sed -E -e "1h;2,\$H;\$!d;g"'
 alias sedne='sedn -e'
-alias gitq='qgit'
+
 alias m='make'
-alias gk='gitk'
-alias k='gitk'
-alias ka='gitk --all'
-alias qg='qgit'
-alias gq='qgit'
+
 alias e="${__EDITOR}"
 alias se="sudo ${__EDITOR}"
 alias E="x ${__XEDITOR}"
@@ -309,14 +295,18 @@ alias KWw='__run_with_witch KW'
 alias KDw='__run_with_witch KD'
 alias Cw='__run_with_witch  C'
 alias Iw='__run_with_witch  I'
+
 alias err='tee /dev/stderr'
 alias out='tee /dev/tty'
 alias t='tee /dev/tty'
+
 alias dm='sudo dmesg'
 alias dmw='sudo dmesg -w'
+
 alias psaux='ps aux'
 alias psauf='ps auf'
 alias psaufx='ps aufx'
+
 alias du0='du -d 0'
 alias du1='du -d 1'
 alias du2='du -d 2'
@@ -326,9 +316,13 @@ alias duh0='du -h -d 0'
 alias duh1='du -h -d 1'
 alias duh2='du -h -d 2'
 alias duh3='du -h -d 3'
+
 alias dfh='df -h'
+
 alias unamea='uname -a'
+
 alias wh='which'
+
 alias xargsn='xargs  -d "\n" -r'
 alias xargs1='xargs          -r -n1'
 alias xargsn1='xargs -d "\n" -r -n1'
@@ -339,9 +333,11 @@ alias xargs1b='xargs1   bash -c'
 alias xargsn1b='xargsn1 bash -c'
 alias xargsib='xargsi   bash -c'
 alias xargsi1b='xargsi1 bash -c'
+
 alias reboot?='[ -f /var/run/reboot-required ] && echo YES || echo no'
 alias reboot!='sudo reboot'
 alias reboot?!='[ -f /var/run/reboot-required ] && (echo YES; sudo reboot || true) || echo no'
+
 alias u+r='chmod u+r'
 alias u-r='chmod u-r'
 alias u+w='chmod u+w'
@@ -398,21 +394,54 @@ alias a+wx='chmod a+wx'
 alias a-wx='chmod a-wx'
 alias a+rwx='chmod a+rwx'
 alias a-rwx='chmod a-rwx'
-alias fu='flatpak update'
-alias dirty='watch -n1 -t grep -e "Dirty:" -e "Writeback:" /proc/meminfo'
-alias demangle='c++filt'
-alias bashtrack='strace -e execve -b execve -f -qqv -e signal="!all" bash'
+
+alias top='top -d 0,5'
+
+alias git='LANG=en_US.UTF-8 git'
+alias g='git'
+alias gitgui='x git gui'
+alias gg='gitgui'
+alias gk='gitk'
+alias k='gitk'
+alias ka='gitk --all'
+alias qg='qgit'
+alias gq='qgit'
+alias gitq='qgit'
+
 alias lsb-release='cat /etc/lsb-release'
+
+alias aptu='sudo apt update'
+alias ap-u='sudo apt update'
+
 alias apt-list-installed='LANG=C sudo apt list --installed'
 alias apt-list-installed-local='LANG=C sudo apt list --installed | grep "/now "'
+
+alias dirty='watch -n1 -t grep -e "Dirty:" -e "Writeback:" /proc/meminfo'
+
+alias fu='flatpak update'
+
+alias demangle='c++filt'
+
+alias bashtrack='strace -e execve -b execve -f -qqv -e signal="!all" bash'
+
+alias axel='axel --user-agent="Mozilla/5.0 (Windows NT 10.0; rv:68.0) Gecko/20100101 Firefox/68.0"'
+alias axel2='axel -n 2'
+alias axel3='axel -n 3'
+alias axel4='axel -n 4'
+alias axel5='axel -n 5'
+alias axel10='axel -n 10'
+alias axel15='axel -n 15'
+alias axel20='axel -n 20'
+alias axel25='axel -n 25'
+alias axel30='axel -n 30'
+
+# which colormake &>/dev/null && alias make='colormake'
 
 function __run_with_witch {
     local task="$1"
     shift
     eval $task $(which $@)
 }
-
-#which colormake &>/dev/null && alias make='colormake'
 
 function cd {
     local args=''
