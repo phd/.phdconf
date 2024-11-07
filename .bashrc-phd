@@ -463,8 +463,16 @@ function x {
     local args="$@"
     local input="$([ ! -t 0 ] && cat)"
     (
-        exec &>/dev/null
-        xargs ${args} <<<"${input}" & disown
+        (
+            local output=$(xargs ${args} <<<"${input}" 2>&1)
+            local ret="$?"
+            case "${ret}" in
+                '1'|'126'|'127')
+                    >&2 echo "$output"
+                    ;;
+            esac
+        ) &
+        disown
     )
 }
 
