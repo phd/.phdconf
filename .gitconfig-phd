@@ -130,7 +130,10 @@
     d                    = diff
     dn                   = diff --name-only
     dw                   = diff --color-words=.
+    dm                   = diff --color-moved=plain
     dc                   = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { git diff --check $@ | cut -d: -f1 | sort -u; }; _"
+
+    ds                   = d --staged
     d2                   = d HEAD~1..HEAD
     d3                   = d HEAD~2..HEAD~1
     d4                   = d HEAD~3..HEAD~2
@@ -147,6 +150,8 @@
     d7-                  = d HEAD~6
     d8-                  = d HEAD~7
     d9-                  = d HEAD~8
+
+    dns                  = dn --staged
     dn2                  = dn HEAD~1..HEAD
     dn3                  = dn HEAD~2..HEAD~1
     dn4                  = dn HEAD~3..HEAD~2
@@ -163,6 +168,8 @@
     dn7-                 = dn HEAD~6
     dn8-                 = dn HEAD~7
     dn9-                 = dn HEAD~8
+
+    dws                  = dw --staged
     dw2                  = dw HEAD~1..HEAD
     dw3                  = dw HEAD~2..HEAD~1
     dw4                  = dw HEAD~3..HEAD~2
@@ -179,6 +186,26 @@
     dw7-                 = dw HEAD~6
     dw8-                 = dw HEAD~7
     dw9-                 = dw HEAD~8
+
+    dms                  = dm --staged
+    dm2                  = dm HEAD~1..HEAD
+    dm3                  = dm HEAD~2..HEAD~1
+    dm4                  = dm HEAD~3..HEAD~2
+    dm5                  = dm HEAD~4..HEAD~3
+    dm6                  = dm HEAD~5..HEAD~4
+    dm7                  = dm HEAD~6..HEAD~5
+    dm8                  = dm HEAD~7..HEAD~6
+    dm9                  = dm HEAD~8..HEAD~7
+    dm2-                 = dm HEAD~1
+    dm3-                 = dm HEAD~2
+    dm4-                 = dm HEAD~3
+    dm5-                 = dm HEAD~4
+    dm6-                 = dm HEAD~5
+    dm7-                 = dm HEAD~6
+    dm8-                 = dm HEAD~7
+    dm9-                 = dm HEAD~8
+
+    dcs                  = dc --staged
     dc2                  = dc HEAD~1..HEAD
     dc3                  = dc HEAD~2..HEAD~1
     dc4                  = dc HEAD~3..HEAD~2
