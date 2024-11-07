@@ -140,12 +140,13 @@ function __prompt_sign_update {
     [ "${HISTFILE}" == '/dev/null' ] && __PROMPT_SIGN='-' || true
 }
 
+__HISTFILE=~/.bash_history-phd
 export HISTFILE=~/.bash_history
 history -c
 history -w
 export HISTFILESIZE=32000
 export HISTSIZE=32000
-export HISTFILE=~/.bash_history-phd
+export HISTFILE="${__HISTFILE}"
 export HISTFILESIZE=32000
 export HISTSIZE=32000
 export HISTCONTROL='ignoredups:erasedups:ignorespace'
@@ -158,7 +159,9 @@ function __history_cleaned {
         "$HISTFILE"
 }
 function __history_clean {
-    echo "$(__history_cleaned)" > "$HISTFILE"
+    local entries
+    read -d '' entries <<<"$(__history_cleaned)"
+    cat <<<"${entries}" > "$HISTFILE"
 }
 function __history_append {
     history -a
@@ -169,15 +172,15 @@ function __history_reload {
     history -r
 }
 export PROMPT_COMMAND="__history_append; ${PROMPT_COMMAND}"
-alias h='history'                                             # print history
-alias hh='__history_reload'                                   # reload common history from all shells
-alias hhh='e "$HISTFILE"'                                     # edit Bash history
-alias HHH='E "$HISTFILE"'                                     # edit Bash history in X
-alias Ehhh='E "$HISTFILE"'                                    # edit Bash history in X
-alias h-='HISTFILE=/dev/null          ; __prompt_sign_update' # temporarily disable history saving for this shell
-alias h+='HISTFILE=~/.bash_history-phd; __prompt_sign_update' # re-enable history saving for this shell
-alias H-='set +o history              ; __prompt_sign_update' # temporarily disable history for this shell
-alias H+='set -o history              ; __prompt_sign_update' # re-enable history for this shell
+alias h='history'                                         # print history
+alias hh='__history_reload'                               # reload common history from all shells
+alias hhh='e "$HISTFILE"'                                 # edit Bash history
+alias HHH='E "$HISTFILE"'                                 # edit Bash history in X
+alias Ehhh='E "$HISTFILE"'                                # edit Bash history in X
+alias h-='HISTFILE=/dev/null      ; __prompt_sign_update' # temporarily disable history saving for this shell
+alias h+="HISTFILE='${__HISTFILE}'; __prompt_sign_update" # re-enable history saving for this shell
+alias H-='set +o history          ; __prompt_sign_update' # temporarily disable history for this shell
+alias H+='set -o history          ; __prompt_sign_update' # re-enable history for this shell
 
 __prompt_sign_update
 
