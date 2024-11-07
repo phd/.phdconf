@@ -300,6 +300,15 @@ alias KW='x kwrite'
 alias KD='x kdevelop'
 alias C='x codium'
 alias I='x intellij-idea-community'
+alias ew='__run_with_witch  e'
+alias sew='__run_with_witch se'
+alias Ew='__run_with_witch  E'
+alias EEw='__run_with_witch EE'
+alias Kw='__run_with_witch  K'
+alias KWw='__run_with_witch KW'
+alias KDw='__run_with_witch KD'
+alias Cw='__run_with_witch  C'
+alias Iw='__run_with_witch  I'
 alias err='tee /dev/stderr'
 alias out='tee /dev/tty'
 alias t='tee /dev/tty'
@@ -396,6 +405,12 @@ alias bashtrack='strace -e execve -b execve -f -qqv -e signal="!all" bash'
 alias lsb-release='cat /etc/lsb-release'
 alias apt-list-installed='LANG=C sudo apt list --installed'
 alias apt-list-installed-local='LANG=C sudo apt list --installed | grep "/now "'
+
+function __run_with_witch {
+    local task="$1"
+    shift
+    eval $task $(which $@)
+}
 
 #which colormake &>/dev/null && alias make='colormake'
 
