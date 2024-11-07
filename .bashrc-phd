@@ -83,6 +83,27 @@ function decorate {
     done
 }
 
+__LAST_COMMAND=''
+__LAST_DEBUG_COMMAND=''
+__CURRENT_DEBUG_COMMAND=''
+function __debug_last_command {
+    __LAST_DEBUG_COMMAND="${__CURRENT_DEBUG_COMMAND}"
+    __CURRENT_DEBUG_COMMAND="${BASH_COMMAND}"
+    return 0
+}
+trap __debug_last_command DEBUG
+function __store_last_command {
+    __LAST_COMMAND="${__LAST_DEBUG_COMMAND}"
+}
+function __cleanup_last_command {
+    __LAST_DEBUG_COMMAND=''
+    __CURRENT_DEBUG_COMMAND=''
+}
+function __has_last_command {
+    # echo "(LAST=${__LAST_COMMAND})" # debug
+    [ -n "${__LAST_COMMAND}" ]
+}
+
 if [ -f /usr/lib/git-core/git-sh-prompt ]; then
     . /usr/lib/git-core/git-sh-prompt
 fi
@@ -115,7 +136,9 @@ function __colorpwd {
 }
 function __prompt_err {
     local ERR="${PIPESTATUS[-1]}"
-    [ "${ERR}" -ne 0 ] && echo -ne " ${C_RED}(${ERR})${C_NONE}"
+    __has_last_command || return 0
+    [ "${ERR}" -ne 0 ] || return 0
+    echo -ne " ${C_RED}(${ERR})${C_NONE}"
 }
 function __git_head {
     git rev-parse --short HEAD 2>/dev/null
@@ -171,7 +194,7 @@ function __history_reload {
     history -c
     history -r
 }
-export PROMPT_COMMAND="__history_append; ${PROMPT_COMMAND}"
+export PROMPT_COMMAND="__has_last_command && __history_append ${PROMPT_COMMAND:+;} ${PROMPT_COMMAND}"
 alias h='history'                                         # print history
 alias hh='__history_reload'                               # reload common history from all shells
 alias hhh='e "$HISTFILE"'                                 # edit Bash history
@@ -184,7 +207,7 @@ alias H+='set -o history          ; __prompt_sign_update' # re-enable history fo
 
 __prompt_sign_update
 
-export PROMPT_COMMAND="setterm -cursor on; ${PROMPT_COMMAND}"
+export PROMPT_COMMAND="setterm -cursor on ${PROMPT_COMMAND:+;} ${PROMPT_COMMAND}"
 
 shopt -s autocd
 
@@ -749,3 +772,7 @@ function ovh-dyndns {
 if [ -f ~/.bashrc-ssh ]; then
     . ~/.bashrc-ssh
 fi
+
+# must be at the end of the .bashrc file:
+export PROMPT_COMMAND="__store_last_command; ${PROMPT_COMMAND} ${PROMPT_COMMAND:+;} __cleanup_last_command"
+__cleanup_last_command
