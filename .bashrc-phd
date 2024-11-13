@@ -459,6 +459,7 @@ function cd {
         where="${HOME}"
     elif [ -e "${where}" ] && [ ! -d "${where}" ]; then
         where="$(dirname "${where}")"
+        echo "cd -- '${where}'"
     fi
     builtin cd $args -- "${where}" || return "${?}"
     # skip for Konsole KPart:
@@ -481,7 +482,7 @@ function c {
         echo "${matches}" | ( [ -n "${args}" ] && GREP_COLORS='ms=01;37;42' grep --color=always "${args}" || cat ) | decorate '' '/'
         return 1
     fi
-    echo cd -- "'${matches}'"
+    echo "cd -- '${matches}'"
     cd -- "${matches}"
 }
 
