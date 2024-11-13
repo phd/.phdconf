@@ -252,6 +252,7 @@ alias ~='cd ~'
 alias c~='cd ~'
 alias cd~='cd ~'
 alias -- -='cd -'
+alias cdw='__run_with_witch  cd'
 
 alias s='sudo su'
 alias sk='sudo -k'
