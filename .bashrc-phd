@@ -252,7 +252,7 @@ alias ~='cd ~'
 alias c~='cd ~'
 alias cd~='cd ~'
 alias -- -='cd -'
-alias cdw='__run_with_witch  cd'
+alias cdw='__run_with_witch cd'
 
 alias s='sudo su'
 alias sk='sudo -k'
@@ -439,9 +439,9 @@ alias axel30='axel -n 30'
 # which colormake &>/dev/null && alias make='colormake'
 
 function __run_with_witch {
-    local task="$1"
-    shift
-    eval $task $(which $@)
+    local task="${@:1:$#-1}" # all args but last
+    local which="${@: -1}" # last arg
+    eval "${task} $(which ${which})"
 }
 
 function cd {
