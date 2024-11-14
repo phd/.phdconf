@@ -126,10 +126,10 @@
     caamdn               = commit -a --amend --date=now
     cd                   = commit    --amend --date=now
     cu                   = commit -a --amend --date=now
-    camdc                = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { GIT_COMMITTER_DATE=\"$1\"; shift; git cam   \"$GIT_COMMITTER_DATE\" $@; }; _"
-    camdb                = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { GIT_COMMITTER_DATE=\"$1\"; shift; git camd  \"$GIT_COMMITTER_DATE\" $@; }; _"
-    caamdc               = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { GIT_COMMITTER_DATE=\"$1\"; shift; git caam  \"$GIT_COMMITTER_DATE\" $@; }; _"
-    caamdb               = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { GIT_COMMITTER_DATE=\"$1\"; shift; git caamd \"$GIT_COMMITTER_DATE\" $@; }; _"
+    camdc                = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { export GIT_COMMITTER_DATE=\"$1\"; shift; git cam   \"$GIT_COMMITTER_DATE\" $@; }; _"
+    camdb                = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { export GIT_COMMITTER_DATE=\"$1\"; shift; git camd  \"$GIT_COMMITTER_DATE\" $@; }; _"
+    caamdc               = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { export GIT_COMMITTER_DATE=\"$1\"; shift; git caam  \"$GIT_COMMITTER_DATE\" $@; }; _"
+    caamdb               = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { export GIT_COMMITTER_DATE=\"$1\"; shift; git caamd \"$GIT_COMMITTER_DATE\" $@; }; _"
     camdcn               = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { git camdc  \"$(date +'%Y-%m-%d %H:%M:%S')\" $@; }; _"
     camdbn               = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { git camdb  \"$(date +'%Y-%m-%d %H:%M:%S')\" $@; }; _"
     caamdcn              = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { git caamdc \"$(date +'%Y-%m-%d %H:%M:%S')\" $@; }; _"
