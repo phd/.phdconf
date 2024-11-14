@@ -121,7 +121,7 @@ else
     __prompt_sign='$'
     __prompt_color="${C_BLUE}"
     __prompt_color_bg="${B_BLUE}"
-    if [ "${__NV_PRIME_RENDER_OFFLOAD}" == '1' ] && [ "${__GLX_VENDOR_LIBRARY_NAME}" == 'nvidia' ]; then
+    if [ "${__NV_PRIME_RENDER_OFFLOAD}" = '1' ] && [ "${__GLX_VENDOR_LIBRARY_NAME}" = 'nvidia' ]; then
         __prompt_color="${C_GREEN}"
         #__prompt_color_bg="${B_GREEN}"
     fi
@@ -160,7 +160,7 @@ fi
 function __prompt_sign_update {
     __PROMPT_SIGN="${__prompt_sign}"
     test -o history || __PROMPT_SIGN='-' || true
-    [ "${HISTFILE}" == '/dev/null' ] && __PROMPT_SIGN='-' || true
+    [ "${HISTFILE}" = '/dev/null' ] && __PROMPT_SIGN='-' || true
 }
 
 __HISTFILE=~/.bash_history-phd
@@ -446,8 +446,8 @@ function __run_with_witch {
 
 function cd {
     local args=''
-    while [[ "$1" == '-'?* ]]; do
-        if [ "$1" == '--' ]; then
+    while [[ "$1" = '-'?* ]]; do
+        if [ "$1" = '--' ]; then
             shift
             break
         fi
@@ -692,7 +692,7 @@ function topmem {
 function wgets {
     local k=1
     local numbered=0
-    if [ "$1" == '-n' ]; then
+    if [ "$1" = '-n' ]; then
         numbered=1
         shift
     fi
@@ -702,7 +702,7 @@ function wgets {
         [ -z "${url}" ] && continue
         local name="$(basename "${url}")"
         local kstr=''
-        if [ "${numbered}" == 1 ]; then
+        if [ "${numbered}" = 1 ]; then
             kstr="${k} - "
         fi
         local kname="${kstr}${name}"
