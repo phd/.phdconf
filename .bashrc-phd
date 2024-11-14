@@ -69,6 +69,39 @@ bind 'set show-all-if-ambiguous on'
 
 export GREP_COLORS='ms=01;37;42'
 
+source /etc/bash_completion
+function __lazy_complete {
+    local name="$1"
+    local complete_like="${__lazy_complete_like[$name]}"
+    _completion_loader "${complete_like}"
+    local completion="$(complete -p ${complete_like} || true)"
+    [ -z "${completion}" ] && return 0
+    eval "${completion% *} ${name}" # remove last word (command name), replace with ${name}
+    local func
+    local REGEX=' -F ([^ ]+) '
+    if [[ "${completion}" =~ $REGEX ]]; then
+        func="${BASH_REMATCH[1]}"
+    fi
+    [ -z "${func}" ] && return 0
+    local options="$(compopt ${complete_like} || true)"
+    eval "${options% *}" # remove last word (command name), run for current completion
+    "${func}" ${@}
+}
+export -f __lazy_complete
+declare -A __lazy_complete_like
+function mkalias {
+    local name="$1"
+    shift
+    local complete_like="$1"
+    shift
+    local command="$@"
+    eval "alias ${name}='${command}'"
+    [ -z "${complete_like}" ] && return 0
+    [ "${complete_like}" = "${name}" ] && return 0
+    __lazy_complete_like["${name}"]="${complete_like}"
+    eval "complete -F __lazy_complete ${name}"
+}
+
 function trim {
     local var="$@"
     var="${var#"${var%%[![:space:]]*}"}"
@@ -215,24 +248,24 @@ function mkdircd {
     local name="$@"
     mkdir -p -- "${name}" && cd "${name}"
 }
-alias md='mkdir'
-alias mkd='mkdir'
 alias mdc='mkdircd'
 alias mdcd='mkdircd'
 alias mkdc='mkdircd'
 alias mkdcd='mkdircd'
 alias mkcd='mkdircd'
-alias rd='rmdir'
-alias rmF='rm -rf'
+mkalias md  md 'mkdir'
+mkalias mkd md 'mkdir'
+mkalias rd  rd 'rmdir'
+mkalias rmF rm 'rm -rf'
 
-alias ls='LC_COLLATE=en_US.utf8 ls --color=auto --group-directories-first'
-alias ls1='ls -1'
-alias lsa='ls -a'
-alias lsa1='ls -a -1'
-alias l='LC_COLLATE=en_US.utf8  ls --color=auto --group-directories-first -lvF'
-alias ll='LC_COLLATE=en_US.utf8 ls --color=auto --group-directories-first -lvFa'
-alias ll.='ll -I "[^.]*"'
-alias lll='ll.'
+mkalias ls   ls 'LC_COLLATE=en_US.utf8 ls --color=auto --group-directories-first'
+mkalias ls1  ls 'ls -1'
+mkalias lsa  ls 'ls -a'
+mkalias lsa1 ls 'ls -a -1'
+mkalias l    ls 'LC_COLLATE=en_US.utf8  ls --color=auto --group-directories-first -lvF'
+mkalias ll   ls 'LC_COLLATE=en_US.utf8 ls --color=auto --group-directories-first -lvFa'
+mkalias ll.  ls 'll -I "[^.]*"'
+mkalias lll  ls 'll.'
 
 alias cd..='cd ..'
 alias cd-='cd - &>/dev/null'
@@ -254,86 +287,86 @@ alias cd~='cd ~'
 alias -- -='cd -'
 alias cdw='__run_with_witch cd'
 
-alias s='sudo su'
-alias sk='sudo -k'
-alias sd='sudo'
+mkalias s  sudo 'sudo su'
+mkalias sk sudo 'sudo -k'
+mkalias sd sudo 'sudo'
 
-alias lessf='less -n +F'
-alias lessg='less -n +G'
+mkalias lessf less 'less -n +F'
+mkalias lessg less 'less -n +G'
 
-alias scr='screen -D -R'
-alias scrr='screen -D -r'
-alias scrl='screen -list'
-alias scrw='screen -wipe'
+mkalias scr  screen 'screen -D -R'
+mkalias scrr screen 'screen -D -r'
+mkalias scrl screen 'screen -list'
+mkalias scrw screen 'screen -wipe'
 
 alias exit='clear; exit'
 alias logout='clear; logout'
 alias q='clear; exit'
 
-alias grep='grep --color=auto'
-alias grepE='grep -E'
+mkalias grep  grep 'grep --color=auto'
+mkalias grepE grep 'grep -E'
 
-alias sedn='sed -E -e "1h;2,\$H;\$!d;g"'
-alias sedne='sedn -e'
+mkalias sedn  sed 'sed -E -e "1h;2,\$H;\$!d;g"'
+mkalias sedne sed 'sedn -e'
 
-alias m='make'
+mkalias m make 'make'
 
-alias e="${__EDITOR}"
-alias se="sudo ${__EDITOR}"
-alias E="x ${__XEDITOR}"
-alias EE="x ${__XEDITOR2}"
-alias K='x kate'
-alias KW='x kwrite'
-alias KD='x kdevelop'
-alias C='x codium'
-alias I='x intellij-idea-community'
-alias ew='__run_with_witch  e'
-alias sew='__run_with_witch se'
-alias Ew='__run_with_witch  E'
-alias EEw='__run_with_witch EE'
-alias Kw='__run_with_witch  K'
-alias KWw='__run_with_witch KW'
-alias KDw='__run_with_witch KD'
-alias Cw='__run_with_witch  C'
-alias Iw='__run_with_witch  I'
+mkalias e   "${__EDITOR}"           "${__EDITOR}"
+mkalias se  "${__EDITOR}"           "sudo ${__EDITOR}"
+mkalias E   "${__XEDITOR}"          "x ${__XEDITOR}"
+mkalias EE  "${__XEDITOR2}"         "x ${__XEDITOR2}"
+mkalias K   kate                    'x kate'
+mkalias KW  kwrite                  'x kwrite'
+mkalias KD  kdevelop                'x kdevelop'
+mkalias C   codium                  'x codium'
+mkalias I   intellij-idea-community 'x intellij-idea-community'
+mkalias ew  "${__EDITOR}"           '__run_with_witch  e'
+mkalias sew "${__EDITOR}"           '__run_with_witch se'
+mkalias Ew  "${__XEDITOR}"          '__run_with_witch  E'
+mkalias EEw "${__XEDITOR2}"         '__run_with_witch EE'
+mkalias Kw  kate                    '__run_with_witch  K'
+mkalias KWw kwrite                  '__run_with_witch KW'
+mkalias KDw kdevelop                '__run_with_witch KD'
+mkalias Cw  codium                  '__run_with_witch  C'
+mkalias Iw  intellij-idea-community '__run_with_witch  I'
 
 alias err='tee /dev/stderr'
 alias out='tee /dev/tty'
 alias t='tee /dev/tty'
 
-alias dm='sudo dmesg'
-alias dmw='sudo dmesg -w'
+mkalias dm  dmesg 'sudo dmesg'
+mkalias dmw dmesg 'sudo dmesg -w'
 
-alias psaux='ps aux'
-alias psauf='ps auf'
-alias psaufx='ps aufx'
+mkalias psaux ps  'ps aux'
+mkalias psauf ps  'ps auf'
+mkalias psaufx ps 'ps aufx'
 
-alias du0='du -d 0'
-alias du1='du -d 1'
-alias du2='du -d 2'
-alias du3='du -d 3'
-alias duh='du -h'
-alias duh0='du -h -d 0'
-alias duh1='du -h -d 1'
-alias duh2='du -h -d 2'
-alias duh3='du -h -d 3'
+mkalias du0  du 'du -d 0'
+mkalias du1  du 'du -d 1'
+mkalias du2  du 'du -d 2'
+mkalias du3  du 'du -d 3'
+mkalias duh  du 'du -h'
+mkalias duh0 du 'du -h -d 0'
+mkalias duh1 du 'du -h -d 1'
+mkalias duh2 du 'du -h -d 2'
+mkalias duh3 du 'du -h -d 3'
 
-alias dfh='df -h'
+mkalias dfh df 'df -h'
 
-alias unamea='uname -a'
+mkalias unamea uname 'uname -a'
 
-alias wh='which'
+mkalias wh which 'which'
 
-alias xargsn='xargs  -d "\n" -r'
-alias xargs1='xargs          -r -n1'
-alias xargsn1='xargs -d "\n" -r -n1'
-alias xargsi='xargs -r -i'
-alias xargsi1='xargs -n1 | xargs -r -i'
-alias xargsnb='xargsn   bash -c'
-alias xargs1b='xargs1   bash -c'
-alias xargsn1b='xargsn1 bash -c'
-alias xargsib='xargsi   bash -c'
-alias xargsi1b='xargsi1 bash -c'
+mkalias xargsn   xargs 'xargs     -d "\n" -r'
+mkalias xargs1   xargs 'xargs -n1         -r'
+mkalias xargsn1  xargs 'xargs -n1 -d "\n" -r'
+mkalias xargsi   xargs 'xargs             -r -i'
+mkalias xargsi1  xargs 'xargs -n1 | xargs -r -i'
+mkalias xargsnb  bash  'xargsn  bash -c'
+mkalias xargs1b  bash  'xargs1  bash -c'
+mkalias xargsn1b bash  'xargsn1 bash -c'
+mkalias xargsib  bash  'xargsi  bash -c'
+mkalias xargsi1b bash  'xargsi1 bash -c'
 
 alias reboot?='[ -f /var/run/reboot-required ] && echo YES || echo no'
 alias reboot!='sudo reboot'
@@ -396,45 +429,45 @@ alias a-wx='chmod a-wx'
 alias a+rwx='chmod a+rwx'
 alias a-rwx='chmod a-rwx'
 
-alias top='top -d 0,5'
+mkalias top top 'top -d 0,5'
 
-alias git='LANG=en_US.UTF-8 git'
-alias g='git'
-alias gitgui='x git gui'
-alias gg='gitgui'
-alias gk='gitk'
-alias k='gitk'
-alias ka='gitk --all'
-alias qg='qgit'
-alias gq='qgit'
-alias gitq='qgit'
+mkalias git    git  'LANG=en_US.UTF-8 git'
+mkalias g      git  'git'
+mkalias gitgui git  'x git gui'
+mkalias gg     git  'gitgui'
+mkalias gk     gitk 'gitk'
+mkalias k      gitk 'gitk'
+mkalias ka     gitk 'gitk --all'
+mkalias qg     qgit 'qgit'
+mkalias gq     qgit 'qgit'
+mkalias gitq   qgit 'qgit'
 
 alias lsb-release='cat /etc/lsb-release'
 
-alias aptu='sudo apt update'
-alias ap-u='sudo apt update'
+mkalias aptu apt-get 'sudo apt-get update'
+mkalias ap-u apt-get 'sudo apt-get update'
 
 alias apt-list-installed='LANG=C sudo apt list --installed 2>/dev/null | grep --color=never "/"'
 alias apt-list-installed-local='LANG=C sudo apt list --installed 2>/dev/null | grep --color=never "/now "'
 
 alias dirty='watch -n1 -t grep -e "Dirty:" -e "Writeback:" /proc/meminfo'
 
-alias fu='flatpak update'
+mkalias fu flatpak 'flatpak update'
 
-alias demangle='c++filt'
+mkalias demangle c++filt 'c++filt'
 
 alias bashtrack='strace -e execve -b execve -f -qqv -e signal="!all" bash'
 
-alias axel='axel --user-agent="Mozilla/5.0 (Windows NT 10.0; rv:68.0) Gecko/20100101 Firefox/68.0"'
-alias axel2='axel -n 2'
-alias axel3='axel -n 3'
-alias axel4='axel -n 4'
-alias axel5='axel -n 5'
-alias axel10='axel -n 10'
-alias axel15='axel -n 15'
-alias axel20='axel -n 20'
-alias axel25='axel -n 25'
-alias axel30='axel -n 30'
+mkalias axel   axel 'axel --user-agent="Mozilla/5.0 (Windows NT 10.0; rv:68.0) Gecko/20100101 Firefox/68.0"'
+mkalias axel2  axel 'axel -n 2'
+mkalias axel3  axel 'axel -n 3'
+mkalias axel4  axel 'axel -n 4'
+mkalias axel5  axel 'axel -n 5'
+mkalias axel10 axel 'axel -n 10'
+mkalias axel15 axel 'axel -n 15'
+mkalias axel20 axel 'axel -n 20'
+mkalias axel25 axel 'axel -n 25'
+mkalias axel30 axel 'axel -n 30'
 
 # which colormake &>/dev/null && alias make='colormake'
 
