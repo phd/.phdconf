@@ -76,7 +76,9 @@ function __cmd_exists {
 [ -f /etc/bash_completion ] && source /etc/bash_completion
 function __lazy_complete {
     local name="$1"
+    [ -z "${name}" ] && return 0
     local complete_like="${__lazy_complete_like[$name]}"
+    [ -z "${complete_like}" ] && return 0
     __cmd_exists '_completion_loader' || return 0
     _completion_loader "${complete_like}"
     __cmd_exists 'complete' || return 0
@@ -89,6 +91,7 @@ function __lazy_complete {
         func="${BASH_REMATCH[1]}"
     fi
     [ -z "${func}" ] && return 0
+    [ "${func}" = "__lazy_complete" ] && return 0
     __cmd_exists 'compopt' || return 0
     local options="$(compopt ${complete_like} || true)"
     eval "${options% *}" # remove last word (command name), run for current completion
