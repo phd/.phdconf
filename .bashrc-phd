@@ -454,17 +454,16 @@ mkalias fl 'flatpak list'   flatpak
 mkalias demangle 'c++filt' c++filt
 
 alias bashtrack='strace -e execve -b execve -f -qqv -e signal="!all" bash'
-
-mkalias axel   'axel --user-agent="Mozilla/5.0 (Windows NT 10.0; rv:68.0) Gecko/20100101 Firefox/68.0"' axel
-mkalias axel2  'axel -n 2'                                                                              axel
-mkalias axel3  'axel -n 3'                                                                              axel
-mkalias axel4  'axel -n 4'                                                                              axel
-mkalias axel5  'axel -n 5'                                                                              axel
-mkalias axel10 'axel -n 10'                                                                             axel
-mkalias axel15 'axel -n 15'                                                                             axel
-mkalias axel20 'axel -n 20'                                                                             axel
-mkalias axel25 'axel -n 25'                                                                             axel
-mkalias axel30 'axel -n 30'                                                                             axel
+mkalias axel   'axel --user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:128.0) Gecko/20100101 Firefox/128.0"' axel
+mkalias axel2  'axel -n 2'                                                                                            axel
+mkalias axel3  'axel -n 3'                                                                                            axel
+mkalias axel4  'axel -n 4'                                                                                            axel
+mkalias axel5  'axel -n 5'                                                                                            axel
+mkalias axel10 'axel -n 10'                                                                                           axel
+mkalias axel15 'axel -n 15'                                                                                           axel
+mkalias axel20 'axel -n 20'                                                                                           axel
+mkalias axel25 'axel -n 25'                                                                                           axel
+mkalias axel30 'axel -n 30'                                                                                           axel
 
 # which colormake &>/dev/null && alias make='colormake'
 
