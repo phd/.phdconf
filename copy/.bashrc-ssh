@@ -1,4 +1,8 @@
 #!/bin/bash -e
 #
-# alias @host='ssh -A user@host'
+# SSH aliases
+#
+# Examples:
+#     alias @host='ssh -A host'
+#     alias @user@host='ssh -A user@host'
 #
