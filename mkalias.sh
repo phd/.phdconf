@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 #
-# mkalias 1.0.0 - automatic lazy Bash completion for aliases
+# mkalias 1.1.0 - automatic lazy Bash completion for aliases
 #
 # Copyright (C) 2024  Piotr Henryk Dabrowski <phd@phd.re>
 #
@@ -23,10 +23,11 @@
 [ -f /etc/bash_completion ] && source /etc/bash_completion
 
 declare -A __mkalias_commands
+declare -A __mkalias_functions
 
 function mkalias {
     if [ -z "$1" ]; then     # no arguments
-        __mkalias_print_all  # print all aliasses
+        __mkalias_print_all  # print all aliases
         return 0
     fi
     if [ "$1" = "-p" ]; then                                              # -p [NAME]
@@ -57,7 +58,7 @@ function mkalias {
     if [ -z "${Command}" ]; then      # was Command given in arguments?
         Command=""${Syntax%% *}""     # no -> get the first word of alias' Syntax as the Command
         if [ -z "${Command}" ]; then  # still no Command -> error:
-            echo 'mkalias: error: command not given and cannot be decucted form the existing alias' >&2
+            echo 'mkalias: error: command not given and cannot be deducted form the existing alias' >&2
             return 2
         fi
     fi
@@ -69,7 +70,7 @@ function mkalias {
     fi
 
     command -v 'complete' &>/dev/null || return 3       # do we have 'complete'? no -> error
-    eval "complete -F __mkalias_lazy_complete ${Name}"  # temporarly assign the lazy completion function for this alias
+    eval "complete -F __mkalias_lazy_complete ${Name}"  # temporarily assign the lazy completion function for this alias
 }
 
 function __mkalias_lazy_complete {
@@ -82,20 +83,39 @@ function __mkalias_lazy_complete {
 
     local completion=$(complete -p ${Command} || true)  # get 'complete' command string for the Command
     [ -z "${completion}" ] && return 0                  # exit if 'complete' command string is unknown
-    eval "${completion% *} ${Name}"                     # replace the Command with alias' Name, and then run 'complete'
-                                                        # to reassign the completion function and options for this alias
 
     local func
-    local REGEX=' -F ([^ ]+) '                     # regex: get the value of the '-F' argument from the 'complete' command
+    local REGEX=' -F ([^ ]+) '                     # regex: the value of the '-F' argument from the 'complete' command
     if [[ "${completion}" =~ ${REGEX} ]]; then
         func="${BASH_REMATCH[1]}"                  # get the function name used by Bash for Command's completion
     fi
     [ -z "${func}" ] && return 0                   # exit if failed to get the function name
     [ "${func}" = "__lazy_complete" ] && return 0  # exit if completion function points back to here
+    __mkalias_functions["${Name}"]="${func}"       # save the function
+
+    complete -F '__mkalias_complete' "${Name}"  # reassign alias' completion function to '__mkalias_complete'
 
     local options=$(compopt ${Command} || true)  # get the completion options for the Command
-    eval "${options% *}"                         # remove Command's name (last) and run 'compopt' to set options here
-    "${func}" $@                                 # this one time run the original function with its options set
+    options="${options% *}"                      # remove Command's name (last word)
+    eval "${options} ${Name}"                    # run 'compopt' to save the options for alias
+    eval "${options}"                            # run 'compopt' to also set the options now in this function call
+
+    shift
+    "${func}" "${Command}" $@  # continue to the original completion function with the alias Name replaced with Command
+}
+
+function __mkalias_complete {
+    local Name="$1"               # the Name of the alias currently being completed by this proxy function
+    [ -z "${Name}" ] && return 0  # exit if unknown
+
+    local Command="${__mkalias_commands[$Name]}"  # get the saved Command for this alias
+    [ -z "${Command}" ] && return 0               # exit if unknown
+
+    local func="${__mkalias_functions[$Name]}"  # get the saved function for this alias
+    [ -z "${func}" ] && return 0                # exit if unknown
+
+    shift
+    "${func}" "${Command}" $@  # continue to the original completion function with the alias Name replaced with Command
 }
 
 function __mkalias_print_all {
