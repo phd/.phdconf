@@ -144,18 +144,29 @@ GIT_PS1_SHOWCOLORHINTS='true'
 GIT_PS1_STATESEPARATOR=''
 if [ "$(id -u)" -eq 0 ]; then
     __prompt_sign='#'
-    __prompt_color="${C_RED}"
-    __prompt_color_bg="${B_RED}"
+    __prompt_fg="${C_RED}"
+    __prompt_bg="${B_RED}"
 else
     __prompt_sign='$'
-    __prompt_color="${C_BLUE}"
-    __prompt_color_bg="${B_BLUE}"
-    if [ "${__NV_PRIME_RENDER_OFFLOAD}" = '1' ] && [ "${__GLX_VENDOR_LIBRARY_NAME}" = 'nvidia' ]; then
-        __prompt_color="${C_GREEN}"
-        #__prompt_color_bg="${B_GREEN}"
-    fi
+    __prompt_fg="${C_BLUE}"
+    __prompt_bg="${B_BLUE}"
 fi
-__PROMPT_SIGN="${__prompt_sign}"
+
+__prompt_flags=''
+function __update_prompt_flags {
+    __prompt_flags=''
+    test -o history || \
+        __prompt_flags="${__prompt_flags} ${C_MAGENTA}H-${C_NONE}"
+    if [ "${HISTFILE}" = '/dev/null' ]; then
+        __prompt_flags="${__prompt_flags} ${C_MAGENTA}h-${C_NONE}"
+    fi
+    if [ "${__IDLE}" = '1' ]; then
+        __prompt_flags="${__prompt_flags} ${C_MAGENTA}idle${C_NONE}"
+    fi
+    if [ "${__NV_PRIME_RENDER_OFFLOAD}" = '1' ] && [ "${__GLX_VENDOR_LIBRARY_NAME}" = 'nvidia' ]; then
+        __prompt_flags="${__prompt_flags} ${C_MAGENTA}nv${C_NONE}"
+    fi
+}
 
 function colorpwd {
     echo "${PWD////${C_YELLOW}/${C_NONE}}"
@@ -178,19 +189,13 @@ function __prompt_git {
 function __prompt_git_eval {
     eval "echo \"$(__prompt_git)\""
 }
-PS1="\[${F_RESET}\]\[${__prompt_color_bg}\]  \[${B_NONE}\] $(__colorpwd) \[${__prompt_color}\][\u@\H]\[${C_NONE}\]$(__prompt_git)\$(__prompt_err)\n\[${__prompt_color_bg}\] \[${B_NONE}\]\[${__prompt_color}\]\${__PROMPT_SIGN}\[${C_NONE}\] "
-PS2="\[${__prompt_color_bg}\] \[${B_NONE}\]\[${__prompt_color}\]>\[${C_NONE}\] "
+PS1="\[${F_RESET}\]\[${__prompt_bg}\]  \[${B_NONE}\] $(__colorpwd) \[${__prompt_fg}\][\u@\H]\[${C_NONE}\]$(__prompt_git)\${__prompt_flags}\$(__prompt_err)\n\[${__prompt_bg}\] \[${B_NONE}\]\[${__prompt_fg}\]${__prompt_sign}\[${C_NONE}\] "
+PS2="\[${__prompt_bg}\] \[${B_NONE}\]\[${__prompt_fg}\]>\[${C_NONE}\] "
 
 if [ "${__PROMPT_INDENT}" -eq '0' ]; then
-    PS1="\[${F_RESET}\]${debian_chroot:+($debian_chroot)}\[${__prompt_color}\]\u\[${C_NONE}\]@\H:\[${__prompt_color}\]\w\[${C_NONE}\]${__prompt_sign} "
+    PS1="\[${F_RESET}\]${debian_chroot:+($debian_chroot)}\[${__prompt_fg}\]\u\[${C_NONE}\]@\H:\[${__prompt_fg}\]\w\[${C_NONE}\]${__prompt_sign} "
     PS2="> "
 fi
-
-function __prompt_sign_update {
-    __PROMPT_SIGN="${__prompt_sign}"
-    test -o history || __PROMPT_SIGN='-' || true
-    [ "${HISTFILE}" = '/dev/null' ] && __PROMPT_SIGN='-' || true
-}
 
 __HISTFILE=~/.bash_history-phd
 export HISTFILE=~/.bash_history
@@ -224,17 +229,15 @@ function __history_reload {
     history -r
 }
 export PROMPT_COMMAND="__has_last_command && __history_append ${PROMPT_COMMAND:+;} ${PROMPT_COMMAND}"
-alias h='history'                                         # print history
-alias hh='__history_reload'                               # reload common history from all shells
-alias hhh='e "$HISTFILE"'                                 # edit Bash history
-alias HHH='E "$HISTFILE"'                                 # edit Bash history in X
-alias Ehhh='E "$HISTFILE"'                                # edit Bash history in X
-alias h-='HISTFILE=/dev/null      ; __prompt_sign_update' # temporarily disable history saving for this shell
-alias h+="HISTFILE='${__HISTFILE}'; __prompt_sign_update" # re-enable history saving for this shell
-alias H-='set +o history          ; __prompt_sign_update' # temporarily disable history for this shell
-alias H+='set -o history          ; __prompt_sign_update' # re-enable history for this shell
-
-__prompt_sign_update
+alias h='history'                                          # print history
+alias hh='__history_reload'                                # reload common history from all shells
+alias hhh='e "$HISTFILE"'                                  # edit Bash history
+alias HHH='E "$HISTFILE"'                                  # edit Bash history in X
+alias Ehhh='E "$HISTFILE"'                                 # edit Bash history in X
+alias h-='HISTFILE=/dev/null      ; __update_prompt_flags' # temporarily disable history saving for this shell
+alias h+="HISTFILE='${__HISTFILE}'; __update_prompt_flags" # re-enable history saving for this shell
+alias H-='set +o history          ; __update_prompt_flags' # temporarily disable history for this shell
+alias H+='set -o history          ; __update_prompt_flags' # re-enable history for this shell
 
 export PROMPT_COMMAND="setterm -cursor on ${PROMPT_COMMAND:+;} ${PROMPT_COMMAND}"
 
@@ -555,7 +558,8 @@ function idle {
     local child=''
     case "$@" in
         ''|*[!0-9]*)
-            ${@:-bash} &
+        local command="${@:-bash}"
+            __IDLE=1 $command &
             child="$!"
             ;;
     esac
@@ -855,6 +859,8 @@ function ovh-dyndns {
 if [ -f ~/.bashrc-ssh ]; then
     . ~/.bashrc-ssh
 fi
+
+__update_prompt_flags
 
 # must be at the end of the .bashrc file:
 export PROMPT_COMMAND="__store_last_command; ${PROMPT_COMMAND} ${PROMPT_COMMAND:+;} __cleanup_last_command"
