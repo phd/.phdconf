@@ -34,8 +34,8 @@
     deb-src https://ppa.launchpadcontent.net/kubuntu-ppa/backports-extra/ubuntu noble main
 
 ### Trinity TDE3 desktop
- #  deb     http://mirror.ppa.trinitydesktop.org/trinity/deb/trinity-r14.1.x noble  main deps
- #  deb-src http://mirror.ppa.trinitydesktop.org/trinity/deb/trinity-r14.1.x noble  main deps
+ #  deb     http://mirror.ppa.trinitydesktop.org/trinity/deb/trinity-r14.1.x noble main deps
+ #  deb-src http://mirror.ppa.trinitydesktop.org/trinity/deb/trinity-r14.1.x noble main deps
 
 ### Webmin
     deb     https://download.webmin.com/download/repository sarge contrib
