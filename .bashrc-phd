@@ -443,11 +443,15 @@ mkalias gitq   'qgit'                 qgit
 
 alias lsb-release='cat /etc/lsb-release'
 
-mkalias aptu 'sudo apt-get update' apt-get
-mkalias ap-u 'sudo apt-get update' apt-get
+alias ap-u='sudo apt-get update; sudo -k'
+alias ap-up="sudo apt-get update; sudo apt-get dist-upgrade; sudo -k; echo -n 'Reboot: '; reboot?"
+alias apu='ap-u'
+alias apup='ap-up'
 
 alias apt-list-installed='LANG=C sudo apt list --installed 2>/dev/null | grep --color=never "/"'
 alias apt-list-installed-local='LANG=C sudo apt list --installed 2>/dev/null | grep --color=never "/now "'
+alias ap-li='apt-list-installed'
+alias ap-lil='apt-list-installed-local'
 
 alias dirty='watch -n1 -t grep -e "Dirty:" -e "Writeback:" /proc/meminfo'
 
