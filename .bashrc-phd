@@ -444,9 +444,7 @@ mkalias gitq   'qgit'                 qgit
 alias lsb-release='cat /etc/lsb-release'
 
 alias ap-u='sudo apt-get update; sudo -k'
-alias ap-up="sudo apt-get update; sudo apt-get dist-upgrade; sudo -k; echo -n 'Reboot: '; reboot?"
 alias apu='ap-u'
-alias apup='ap-up'
 
 alias apt-list-installed='LANG=C sudo apt list --installed 2>/dev/null | grep --color=never "/"'
 alias apt-list-installed-local='LANG=C sudo apt list --installed 2>/dev/null | grep --color=never "/now "'
@@ -637,6 +635,22 @@ function kernels {
     echo "CURRENT: $(uname -sr)"
 }
 
+function __ap-up {
+    local args="$@"
+    apt-get update
+    apt-get dist-upgrade
+    kernels
+    apt-get --purge autoremove || return $?
+    apt-get clean || return $?
+}
+function ap-up {
+    local args="$@"
+    sudo bash -i -c "__ap-up" || return $?
+    sudo -k
+    echo -n 'Reboot: '; reboot?
+}
+alias apup='ap-up'
+
 function __ap {
     local args="$@"
     aptitude ${args} || return $?
@@ -651,6 +665,7 @@ function ap {
     echo -n 'Reboot: '; reboot?
 }
 alias ap-fo='ap -o Dpkg::Options::="--force-overwrite"'
+
 function ap-fix {
     sudo bash -c "dpkg --configure -a; apt-get update --fix-missing; apt-get install -f; apt-get clean"
 }
