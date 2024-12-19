@@ -86,10 +86,10 @@ T_CURSOR_ON=$'\e[?25h'
 
 __PHDCONF_PATH="$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
 
-export LS_COLORS="${LS_COLORS}:so=01;37;42:"
+LS_COLORS="${LS_COLORS}:so=01;37;42:"
 bind 'set show-all-if-ambiguous on'
 
-export GREP_COLORS='ms=01;37;42'
+GREP_COLORS='ms=01;37;42'
 
 function mkalias { alias -- "$1"="$2"; } # fallback
 source "${__PHDCONF_PATH}/mkalias.sh" || true
@@ -113,23 +113,22 @@ function decorate {
 }
 
 __LAST_COMMAND=''
-__LAST_DEBUG_COMMAND=''
-__CURRENT_DEBUG_COMMAND=''
+__STORE_NEXT_LAST_COMMAND=0
 function __debug_last_command {
-    __LAST_DEBUG_COMMAND="${__CURRENT_DEBUG_COMMAND}"
-    __CURRENT_DEBUG_COMMAND="${BASH_COMMAND}"
-    return 0
+    # echo "(__debug_last_command: BASH_COMMAND==${BASH_COMMAND})" # debug
+    if [ "${__STORE_NEXT_LAST_COMMAND}" = '1' ]; then
+        # echo "(__debug_last_command: __LAST_COMMAND:=${BASH_COMMAND})" # debug
+        __LAST_COMMAND="${BASH_COMMAND##:}"
+        __STORE_NEXT_LAST_COMMAND=0
+    fi
 }
 trap __debug_last_command DEBUG
-function __store_last_command {
-    __LAST_COMMAND="${__LAST_DEBUG_COMMAND}"
-}
-function __cleanup_last_command {
-    __LAST_DEBUG_COMMAND=''
-    __CURRENT_DEBUG_COMMAND=''
+function __store_next_last_command {
+    # echo "(__store_next_last_command)" # debug
+    __STORE_NEXT_LAST_COMMAND=1
 }
 function __has_last_command {
-    # echo "(LAST=${__LAST_COMMAND})" # debug
+    # echo "(__has_last_command: __LAST_COMMAND==${__LAST_COMMAND})" # debug
     [ -n "${__LAST_COMMAND}" ]
 }
 
@@ -207,15 +206,15 @@ if [ "${__PROMPT_INDENT}" -eq '0' ]; then
 fi
 
 __HISTFILE=~/.bash_history-phd
-export HISTFILE=~/.bash_history
+HISTFILE=~/.bash_history
 history -c
 history -w
-export HISTFILESIZE=32000
-export HISTSIZE=32000
-export HISTFILE="${__HISTFILE}"
-export HISTFILESIZE=32000
-export HISTSIZE=32000
-export HISTCONTROL='ignoredups:erasedups:ignorespace'
+HISTFILESIZE=32000
+HISTSIZE=32000
+HISTFILE="${__HISTFILE}"
+HISTFILESIZE=32000
+HISTSIZE=32000
+HISTCONTROL='ignoredups:erasedups:ignorespace'
 touch "$HISTFILE"
 shopt -s histappend
 bind 'set revert-all-at-newline on'
@@ -237,7 +236,7 @@ function __history_reload {
     history -c
     history -r
 }
-export PROMPT_COMMAND="__has_last_command && __history_append ${PROMPT_COMMAND:+;} ${PROMPT_COMMAND}"
+PROMPT_COMMAND="__has_last_command && __history_append ${PROMPT_COMMAND:+;} ${PROMPT_COMMAND}"
 alias h='history'                                          # print history
 alias hh='__history_reload'                                # reload common history from all shells
 alias hhh='e "$HISTFILE"'                                  # edit Bash history
@@ -248,7 +247,7 @@ alias h+="HISTFILE='${__HISTFILE}'; __update_prompt_flags" # re-enable history s
 alias H-='set +o history          ; __update_prompt_flags' # temporarily disable history for this shell
 alias H+='set -o history          ; __update_prompt_flags' # re-enable history for this shell
 
-export PROMPT_COMMAND="setterm -cursor on ${PROMPT_COMMAND:+;} ${PROMPT_COMMAND}"
+PROMPT_COMMAND="setterm -cursor on ${PROMPT_COMMAND:+;} ${PROMPT_COMMAND}"
 
 shopt -s autocd
 
@@ -894,6 +893,5 @@ fi
 
 __update_prompt_flags
 
-# must be at the end of the .bashrc file:
-export PROMPT_COMMAND="__store_last_command; ${PROMPT_COMMAND} ${PROMPT_COMMAND:+;} __cleanup_last_command"
-__cleanup_last_command
+# __LAST_COMMAND: this line must be at the very end of the .bashrc file:
+PROMPT_COMMAND=":; ${PROMPT_COMMAND} ${PROMPT_COMMAND:+;} __store_next_last_command"
