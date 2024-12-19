@@ -166,7 +166,7 @@ function __update_prompt_flags {
     if [ "${__NV_PRIME_RENDER_OFFLOAD}" = '1' ] && [ "${__GLX_VENDOR_LIBRARY_NAME}" = 'nvidia' ]; then
         __prompt_flags="${__prompt_flags} ${C_MAGENTA}nv${C_NONE}"
     fi
-    if [ "${__GL_SYNC_TO_VBLANK}" = '1' ] && [ "${vblank_mode}" = '1' ]; then
+    if [ "${__GL_SYNC_TO_VBLANK}" = '1' ] && [ "${vblank_mode}" -ge '2' ]; then
         __prompt_flags="${__prompt_flags} ${C_MAGENTA}vsync+${C_NONE}"
     fi
     if [ "${__GL_SYNC_TO_VBLANK}" = '0' ] && [ "${vblank_mode}" = '0' ]; then
@@ -788,7 +788,7 @@ function nvcomp- {
 }
 function vsync+ {
     local args="$@"
-    __GL_SYNC_TO_VBLANK=1 vblank_mode=1 ${args:-bash}
+    __GL_SYNC_TO_VBLANK=1 vblank_mode=3 ${args:-bash}
 }
 complete -F _command vsync+
 function vsync- {
