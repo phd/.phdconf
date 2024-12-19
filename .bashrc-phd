@@ -564,12 +564,15 @@ function x {
     )
 }
 
+function __idle {
+    local OK="$@"
+    $OK &
+}
 function idle {
     local child=''
     case "$@" in
         ''|*[!0-9]*)
-        local command="${@:-bash}"
-            __IDLE=1 $command &
+            __IDLE=1 SHLVL="$(($SHLVL+1))" __idle ${@:-bash}
             child="$!"
             ;;
     esac
