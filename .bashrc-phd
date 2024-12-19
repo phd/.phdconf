@@ -576,6 +576,7 @@ function idle {
     ionice    -c  3 -p "${child:-$@}" &>/dev/null
     [ -n "${child}" ] && fg &>/dev/null
 }
+complete -F _command idle
 
 function F {
     find . -not -path '*/.*' -name "$@"
@@ -778,6 +779,7 @@ function nv {
     local args="$@"
     __NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia ${args:-bash}
 }
+complete -F _command nv
 function nvcomp+ {
     nvidia-settings --assign CurrentMetaMode='nvidia-auto-select +0+0 { ForceCompositionPipeline = On }'
 }
@@ -788,10 +790,12 @@ function vsync+ {
     local args="$@"
     __GL_SYNC_TO_VBLANK=1 vblank_mode=1 ${args:-bash}
 }
+complete -F _command vsync+
 function vsync- {
     local args="$@"
     __GL_SYNC_TO_VBLANK=0 vblank_mode=0 ${args:-bash}
 }
+complete -F _command vsync-
 
 function server-http {
     python -m http.server "$@"
