@@ -195,7 +195,10 @@ function __prompt_git {
 function __prompt_git_eval {
     eval "echo \"$(__prompt_git)\""
 }
-PS1="\[${F_RESET}\]\[${__prompt_bg}\]  \[${B_NONE}\] $(__colorpwd) \[${__prompt_fg}\][\u@\H]\[${C_NONE}\]$(__prompt_git)\${__prompt_flags}\$(__prompt_err)\n\[${__prompt_bg}\] \[${B_NONE}\]\[${__prompt_fg}\]${__prompt_sign}\[${C_NONE}\] "
+function __prompt_shlvl {
+    [ "${SHLVL}" -ge 2 ] && echo -ne " ${C_MAGENTA}${SHLVL}${C_NONE}"
+}
+PS1="\[${F_RESET}\]\[${__prompt_bg}\]  \[${B_NONE}\] $(__colorpwd) \[${__prompt_fg}\][\u@\H]\[${C_NONE}\]$(__prompt_git)$(__prompt_shlvl)\${__prompt_flags}\$(__prompt_err)\n\[${__prompt_bg}\] \[${B_NONE}\]\[${__prompt_fg}\]${__prompt_sign}\[${C_NONE}\] "
 PS2="\[${__prompt_bg}\] \[${B_NONE}\]\[${__prompt_fg}\]>\[${C_NONE}\] "
 
 if [ "${__PROMPT_INDENT}" -eq '0' ]; then
