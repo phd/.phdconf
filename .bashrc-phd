@@ -9,7 +9,7 @@
 #
 # .bashrc-phd
 #
-# Copyright (C) 2010-2024  Piotr Henryk Dabrowski <phd@phd.re>
+# Copyright (C) 2010-2025  Piotr Henryk Dabrowski <phd@phd.re>
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -154,6 +154,9 @@ fi
 __prompt_flags=''
 function __update_prompt_flags {
     __prompt_flags=''
+    if [ "${DISPLAY}" != ':0' ]; then
+        __prompt_flags="${__prompt_flags} ${C_MAGENTA}${DISPLAY}${C_NONE}"
+    fi
     test -o history || \
         __prompt_flags="${__prompt_flags} ${C_MAGENTA}H-${C_NONE}"
     if [ "${HISTFILE}" = '/dev/null' ]; then
