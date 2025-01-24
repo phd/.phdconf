@@ -151,29 +151,29 @@ else
     __prompt_bg="${B_BLUE}"
 fi
 
-__prompt_flags=''
-function __update_prompt_flags {
-    __prompt_flags=''
+function __prompt_flags {
+    local prompt_flags=''
     if [ "${DISPLAY}" != ':0' ]; then
-        __prompt_flags="${__prompt_flags} ${C_MAGENTA}${DISPLAY}${C_NONE}"
+        prompt_flags="${prompt_flags} ${C_MAGENTA}${DISPLAY}${C_NONE}"
     fi
     test -o history || \
-        __prompt_flags="${__prompt_flags} ${C_MAGENTA}H-${C_NONE}"
+        prompt_flags="${prompt_flags} ${C_MAGENTA}H-${C_NONE}"
     if [ "${HISTFILE}" = '/dev/null' ]; then
-        __prompt_flags="${__prompt_flags} ${C_MAGENTA}h-${C_NONE}"
+        prompt_flags="${prompt_flags} ${C_MAGENTA}h-${C_NONE}"
     fi
     if [ "${__IDLE}" = '1' ]; then
-        __prompt_flags="${__prompt_flags} ${C_MAGENTA}idle${C_NONE}"
+        prompt_flags="${prompt_flags} ${C_MAGENTA}idle${C_NONE}"
     fi
     if [ "${__NV_PRIME_RENDER_OFFLOAD}" = '1' ] && [ "${__GLX_VENDOR_LIBRARY_NAME}" = 'nvidia' ]; then
-        __prompt_flags="${__prompt_flags} ${C_MAGENTA}nv${C_NONE}"
+        prompt_flags="${prompt_flags} ${C_MAGENTA}nv${C_NONE}"
     fi
     if [ "${__GL_SYNC_TO_VBLANK}" = '1' ] && [ "${vblank_mode}" -ge '2' ]; then
-        __prompt_flags="${__prompt_flags} ${C_MAGENTA}vsync+${C_NONE}"
+        prompt_flags="${prompt_flags} ${C_MAGENTA}vsync+${C_NONE}"
     fi
     if [ "${__GL_SYNC_TO_VBLANK}" = '0' ] && [ "${vblank_mode}" = '0' ]; then
-        __prompt_flags="${__prompt_flags} ${C_MAGENTA}vsync-${C_NONE}"
+        prompt_flags="${prompt_flags} ${C_MAGENTA}vsync-${C_NONE}"
     fi
+    echo "${prompt_flags}"
 }
 
 function colorpwd {
@@ -200,7 +200,7 @@ function __prompt_git_eval {
 function __prompt_shlvl {
     [ "${SHLVL}" -ge 2 ] && echo -ne " ${C_MAGENTA}${SHLVL}${C_NONE}"
 }
-PS1="\[${F_RESET}\]\[${__prompt_bg}\]  \[${B_NONE}\] $(__colorpwd) \[${__prompt_fg}\][\u@\H]\[${C_NONE}\]$(__prompt_git)$(__prompt_shlvl)\${__prompt_flags}\$(__prompt_err)\n\[${__prompt_bg}\] \[${B_NONE}\]\[${__prompt_fg}\]${__prompt_sign}\[${C_NONE}\] "
+PS1="\[${F_RESET}\]\[${__prompt_bg}\]  \[${B_NONE}\] $(__colorpwd) \[${__prompt_fg}\][\u@\H]\[${C_NONE}\]$(__prompt_git)$(__prompt_shlvl)\$(__prompt_flags)\$(__prompt_err)\n\[${__prompt_bg}\] \[${B_NONE}\]\[${__prompt_fg}\]${__prompt_sign}\[${C_NONE}\] "
 PS2="\[${__prompt_bg}\] \[${B_NONE}\]\[${__prompt_fg}\]>\[${C_NONE}\] "
 
 if [ "${__PROMPT_INDENT}" -eq '0' ]; then
@@ -240,15 +240,15 @@ function __history_reload {
     history -r
 }
 PROMPT_COMMAND="__has_last_command && __history_append ${PROMPT_COMMAND:+;} ${PROMPT_COMMAND}"
-alias h='history'                                          # print history
-alias hh='__history_reload'                                # reload common history from all shells
-alias hhh='e "$HISTFILE"'                                  # edit Bash history
-alias HHH='E "$HISTFILE"'                                  # edit Bash history in X
-alias Ehhh='E "$HISTFILE"'                                 # edit Bash history in X
-alias h-='HISTFILE=/dev/null      ; __update_prompt_flags' # temporarily disable history saving for this shell
-alias h+="HISTFILE='${__HISTFILE}'; __update_prompt_flags" # re-enable history saving for this shell
-alias H-='set +o history          ; __update_prompt_flags' # temporarily disable history for this shell
-alias H+='set -o history          ; __update_prompt_flags' # re-enable history for this shell
+alias h='history'                   # print history
+alias hh='__history_reload'         # reload common history from all shells
+alias hhh='e "$HISTFILE"'           # edit Bash history
+alias HHH='E "$HISTFILE"'           # edit Bash history in X
+alias Ehhh='E "$HISTFILE"'          # edit Bash history in X
+alias h-='HISTFILE=/dev/null'       # temporarily disable history saving for this shell
+alias h+="HISTFILE='${__HISTFILE}'" # re-enable history saving for this shell
+alias H-='set +o history'           # temporarily disable history for this shell
+alias H+='set -o history'           # re-enable history for this shell
 
 PROMPT_COMMAND="setterm -cursor on ${PROMPT_COMMAND:+;} ${PROMPT_COMMAND}"
 
@@ -896,8 +896,6 @@ function ovh-dyndns {
 if [ -f ~/.bashrc-ssh ]; then
     . ~/.bashrc-ssh
 fi
-
-__update_prompt_flags
 
 # __LAST_COMMAND: this line must be at the very end of the .bashrc file:
 PROMPT_COMMAND=":; ${PROMPT_COMMAND} ${PROMPT_COMMAND:+;} __store_next_last_command"
