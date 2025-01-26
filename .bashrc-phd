@@ -83,13 +83,15 @@ F_ALL_OFF="${F_BOLD_OFF}${F_DIM_OFF}${F_ITALIC_OFF}${F_UNDERLINE_OFF}${F_BLINKIN
 F_RESET="${F_ALL_OFF}${BC_RESET}"
 T_CURSOR_OFF=$'\e[?25l'
 T_CURSOR_ON=$'\e[?25h'
+__NL=$'\n'
 
 __PHDCONF_PATH="$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
 
-LS_COLORS="${LS_COLORS}:so=01;37;42:"
+# Bash completion colors:
+export LS_COLORS="${LS_COLORS}:so=01;37;42:"
 bind 'set show-all-if-ambiguous on'
 
-GREP_COLORS='ms=01;37;42'
+export GREP_COLORS='ms=01;37;42'
 
 function mkalias { alias -- "$1"="$2"; } # fallback
 source "${__PHDCONF_PATH}/mkalias.sh" || true
@@ -153,7 +155,7 @@ fi
 
 function __prompt_flags {
     local prompt_flags=''
-    if [ "${DISPLAY}" != ':0' ]; then
+    if [ "${DISPLAY}" != ':0' ] && [[ "${DISPLAY}" = *':'* ]]; then
         prompt_flags="${prompt_flags} ${C_MAGENTA}${DISPLAY}${C_NONE}"
     fi
     test -o history || \
@@ -200,7 +202,7 @@ function __prompt_git_eval {
 function __prompt_shlvl {
     [ "${SHLVL}" -ge 2 ] && echo -ne " ${C_MAGENTA}${SHLVL}${C_NONE}"
 }
-PS1="\[${F_RESET}\]\[${__prompt_bg}\]  \[${B_NONE}\] $(__colorpwd) \[${__prompt_fg}\][\u@\H]\[${C_NONE}\]$(__prompt_git)$(__prompt_shlvl)\$(__prompt_flags)\$(__prompt_err)\n\[${__prompt_bg}\] \[${B_NONE}\]\[${__prompt_fg}\]${__prompt_sign}\[${C_NONE}\] "
+PS1="\[${F_RESET}\]\[${__prompt_bg}\]  \[${B_NONE}\] $(__colorpwd) \[${__prompt_fg}\][\u@\H]\[${C_NONE}\]$(__prompt_git)$(__prompt_shlvl)\$(__prompt_flags)\$(__prompt_err)${__NL}\[${__prompt_bg}\] \[${B_NONE}\]\[${__prompt_fg}\]${__prompt_sign}\[${C_NONE}\] "
 PS2="\[${__prompt_bg}\] \[${B_NONE}\]\[${__prompt_fg}\]>\[${C_NONE}\] "
 
 if [ "${__PROMPT_INDENT}" -eq '0' ]; then
@@ -250,7 +252,7 @@ alias h+="HISTFILE='${__HISTFILE}'" # re-enable history saving for this shell
 alias H-='set +o history'           # temporarily disable history for this shell
 alias H+='set -o history'           # re-enable history for this shell
 
-PROMPT_COMMAND="setterm -cursor on ${PROMPT_COMMAND:+;} ${PROMPT_COMMAND}"
+PROMPT_COMMAND="setterm -cursor on &>/dev/null ${PROMPT_COMMAND:+;} ${PROMPT_COMMAND}"
 
 shopt -s autocd
 
