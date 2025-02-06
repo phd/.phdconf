@@ -38,6 +38,14 @@
     fa                   = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git f --all"
     ft                   = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git f --tags"
     fat                  = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git f --all --tags"
+    fo                   = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git f   origin"
+    fao                  = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git fa  origin"
+    fto                  = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git ft  origin"
+    fato                 = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git fat origin"
+    fu                   = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git f   upstream"
+    fau                  = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git fa  upstream"
+    ftu                  = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git ft  upstream"
+    fatu                 = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git fat upstream"
 
     pullr                = pull --rebase
 
