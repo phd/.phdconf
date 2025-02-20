@@ -1,29 +1,29 @@
-###=========================#
-###  Ubuntu 24.10 Oracular  #
-###=========================#
+###=======================#
+###  Ubuntu 25.04 Plucky  #
+###=======================#
 
 ###===========#
 ###  SYSTEM:  #
 ###===========#
 
 ### DDEBS
-    deb     http://ddebs.ubuntu.com oracular         main restricted universe multiverse
-    deb     http://ddebs.ubuntu.com oracular-updates main restricted universe multiverse
+    deb     http://ddebs.ubuntu.com plucky         main restricted universe multiverse
+    deb     http://ddebs.ubuntu.com plucky-updates main restricted universe multiverse
 
 ### Liquorix kernel
-    deb     https://ppa.launchpadcontent.net/damentz/liquorix/ubuntu oracular main
-    deb-src https://ppa.launchpadcontent.net/damentz/liquorix/ubuntu oracular main
+    deb     https://ppa.launchpadcontent.net/damentz/liquorix/ubuntu plucky main
+    deb-src https://ppa.launchpadcontent.net/damentz/liquorix/ubuntu plucky main
 
 ### XanMod kernel
     deb     https://deb.xanmod.org releases main
 
 ### graphics-drivers
-    deb     https://ppa.launchpadcontent.net/graphics-drivers/ppa/ubuntu oracular main
-    deb-src https://ppa.launchpadcontent.net/graphics-drivers/ppa/ubuntu oracular main
+    deb     https://ppa.launchpadcontent.net/graphics-drivers/ppa/ubuntu plucky main
+    deb-src https://ppa.launchpadcontent.net/graphics-drivers/ppa/ubuntu plucky main
 
 ### Ubuntu X SWAT
- #- deb     https://ppa.launchpadcontent.net/ubuntu-x-swat/updates/ubuntu oracular main
- #- deb-src https://ppa.launchpadcontent.net/ubuntu-x-swat/updates/ubuntu oracular main
+ #- deb     https://ppa.launchpadcontent.net/ubuntu-x-swat/updates/ubuntu plucky main
+ #- deb-src https://ppa.launchpadcontent.net/ubuntu-x-swat/updates/ubuntu plucky main
 
 ### kubuntu-ppa backports
     deb     https://ppa.launchpadcontent.net/kubuntu-ppa/backports/ubuntu       oracular main
@@ -32,10 +32,18 @@
     deb     https://ppa.launchpadcontent.net/kubuntu-ppa/backports-extra/ubuntu oracular main
     deb     https://ppa.launchpadcontent.net/kubuntu-ppa/backports-extra/ubuntu oracular main/debug
     deb-src https://ppa.launchpadcontent.net/kubuntu-ppa/backports-extra/ubuntu oracular main
+ #- deb     https://ppa.launchpadcontent.net/kubuntu-ppa/backports/ubuntu       plucky main
+ #- deb     https://ppa.launchpadcontent.net/kubuntu-ppa/backports/ubuntu       plucky main/debug
+ #- deb-src https://ppa.launchpadcontent.net/kubuntu-ppa/backports/ubuntu       plucky main
+ #- deb     https://ppa.launchpadcontent.net/kubuntu-ppa/backports-extra/ubuntu plucky main
+ #- deb     https://ppa.launchpadcontent.net/kubuntu-ppa/backports-extra/ubuntu plucky main/debug
+ #- deb-src https://ppa.launchpadcontent.net/kubuntu-ppa/backports-extra/ubuntu plucky main
 
 ### Trinity TDE3 desktop
  #  deb     http://mirror.ppa.trinitydesktop.org/trinity/deb/trinity-r14.1.x oracular main deps
  #  deb-src http://mirror.ppa.trinitydesktop.org/trinity/deb/trinity-r14.1.x oracular main deps
+ #- deb     http://mirror.ppa.trinitydesktop.org/trinity/deb/trinity-r14.1.x plucky main deps
+ #- deb-src http://mirror.ppa.trinitydesktop.org/trinity/deb/trinity-r14.1.x plucky main deps
 
 ### Webmin
     deb     https://download.webmin.com/download/repository sarge contrib
@@ -54,19 +62,21 @@
     deb     [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main
 
 ### Chromium Browser (phd, Mint packages)
-    deb     https://freeshell.de/phd/chromium/oracular /
+    deb     https://freeshell.de/phd/chromium/plucky /
 
 ### Firefox (phd)
- #  deb     https://ppa.launchpadcontent.net/phd/firefox/ubuntu oracular main
- #  deb-src https://ppa.launchpadcontent.net/phd/firefox/ubuntu oracular main
+ #  deb     https://ppa.launchpadcontent.net/phd/firefox/ubuntu plucky main
+ #  deb-src https://ppa.launchpadcontent.net/phd/firefox/ubuntu plucky main
 
 ### Firefox & Thunderbird (Mozilla Team)
-    deb     https://ppa.launchpadcontent.net/mozillateam/ppa/ubuntu oracular main
-    deb-src https://ppa.launchpadcontent.net/mozillateam/ppa/ubuntu oracular main
+    deb     https://ppa.launchpadcontent.net/mozillateam/ppa/ubuntu plucky main
+    deb-src https://ppa.launchpadcontent.net/mozillateam/ppa/ubuntu plucky main
 
 ### Firefox Beta (Mozilla Team)
  #  deb     https://ppa.launchpadcontent.net/mozillateam/firefox-next/ubuntu oracular main
  #  deb-src https://ppa.launchpadcontent.net/mozillateam/firefox-next/ubuntu oracular main
+ #- deb     https://ppa.launchpadcontent.net/mozillateam/firefox-next/ubuntu plucky main
+ #- deb-src https://ppa.launchpadcontent.net/mozillateam/firefox-next/ubuntu plucky main
 
 ### Librewolf
     deb     [arch=amd64] https://repo.librewolf.net/ librewolf main
@@ -78,11 +88,16 @@
 ### LibreOffice
     deb     https://ppa.launchpadcontent.net/libreoffice/ppa/ubuntu oracular main
     deb-src https://ppa.launchpadcontent.net/libreoffice/ppa/ubuntu oracular main
+ #- deb     https://ppa.launchpadcontent.net/libreoffice/ppa/ubuntu plucky main
+ #- deb-src https://ppa.launchpadcontent.net/libreoffice/ppa/ubuntu plucky main
 
 ### Wine
     deb     https://dl.winehq.org/wine-builds/ubuntu/ oracular main
     deb-src https://dl.winehq.org/wine-builds/ubuntu/ oracular main
+ #- deb     https://dl.winehq.org/wine-builds/ubuntu/ plucky main
+ #- deb-src https://dl.winehq.org/wine-builds/ubuntu/ plucky main
  #  deb     https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/xUbuntu_24.10/ ./
+ #- deb     https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/xUbuntu_25.04/ ./
 
 ###===================#
 ###  OTHER SOFTWARE:  #
@@ -90,20 +105,23 @@
 
 ### VirtualBox
     deb     [arch=amd64] https://download.virtualbox.org/virtualbox/debian oracular contrib
+ #- deb     [arch=amd64] https://download.virtualbox.org/virtualbox/debian plucky contrib
 
 ### Steam
     deb     [arch=amd64,i386] https://repo.steampowered.com/steam/ stable steam
     deb-src [arch=amd64,i386] https://repo.steampowered.com/steam/ stable steam
 
 ### TeXmacs
- #  deb     [arch=amd64] https://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/ mantic   universe
- #- deb     [arch=amd64] https://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/ oracular universe
+ #  deb     [arch=amd64] https://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/ mantic universe
+ #- deb     [arch=amd64] https://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/ plucky universe
     deb     https://download.opensuse.org/repositories/home:/slowphil:/texmacs-devel/xUbuntu_24.04/ /
- #- deb     https://download.opensuse.org/repositories/home:/slowphil:/texmacs-devel/xUbuntu_24.10/ /
+ #- deb     https://download.opensuse.org/repositories/home:/slowphil:/texmacs-devel/xUbuntu_25.04/ /
 
 ### IntelliJ IDEA
     deb     https://ppa.launchpadcontent.net/mmk2410/intellij-idea/ubuntu oracular main
     deb-src https://ppa.launchpadcontent.net/mmk2410/intellij-idea/ubuntu oracular main
+ #- deb     https://ppa.launchpadcontent.net/mmk2410/intellij-idea/ubuntu plucky main
+ #- deb-src https://ppa.launchpadcontent.net/mmk2410/intellij-idea/ubuntu plucky main
 
 ### VS Codium
  #  deb     https://download.vscodium.com/debs vscodium main
@@ -123,14 +141,18 @@
 ### google-drive-ocamlfuse
     deb     https://ppa.launchpadcontent.net/alessandro-strada/ppa/ubuntu oracular main
     deb-src https://ppa.launchpadcontent.net/alessandro-strada/ppa/ubuntu oracular main
+ #- deb     https://ppa.launchpadcontent.net/alessandro-strada/ppa/ubuntu plucky main
+ #- deb-src https://ppa.launchpadcontent.net/alessandro-strada/ppa/ubuntu plucky main
 
 ### Cryptomator
  #  deb     https://ppa.launchpadcontent.net/sebastian-stenzel/cryptomator/ubuntu oracular main
  #  deb-src https://ppa.launchpadcontent.net/sebastian-stenzel/cryptomator/ubuntu oracular main
+ #- deb     https://ppa.launchpadcontent.net/sebastian-stenzel/cryptomator/ubuntu plucky main
+ #- deb-src https://ppa.launchpadcontent.net/sebastian-stenzel/cryptomator/ubuntu plucky main
 
 ### mkusb
- #  deb     https://ppa.launchpadcontent.net/mkusb/ppa/ubuntu oracular main
- #  deb-src https://ppa.launchpadcontent.net/mkusb/ppa/ubuntu oracular main
+ #  deb     https://ppa.launchpadcontent.net/mkusb/ppa/ubuntu plucky main
+ #  deb-src https://ppa.launchpadcontent.net/mkusb/ppa/ubuntu plucky main
 
 ### ROS
  #  deb     https://packages.ros.org/ros/ubuntu              focal main

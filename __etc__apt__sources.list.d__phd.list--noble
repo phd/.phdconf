@@ -80,8 +80,8 @@
     deb-src https://ppa.launchpadcontent.net/libreoffice/ppa/ubuntu noble main
 
 ### Wine
-    deb     https://dl.winehq.org/wine-builds/ubuntu/ noble  main
-    deb-src https://dl.winehq.org/wine-builds/ubuntu/ noble  main
+    deb     https://dl.winehq.org/wine-builds/ubuntu/ noble main
+    deb-src https://dl.winehq.org/wine-builds/ubuntu/ noble main
  #  deb     https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/xUbuntu_24.04/ ./
 
 ###===================#
