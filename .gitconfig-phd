@@ -143,6 +143,8 @@
     caamdcn              = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { git caamdc \"$(date +'%Y-%m-%d %H:%M:%S')\" $@; }; _"
     caamdbn              = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { git caamdb \"$(date +'%Y-%m-%d %H:%M:%S')\" $@; }; _"
 
+    cleandfx             = clean -dfx
+
     d                    = diff
     dn                   = diff --name-only
     dw                   = diff --color-words=.
