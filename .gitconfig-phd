@@ -144,6 +144,10 @@
     caamdbn              = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { git caamdb \"$(date +'%Y-%m-%d %H:%M:%S')\" $@; }; _"
 
     cleandfx             = clean -dfx
+    clean-dfx            = clean -dfx
+
+    stash-working        = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { git stash -S && git stash && git stash pop --index 'stash@{1}'; }; _"
+    stash-staged         = stash -S
 
     d                    = diff
     dn                   = diff --name-only
