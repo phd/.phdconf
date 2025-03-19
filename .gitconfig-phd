@@ -9,6 +9,10 @@
     coma                 = checkout main
     co--                 = checkout --
 
+    sw                   = switch
+
+    re                   = restore
+
     cp                   = cherry-pick
     cpc                  = cherry-pick --continue
     cpa                  = cherry-pick --abort
@@ -146,8 +150,11 @@
     cleandfx             = clean -dfx
     clean-dfx            = clean -dfx
 
-    stash-working        = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { git stash -S && git stash && git stash pop --index 'stash@{1}'; }; _"
-    stash-staged         = stash -S
+    stash-staged-test    = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { git diff-index --cached HEAD --quiet -- && echo "No staged changes to save"   && exit 1 || exit 0; }; _"
+    stash-unstaged-test  = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { git diff-files --quiet                  && echo "No unstaged changes to save" && exit 1 || exit 0; }; _"
+    stash-staged         = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { git stash-staged-test && git stash -S; }; _"
+    stash-unstaged       = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { git stash-unstaged-test && git stash-staged && (git stash; git stash pop --index 'stash@{1}') || git stash; }; _"
+    stash-working        = stash-unstaged
 
     d                    = diff
     dn                   = diff --name-only
