@@ -150,10 +150,10 @@
     cleandfx             = clean -dfx
     clean-dfx            = clean -dfx
 
-    stash-staged-test    = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { git diff-index --cached HEAD --quiet -- && echo "No staged changes to save"   && exit 1 || exit 0; }; _"
-    stash-unstaged-test  = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { git diff-files --quiet                  && echo "No unstaged changes to save" && exit 1 || exit 0; }; _"
-    stash-staged         = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { git stash-staged-test && git stash -S; }; _"
-    stash-unstaged       = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { git stash-unstaged-test && git stash-staged && (git stash; git stash pop --index 'stash@{1}') || git stash; }; _"
+    stash-staged-test    = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git diff-index --cached HEAD --quiet -- && echo "No staged changes to save"   && exit 1 || exit 0"
+    stash-unstaged-test  = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git diff-files --quiet                  && echo "No unstaged changes to save" && exit 1 || exit 0"
+    stash-staged         = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git stash-staged-test && git stash -S"
+    stash-unstaged       = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git stash-unstaged-test && git stash-staged && (git stash; git stash pop --index 'stash@{1}') || git stash"
     stash-working        = stash-unstaged
 
     d                    = diff
@@ -311,6 +311,18 @@
     what                 = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; bash -i -c '__git_ps1 %s\\|CLEAN | cut -d\\| -f2 | sed -E \"s,[^A-Za-z-],.,g\" | cut -d. -f1'"
     w                    = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; bash -i -c '__git_ps1 %s\\|CLEAN | cut -d\\| -f2 | sed -E \"s,[^A-Za-z-],.,g\" | cut -d. -f1'"
 
+    continue                = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git continue-$(git action)"
+    continue-CLEAN          = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo 'Nothing to continue.'"
+    continue-CHERRY-PICKING = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git cherry-pick --continue && git cherry-pick --continue"
+    continue-REVERTING      = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git revert      --continue && git revert      --continue"
+    continue-REBASE-i       = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git rebase      --continue && git rebase      --continue"
+    continue-REBASE-m       = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git rebase      --continue && git rebase      --continue"
+    continue-REBASE         = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git rebase      --continue && git rebase      --continue"
+    continue-AM             = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git rebase      --continue && git rebase      --continue"
+    continue-AMREBASE       = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git rebase      --continue && git rebase      --continue"
+    continue-MERGING        = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git merge       --continue && git merge       --continue"
+    continue-BISECTING      = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo 'Bisecting does not support --continue.'; exit 1"
+
     abort                = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git abort-$(git action)"
     abort-CLEAN          = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo 'Nothing to abort.'"
     abort-CHERRY-PICKING = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git cherry-pick --abort && git cherry-pick --abort"
@@ -321,7 +333,7 @@
     abort-AM             = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git rebase      --abort && git rebase      --abort"
     abort-AMREBASE       = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git rebase      --abort && git rebase      --abort"
     abort-MERGING        = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git merge       --abort && git merge       --abort"
-    abort-BISECTING      = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git bisect      --abort && git bisect      --abort"
+    abort-BISECTING      = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git bisect        reset && git bisect        reset"
 
     abort-stash-pop      = reset --merge
 
