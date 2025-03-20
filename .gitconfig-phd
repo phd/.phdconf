@@ -323,6 +323,8 @@
     continue-MERGING        = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git merge       --continue && git merge       --continue"
     continue-BISECTING      = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo 'Bisecting does not support --continue.'; exit 1"
 
+    cont                    = continue
+
     abort                = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git abort-$(git action)"
     abort-CLEAN          = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo 'Nothing to abort.'"
     abort-CHERRY-PICKING = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git cherry-pick --abort && git cherry-pick --abort"
