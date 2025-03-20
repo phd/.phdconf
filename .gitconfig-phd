@@ -323,6 +323,8 @@
     abort-MERGING        = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git merge       --abort && git merge       --abort"
     abort-BISECTING      = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git bisect      --abort && git bisect      --abort"
 
+    abort-stash-pop      = reset --merge
+
     conf                 = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; nano .git/config"
 
     init2                = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { cd \"${_DIR}\"; [ -d '.git'                        ] && echo 'Already initialized!' && exit 1; git init $@; git commit --allow-empty -m 'init'   ; git branch 'init'; }; _"
