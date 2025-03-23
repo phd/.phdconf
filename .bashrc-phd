@@ -445,6 +445,7 @@ mkalias top 'top -d 0,5' top
 
 mkalias git    'LANG=en_US.UTF-8 git' git
 mkalias g      'git'                  git
+mkalias gti    'git'                  git
 mkalias gitgui 'x git gui'            git
 mkalias gg     'gitgui'               git
 mkalias gk     'gitk'                 gitk
