@@ -274,10 +274,14 @@ mkalias ls   'LC_COLLATE=en_US.utf8 ls --color=auto --group-directories-first'  
 mkalias ls1  'ls -1'                                                                 ls
 mkalias lsa  'ls -a'                                                                 ls
 mkalias lsa1 'ls -a -1'                                                              ls
-mkalias l    'LC_COLLATE=en_US.utf8  ls --color=auto --group-directories-first -lvF' ls
+mkalias l    'LC_COLLATE=en_US.utf8 ls --color=auto --group-directories-first -lvF'  ls
 mkalias ll   'LC_COLLATE=en_US.utf8 ls --color=auto --group-directories-first -lvFa' ls
 mkalias ll.  'll -I "[^.]*"'                                                         ls
 mkalias lll  'll.'                                                                   ls
+mkalias lh   'l -h'                                                                  ls
+mkalias llh  'll -h'                                                                 ls
+mkalias llh. 'll. -h'                                                                ls
+mkalias lllh 'lll -h'                                                                ls
 
 alias cd..='cd ..'
 alias cd-='cd - &>/dev/null'
