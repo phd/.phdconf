@@ -80,7 +80,7 @@
     paftu                = push --all -f --tags --set-upstream
 
     b                    = branch
-    branch-delete        = git push --delete
+    branch-delete        = push --delete
 
     r                    = rebase
     ri                   = rebase -i
