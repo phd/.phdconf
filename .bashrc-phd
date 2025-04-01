@@ -350,8 +350,10 @@ alias err='tee /dev/stderr'
 alias out='tee /dev/tty'
 alias t='tee /dev/tty'
 
-mkalias dm  'sudo dmesg'    dmesg
-mkalias dmw 'sudo dmesg -w' dmesg
+mkalias dm   'sudo dmesg'       dmesg
+mkalias dmt  'sudo dmesg -T'    dmesg
+mkalias dmw  'sudo dmesg -w'    dmesg
+mkalias dmtw 'sudo dmesg -T -w' dmesg
 
 mkalias psaux  'ps aux'  ps
 mkalias psauf  'ps auf'  ps
