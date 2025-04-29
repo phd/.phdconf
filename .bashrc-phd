@@ -545,7 +545,7 @@ function CD {
 }
 
 function . {
-    [ -z "$@" ] && cd . || source "$@"
+    [ -z "$*" ] && cd . || source "$@"
 }
 
 function C! {
