@@ -727,7 +727,7 @@ function copy {
 function cb {
     local args="$@"
     if [ -n "${args}" ]; then
-        xclip -sel c <<< "${args}"
+        echo -n "${args}" | xclip -sel c
     elif [ ! -t 0 ]; then
         xclip -sel c
     else
@@ -737,7 +737,7 @@ function cb {
 function CB {
     local args="$@"
     if [ -n "${args}" ]; then
-        xclip -sel c <<< "${args}"
+        echo -n "${args}" | xclip -sel c
     elif [ ! -t 0 ]; then
         xclip -sel c
     fi
