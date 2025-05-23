@@ -26,24 +26,19 @@
  #- deb-src https://ppa.launchpadcontent.net/ubuntu-x-swat/updates/ubuntu plucky main
 
 ### kubuntu-ppa backports
-    deb     https://ppa.launchpadcontent.net/kubuntu-ppa/backports/ubuntu       oracular main
-    deb     https://ppa.launchpadcontent.net/kubuntu-ppa/backports/ubuntu       oracular main/debug
-    deb-src https://ppa.launchpadcontent.net/kubuntu-ppa/backports/ubuntu       oracular main
+    deb     https://ppa.launchpadcontent.net/kubuntu-ppa/backports/ubuntu       plucky main
+    deb     https://ppa.launchpadcontent.net/kubuntu-ppa/backports/ubuntu       plucky main/debug
+    deb-src https://ppa.launchpadcontent.net/kubuntu-ppa/backports/ubuntu       plucky main
     deb     https://ppa.launchpadcontent.net/kubuntu-ppa/backports-extra/ubuntu oracular main
     deb     https://ppa.launchpadcontent.net/kubuntu-ppa/backports-extra/ubuntu oracular main/debug
     deb-src https://ppa.launchpadcontent.net/kubuntu-ppa/backports-extra/ubuntu oracular main
- #- deb     https://ppa.launchpadcontent.net/kubuntu-ppa/backports/ubuntu       plucky main
- #- deb     https://ppa.launchpadcontent.net/kubuntu-ppa/backports/ubuntu       plucky main/debug
- #- deb-src https://ppa.launchpadcontent.net/kubuntu-ppa/backports/ubuntu       plucky main
  #- deb     https://ppa.launchpadcontent.net/kubuntu-ppa/backports-extra/ubuntu plucky main
  #- deb     https://ppa.launchpadcontent.net/kubuntu-ppa/backports-extra/ubuntu plucky main/debug
  #- deb-src https://ppa.launchpadcontent.net/kubuntu-ppa/backports-extra/ubuntu plucky main
 
 ### Trinity TDE3 desktop
- #  deb     http://mirror.ppa.trinitydesktop.org/trinity/deb/trinity-r14.1.x oracular main deps
- #  deb-src http://mirror.ppa.trinitydesktop.org/trinity/deb/trinity-r14.1.x oracular main deps
- #- deb     http://mirror.ppa.trinitydesktop.org/trinity/deb/trinity-r14.1.x plucky main deps
- #- deb-src http://mirror.ppa.trinitydesktop.org/trinity/deb/trinity-r14.1.x plucky main deps
+ #  deb     http://mirror.ppa.trinitydesktop.org/trinity/deb/trinity-r14.1.x plucky main deps
+ #  deb-src http://mirror.ppa.trinitydesktop.org/trinity/deb/trinity-r14.1.x plucky main deps
 
 ### Webmin
     deb     https://download.webmin.com/download/repository sarge contrib
@@ -89,18 +84,13 @@
 ###=====================#
 
 ### LibreOffice
-    deb     https://ppa.launchpadcontent.net/libreoffice/ppa/ubuntu oracular main
-    deb-src https://ppa.launchpadcontent.net/libreoffice/ppa/ubuntu oracular main
- #- deb     https://ppa.launchpadcontent.net/libreoffice/ppa/ubuntu plucky main
- #- deb-src https://ppa.launchpadcontent.net/libreoffice/ppa/ubuntu plucky main
+    deb     https://ppa.launchpadcontent.net/libreoffice/ppa/ubuntu plucky main
+    deb-src https://ppa.launchpadcontent.net/libreoffice/ppa/ubuntu plucky main
 
 ### Wine
-    deb     https://dl.winehq.org/wine-builds/ubuntu/ oracular main
-    deb-src https://dl.winehq.org/wine-builds/ubuntu/ oracular main
- #- deb     https://dl.winehq.org/wine-builds/ubuntu/ plucky main
- #- deb-src https://dl.winehq.org/wine-builds/ubuntu/ plucky main
- #  deb     https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/xUbuntu_24.10/ ./
- #- deb     https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/xUbuntu_25.04/ ./
+    deb     https://dl.winehq.org/wine-builds/ubuntu/ plucky main
+    deb-src https://dl.winehq.org/wine-builds/ubuntu/ plucky main
+ #  deb     https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/xUbuntu_25.04/ ./
 
 ###===================#
 ###  OTHER SOFTWARE:  #
@@ -142,16 +132,12 @@
 ###=========#
 
 ### google-drive-ocamlfuse
-    deb     https://ppa.launchpadcontent.net/alessandro-strada/ppa/ubuntu oracular main
-    deb-src https://ppa.launchpadcontent.net/alessandro-strada/ppa/ubuntu oracular main
- #- deb     https://ppa.launchpadcontent.net/alessandro-strada/ppa/ubuntu plucky main
- #- deb-src https://ppa.launchpadcontent.net/alessandro-strada/ppa/ubuntu plucky main
+    deb     https://ppa.launchpadcontent.net/alessandro-strada/ppa/ubuntu plucky main
+    deb-src https://ppa.launchpadcontent.net/alessandro-strada/ppa/ubuntu plucky main
 
 ### Cryptomator
- #  deb     https://ppa.launchpadcontent.net/sebastian-stenzel/cryptomator/ubuntu oracular main
- #  deb-src https://ppa.launchpadcontent.net/sebastian-stenzel/cryptomator/ubuntu oracular main
- #- deb     https://ppa.launchpadcontent.net/sebastian-stenzel/cryptomator/ubuntu plucky main
- #- deb-src https://ppa.launchpadcontent.net/sebastian-stenzel/cryptomator/ubuntu plucky main
+ #  deb     https://ppa.launchpadcontent.net/sebastian-stenzel/cryptomator/ubuntu plucky main
+ #  deb-src https://ppa.launchpadcontent.net/sebastian-stenzel/cryptomator/ubuntu plucky main
 
 ### mkusb
  #  deb     https://ppa.launchpadcontent.net/mkusb/ppa/ubuntu plucky main
