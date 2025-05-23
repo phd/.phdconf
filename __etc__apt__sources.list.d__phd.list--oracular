@@ -56,9 +56,8 @@
 ### Chromium Browser (phd, Mint packages)
     deb     https://freeshell.de/phd/chromium/oracular /
 
-### Firefox (phd)
- #  deb     https://ppa.launchpadcontent.net/phd/firefox/ubuntu oracular main
- #  deb-src https://ppa.launchpadcontent.net/phd/firefox/ubuntu oracular main
+### Firefox (mozilla.org)
+ #  deb     https://packages.mozilla.org/apt mozilla main
 
 ### Firefox & Thunderbird (Mozilla Team)
     deb     https://ppa.launchpadcontent.net/mozillateam/ppa/ubuntu oracular main
@@ -67,6 +66,10 @@
 ### Firefox Beta (Mozilla Team)
  #  deb     https://ppa.launchpadcontent.net/mozillateam/firefox-next/ubuntu oracular main
  #  deb-src https://ppa.launchpadcontent.net/mozillateam/firefox-next/ubuntu oracular main
+
+### Firefox (phd)
+ #  deb     https://ppa.launchpadcontent.net/phd/firefox/ubuntu oracular main
+ #  deb-src https://ppa.launchpadcontent.net/phd/firefox/ubuntu oracular main
 
 ### Librewolf
     deb     [arch=amd64] https://repo.librewolf.net/ librewolf main

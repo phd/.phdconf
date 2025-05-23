@@ -60,9 +60,8 @@
  #X deb     https://ppa.launchpadcontent.net/phd/chromium-browser/ubuntu jammy main
  #X deb-src https://ppa.launchpadcontent.net/phd/chromium-browser/ubuntu jammy main
 
-### Firefox (phd)
- #  deb     https://ppa.launchpadcontent.net/phd/firefox/ubuntu jammy main
- #  deb-src https://ppa.launchpadcontent.net/phd/firefox/ubuntu jammy main
+### Firefox (mozilla.org)
+ #  deb     https://packages.mozilla.org/apt mozilla main
 
 ### Firefox & Thunderbird (Mozilla Team)
     deb     https://ppa.launchpadcontent.net/mozillateam/ppa/ubuntu jammy main
@@ -71,6 +70,10 @@
 ### Firefox Beta (Mozilla Team)
  #  deb     https://ppa.launchpadcontent.net/mozillateam/firefox-next/ubuntu jammy main
  #  deb-src https://ppa.launchpadcontent.net/mozillateam/firefox-next/ubuntu jammy main
+
+### Firefox (phd)
+ #  deb     https://ppa.launchpadcontent.net/phd/firefox/ubuntu jammy main
+ #  deb-src https://ppa.launchpadcontent.net/phd/firefox/ubuntu jammy main
 
 ### Librewolf
     deb     [arch=amd64] https://repo.librewolf.net/ librewolf main

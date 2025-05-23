@@ -56,9 +56,8 @@
 ### Chromium Browser (phd, Mint packages)
     deb     https://freeshell.de/phd/chromium/mantic /
 
-### Firefox (phd)
- #  deb     https://ppa.launchpadcontent.net/phd/firefox/ubuntu mantic main
- #  deb-src https://ppa.launchpadcontent.net/phd/firefox/ubuntu mantic main
+### Firefox (mozilla.org)
+ #  deb     https://packages.mozilla.org/apt mozilla main
 
 ### Firefox & Thunderbird (Mozilla Team)
     deb     https://ppa.launchpadcontent.net/mozillateam/ppa/ubuntu mantic main
@@ -67,6 +66,10 @@
 ### Firefox Beta (Mozilla Team)
  #  deb     https://ppa.launchpadcontent.net/mozillateam/firefox-next/ubuntu mantic main
  #  deb-src https://ppa.launchpadcontent.net/mozillateam/firefox-next/ubuntu mantic main
+
+### Firefox (phd)
+ #  deb     https://ppa.launchpadcontent.net/phd/firefox/ubuntu mantic main
+ #  deb-src https://ppa.launchpadcontent.net/phd/firefox/ubuntu mantic main
 
 ### Librewolf
     deb     [arch=amd64] https://repo.librewolf.net/ librewolf main

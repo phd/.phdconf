@@ -64,9 +64,8 @@
 ### Chromium Browser (phd, Mint packages)
     deb     https://freeshell.de/phd/chromium/plucky /
 
-### Firefox (phd)
- #  deb     https://ppa.launchpadcontent.net/phd/firefox/ubuntu plucky main
- #  deb-src https://ppa.launchpadcontent.net/phd/firefox/ubuntu plucky main
+### Firefox (mozilla.org)
+ #  deb     https://packages.mozilla.org/apt mozilla main
 
 ### Firefox & Thunderbird (Mozilla Team)
     deb     https://ppa.launchpadcontent.net/mozillateam/ppa/ubuntu plucky main
@@ -77,6 +76,10 @@
  #  deb-src https://ppa.launchpadcontent.net/mozillateam/firefox-next/ubuntu oracular main
  #- deb     https://ppa.launchpadcontent.net/mozillateam/firefox-next/ubuntu plucky main
  #- deb-src https://ppa.launchpadcontent.net/mozillateam/firefox-next/ubuntu plucky main
+
+### Firefox (phd)
+ #  deb     https://ppa.launchpadcontent.net/phd/firefox/ubuntu plucky main
+ #  deb-src https://ppa.launchpadcontent.net/phd/firefox/ubuntu plucky main
 
 ### Librewolf
     deb     [arch=amd64] https://repo.librewolf.net/ librewolf main

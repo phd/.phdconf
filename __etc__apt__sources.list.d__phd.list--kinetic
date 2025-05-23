@@ -60,9 +60,8 @@
  #X deb     https://ppa.launchpadcontent.net/phd/chromium-browser/ubuntu kinetic main
  #X deb-src https://ppa.launchpadcontent.net/phd/chromium-browser/ubuntu kinetic main
 
-### Firefox (phd) (X)
- #X deb     https://ppa.launchpadcontent.net/phd/firefox/ubuntu kinetic main
- #X deb-src https://ppa.launchpadcontent.net/phd/firefox/ubuntu kinetic main
+### Firefox (mozilla.org)
+ #  deb     https://packages.mozilla.org/apt mozilla main
 
 ### Firefox & Thunderbird (Mozilla Team)
     deb     https://ppa.launchpadcontent.net/mozillateam/ppa/ubuntu kinetic main
@@ -71,6 +70,10 @@
 ### Firefox Beta (Mozilla Team)
  #  deb     https://ppa.launchpadcontent.net/mozillateam/firefox-next/ubuntu kinetic main
  #  deb-src https://ppa.launchpadcontent.net/mozillateam/firefox-next/ubuntu kinetic main
+
+### Firefox (phd) (X)
+ #X deb     https://ppa.launchpadcontent.net/phd/firefox/ubuntu kinetic main
+ #X deb-src https://ppa.launchpadcontent.net/phd/firefox/ubuntu kinetic main
 
 ### Librewolf
     deb     [arch=amd64] https://repo.librewolf.net/ librewolf main
