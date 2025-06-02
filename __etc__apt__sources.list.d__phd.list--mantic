@@ -74,6 +74,9 @@
 ### Librewolf
     deb     [arch=amd64] https://repo.librewolf.net/ librewolf main
 
+### Opera
+    deb https://deb.opera.com/opera-stable/ stable non-free
+
 ###=====================#
 ###  DESKTOP SOFTWARE:  #
 ###=====================#

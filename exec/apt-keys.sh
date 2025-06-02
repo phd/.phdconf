@@ -3,6 +3,7 @@
 declare -a KEYS=(
 '0686B78420038257'
 '079FA39EE6A75D23'
+'11EE8C00B693A745'
 '17FB29293721A2CD'
 '18763DBDC5B8CA84'
 '2836CB0A8AC93F7A'
@@ -45,5 +46,6 @@ for key in "${KEYS[@]}"; do
 done | xargs                                                      \
     -d '\n'                                                       \
     sudo curl                                                     \
+        --fail                                                    \
         -w '%{filename_effective} %{response_code} %{errormsg}\n' \
         --no-progress-meter

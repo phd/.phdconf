@@ -151,8 +151,11 @@ else
 	$(call create_immutable,                                                                          /etc/apt/sources.list.d/steam-beta.sources   )
 	$(call create_immutable,                                                                          /etc/apt/sources.list.d/google-chrome.list   )
 	$(call create_immutable,                                                                          /etc/apt/sources.list.d/google-chrome.sources)
-	$(call exec            , /etc/.phdconf/exec/apt-key.sh                                                                                         )
+	$(call exec            , /etc/.phdconf/exec/apt-keys.sh                                                                                        )
 endif
+
+apt-keys:
+	$(call exec            , /etc/.phdconf/exec/apt-keys.sh                                                                                        )
 
 install:
 ifneq ($(shell id -u), 0)
