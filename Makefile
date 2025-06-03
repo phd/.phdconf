@@ -111,6 +111,7 @@ home:
 	$(call link_with_backup    , ${HOME}/.phdconf/.Xmodmap                       , ${HOME}/.Xmodmap                     )
 	$(call link_with_backup    , ${HOME}/.phdconf/.Xresources                    , ${HOME}/.Xresources                  )
 	$(call link_with_backup    , ${HOME}/.phdconf/XTerm                          , ${HOME}/XTerm                        )
+	$(call link_with_backup    , ${HOME}/.phdconf/XTerm                          , ${HOME}/UXTerm                       )
 	$(call mkdir               ,                                                   ${HOME}/.config/fontconfig           )
 	$(call link_with_backup    , ${HOME}/.phdconf/.config__fontconfig__fonts.conf, ${HOME}/.config/fontconfig/fonts.conf)
 	$(call link_with_backup    , ${HOME}/.phdconf/.config__mpv                   , ${HOME}/.config/mpv                  )

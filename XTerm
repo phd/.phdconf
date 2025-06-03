@@ -1,16 +1,13 @@
-xterm*termName: xterm-color
+*VT100*termName: xterm-color
 
-xterm*faceName: Liberation Mono
-xterm*faceSize: 10
-xterm*font: 8x16
+*VT100*faceName: Liberation Mono
+*VT100*faceSize: 10
+*VT100*font:     8x16
 
-XTerm*saveLines: 1000
-XTerm*locale: true
+*VT100*saveLines: 1000
+*VT100*locale:    true
 
 !TXT Normal, Normal, Cursor
-URxvt*foreground  : #c8c8c8
-URxvt*background  : #31363b
-URxvt*cursorColor : #c8c8c8
-XTerm*foreground  : #c8c8c8
-XTerm*background  : #31363b
-XTerm*cursorColor : #c8c8c8
+*VT100*foreground:  #c8c8c8
+*VT100*background:  #31363b
+*VT100*cursorColor: #c8c8c8
