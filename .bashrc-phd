@@ -904,6 +904,33 @@ function ovh-dyndns {
     echo "$REPLY"
 }
 
+function kn {
+    local HOST="$1"
+    shift
+    local COMMAND="$@"
+    while [ -z "${HOST}" ]; do
+        read -e -p 'Hostname: ' HOST
+    done
+    local PORTS=''
+    local ports='?'
+    while [ -n "${ports}" ]; do
+        read -e -p 'Ports: ' -s ports
+        PORTS="${PORTS} ${ports}"
+    done
+    PORTS=$(trim "${PORTS}")
+    if [ -n "${PORTS}" ]; then
+        echo 'Knocking...'
+        knock "${HOST}" ${PORTS}
+        if [ -n "${COMMAND}" ]; then
+            sleep 2
+        fi
+    fi
+    if [ -n "${COMMAND}" ]; then
+        echo "${C_YELLOW}${COMMAND}${C_NONE}"
+        eval "${COMMAND}"
+    fi
+}
+
 if [ -e "${HOME}/.bashrc-ssh" ]; then
     source "${HOME}/.bashrc-ssh"
 fi
