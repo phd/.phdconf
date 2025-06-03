@@ -2,15 +2,22 @@ if [ -d "${HOME}/bin" ]; then
     export PATH="${PATH}:${HOME}/bin"
 fi
 
-export GCC_COLORS=true
+if [ -z "${XDG_RUNTIME_DIR}" ]; then
+    export XDG_RUNTIME_DIR="/run/user/${UID}"
+fi
+if [ -z "${DBUS_SESSION_BUS_ADDRESS}" ]; then
+    export DBUS_SESSION_BUS_ADDRESS="unix:path=${XDG_RUNTIME_DIR}/bus"
+fi
 
 export GTK_USE_PORTAL=1
 export GDK_DEBUG=portals
 export GTK2_RC_FILES=~/.gtkrc-2.0
 
-export QT_SELECT=5
+export GCC_COLORS=true
 
 export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel ${_JAVA_OPTIONS}"
+
+#export QT_SELECT=5
 
 #export __GL_SYNC_TO_VBLANK=1
 #export vblank_mode=1
