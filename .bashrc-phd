@@ -93,6 +93,8 @@ bind 'set show-all-if-ambiguous on'
 
 export GREP_COLORS='ms=01;37;42'
 
+source "${__PHDCONF_PATH}/.profile-phd"
+
 function mkalias { alias -- "$1"="$2"; } # fallback
 source "${__PHDCONF_PATH}/mkalias.sh" || true
 
@@ -134,8 +136,8 @@ function __has_last_command {
     [ -n "${__LAST_COMMAND}" ]
 }
 
-if [ -f /usr/lib/git-core/git-sh-prompt ]; then
-    . /usr/lib/git-core/git-sh-prompt
+if [ -f '/usr/lib/git-core/git-sh-prompt' ]; then
+    source '/usr/lib/git-core/git-sh-prompt'
 fi
 
 GIT_PS1_SHOWDIRTYSTATE=1
@@ -902,8 +904,8 @@ function ovh-dyndns {
     echo "$REPLY"
 }
 
-if [ -f ~/.bashrc-ssh ]; then
-    . ~/.bashrc-ssh
+if [ -e "${HOME}/.bashrc-ssh" ]; then
+    source "${HOME}/.bashrc-ssh"
 fi
 
 # __LAST_COMMAND: this line must be at the very end of the .bashrc file:
