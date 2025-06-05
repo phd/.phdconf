@@ -920,7 +920,7 @@ function kn {
     PORTS=$(trim "${PORTS}")
     if [ -n "${PORTS}" ]; then
         echo 'Knocking...'
-        knock "${HOST}" ${PORTS}
+        knock -d 200 "${HOST}" ${PORTS}
         if [ -n "${COMMAND}" ]; then
             sleep 2
         fi
