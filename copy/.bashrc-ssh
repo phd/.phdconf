@@ -3,6 +3,8 @@
 # SSH aliases
 #
 # Examples:
-#     alias @host='ssh -A host'
-#     alias @user@host='ssh -A user@host'
+#     alias  @host='ssh -A host'
+#     alias  @user@host='ssh -A user@host'
+#     alias @@host='kn host @host'
+#     alias @@user@host='kn host @user@host'
 #
