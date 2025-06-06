@@ -137,6 +137,9 @@
 ###  MISC:  #
 ###=========#
 
+### google-cloud-cli ###
+ #  deb     https://packages.cloud.google.com/apt cloud-sdk main
+
 ### google-drive-ocamlfuse (X)
     deb     https://ppa.launchpadcontent.net/alessandro-strada/ppa/ubuntu kinetic main
     deb-src https://ppa.launchpadcontent.net/alessandro-strada/ppa/ubuntu kinetic main

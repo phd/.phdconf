@@ -126,6 +126,9 @@
 ###  MISC:  #
 ###=========#
 
+### google-cloud-cli ###
+ #  deb     https://packages.cloud.google.com/apt cloud-sdk main
+
 ### google-drive-ocamlfuse
     deb     https://ppa.launchpadcontent.net/alessandro-strada/ppa/ubuntu oracular main
     deb-src https://ppa.launchpadcontent.net/alessandro-strada/ppa/ubuntu oracular main
