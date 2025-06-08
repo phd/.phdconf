@@ -166,7 +166,7 @@ function __prompt_flags {
         prompt_flags="${prompt_flags} ${C_MAGENTA}h-${C_NONE}"
     fi
     if [ "${__IDLE}" = '1' ]; then
-        prompt_flags="${prompt_flags} ${C_MAGENTA}idle${C_NONE}"
+        prompt_flags="${prompt_flags} ${C_MAGENTA}IDLE${C_NONE}"
     fi
     if [ "${__NV_PRIME_RENDER_OFFLOAD}" = '1' ] && [ "${__GLX_VENDOR_LIBRARY_NAME}" = 'nvidia' ]; then
         prompt_flags="${prompt_flags} ${C_MAGENTA}nv${C_NONE}"
@@ -578,15 +578,15 @@ function x {
     )
 }
 
-function __idle {
+function _IDLE {
     local OK="$@"
     $OK &
 }
-function idle {
+function IDLE {
     local child=''
     case "$@" in
         ''|*[!0-9]*)
-            __IDLE=1 SHLVL="$(($SHLVL+1))" __idle ${@:-bash}
+            __IDLE=1 SHLVL="$(($SHLVL+1))" _IDLE ${@:-bash}
             child="$!"
             ;;
     esac
@@ -595,7 +595,7 @@ function idle {
     ionice    -c  3 -p "${child:-$@}" &>/dev/null
     [ -n "${child}" ] && fg &>/dev/null
 }
-complete -F _command idle
+complete -F _command IDLE
 
 function F {
     find . -not -path '*/.*' -name "$@"
