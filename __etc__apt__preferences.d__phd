@@ -27,3 +27,12 @@ Pin-Priority: 1001
 Package: *
 Pin: release o=LP-PPA-phd-firefox
 Pin-Priority: 1001
+
+
+Package: *
+Pin: origin deb.xanmod.org
+Pin-Priority: -1
+
+Package: linux-*
+Pin: origin deb.xanmod.org
+Pin-Priority: 100
