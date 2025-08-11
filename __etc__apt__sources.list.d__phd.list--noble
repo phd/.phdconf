@@ -117,6 +117,10 @@
 ### Microsoft Teams
  #  deb     [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main
 
+### NVIDIA Jetson
+    deb https://repo.download.nvidia.com/jetson/common       r36.4 main
+    deb https://repo.download.nvidia.com/jetson/x86_64/jammy r36.4 main
+
 ### Atom
  #X deb     https://ppa.launchpadcontent.net/webupd8team/atom/ubuntu bionic main
  #X deb-src https://ppa.launchpadcontent.net/webupd8team/atom/ubuntu bionic main
