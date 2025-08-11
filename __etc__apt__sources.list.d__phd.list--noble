@@ -37,6 +37,10 @@
  #  deb     http://mirror.ppa.trinitydesktop.org/trinity/deb/trinity-r14.1.x noble main deps
  #  deb-src http://mirror.ppa.trinitydesktop.org/trinity/deb/trinity-r14.1.x noble main deps
 
+### deadsnakes Python repository
+    deb     https://ppa.launchpadcontent.net/deadsnakes/ppa/ubuntu noble main
+    deb-src https://ppa.launchpadcontent.net/deadsnakes/ppa/ubuntu noble main
+
 ### Webmin
     deb     https://download.webmin.com/download/repository sarge contrib
 
