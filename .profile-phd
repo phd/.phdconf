@@ -2,6 +2,12 @@ if [ -d "${HOME}/bin" ]; then
     export PATH="${PATH}:${HOME}/bin"
 fi
 
+if [ -d "${HOME}/bins" ]; then
+    while read dir; do
+        export PATH="${PATH}:${dir}"
+    done < <(find -L "${HOME}/bins" -mindepth 1 -maxdepth 1 -type d)
+fi
+
 if [ -z "${XDG_RUNTIME_DIR}" ]; then
     export XDG_RUNTIME_DIR="/run/user/${UID}"
 fi
