@@ -3,9 +3,7 @@ if [ -d "${HOME}/bin" ]; then
 fi
 
 if [ -d "${HOME}/bins" ]; then
-    while read dir; do
-        export PATH="${PATH}:${dir}"
-    done < <(find -L "${HOME}/bins" -mindepth 1 -maxdepth 1 -type d)
+    export PATH="${PATH}$(find -L "${HOME}/bins" -mindepth 1 -maxdepth 1 -type d -printf '\n%p' | tr '\n' ':')"
 fi
 
 if [ -z "${XDG_RUNTIME_DIR}" ]; then
