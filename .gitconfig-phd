@@ -82,6 +82,8 @@
     b                    = branch
     branch-delete        = push --delete
 
+    count                = rev-list --count HEAD
+
     r                    = rebase
     ri                   = rebase -i
     ri1                  = rebase -i HEAD~1
@@ -123,6 +125,7 @@
     ri400                = rebase -i HEAD~400
     ri450                = rebase -i HEAD~450
     ri500                = rebase -i HEAD~500
+    rimax                = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { git rebase -i \"HEAD~$(( $(git count) - 1 ))\"; }; _"
     rc                   = rebase --continue
     ra                   = rebase --abort
     rdate                = rebase --committer-date-is-author-date
