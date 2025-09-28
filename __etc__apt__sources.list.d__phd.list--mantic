@@ -45,17 +45,17 @@
     deb     https://download.webmin.com/download/repository sarge contrib
 
 ### Conda
-    deb     [arch=amd64] https://repo.anaconda.com/pkgs/misc/debrepo/conda stable main
+    deb     https://repo.anaconda.com/pkgs/misc/debrepo/conda stable main
 
 ###=============#
 ###  BROWSERS:  #
 ###=============#
 
 ### Brave
-    deb     [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main
+    deb     https://brave-browser-apt-release.s3.brave.com/ stable main
 
 ### Chrome
-    deb     [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main
+    deb     https://dl.google.com/linux/chrome/deb/ stable main
 
 ### Chromium Browser (phd, Mint packages)
     deb     https://freeshell.de/phd/chromium/mantic /
@@ -76,10 +76,10 @@
  #  deb-src https://ppa.launchpadcontent.net/phd/firefox/ubuntu mantic main
 
 ### Librewolf
-    deb     [arch=amd64] https://repo.librewolf.net/ librewolf main
+    deb     https://repo.librewolf.net/ librewolf main
 
 ### Opera
-    deb https://deb.opera.com/opera-stable/ stable non-free
+    deb     https://deb.opera.com/opera-stable/ stable non-free
 
 ###=====================#
 ###  DESKTOP SOFTWARE:  #
@@ -99,15 +99,15 @@
 ###===================#
 
 ### VirtualBox
-    deb     [arch=amd64] https://download.virtualbox.org/virtualbox/debian jammy  contrib
- #- deb     [arch=amd64] https://download.virtualbox.org/virtualbox/debian mantic contrib
+    deb     https://download.virtualbox.org/virtualbox/debian jammy  contrib
+ #- deb     https://download.virtualbox.org/virtualbox/debian mantic contrib
 
 ### Steam
-    deb     [arch=amd64,i386] https://repo.steampowered.com/steam/ stable steam
-    deb-src [arch=amd64,i386] https://repo.steampowered.com/steam/ stable steam
+    deb     https://repo.steampowered.com/steam/ stable steam
+    deb-src https://repo.steampowered.com/steam/ stable steam
 
 ### TeXmacs
- #  deb     [arch=amd64] https://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/ mantic universe
+ #  deb     https://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/ mantic universe
     deb     https://download.opensuse.org/repositories/home:/slowphil:/texmacs-devel/xUbuntu_23.10/ /
 
 ### IntelliJ IDEA
@@ -121,11 +121,11 @@
     deb     https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/debs vscodium main
 
 ### Microsoft Teams
- #  deb     [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main
+ #  deb     https://packages.microsoft.com/repos/ms-teams stable main
 
 ### NVIDIA Jetson
-    deb https://repo.download.nvidia.com/jetson/common       r36.4 main
-    deb https://repo.download.nvidia.com/jetson/x86_64/jammy r36.4 main
+    deb     https://repo.download.nvidia.com/jetson/common       r36.4 main
+    deb     https://repo.download.nvidia.com/jetson/x86_64/jammy r36.4 main
 
 ### Atom
  #X deb     https://ppa.launchpadcontent.net/webupd8team/atom/ubuntu bionic main
