@@ -40,6 +40,8 @@
 ### deadsnakes Python repository
     deb     https://ppa.launchpadcontent.net/deadsnakes/ppa/ubuntu noble main
     deb-src https://ppa.launchpadcontent.net/deadsnakes/ppa/ubuntu noble main
+ #- deb     https://ppa.launchpadcontent.net/deadsnakes/ppa/ubuntu oracular main
+ #- deb-src https://ppa.launchpadcontent.net/deadsnakes/ppa/ubuntu oracular main
 
 ### Webmin
     deb     https://download.webmin.com/download/repository sarge contrib

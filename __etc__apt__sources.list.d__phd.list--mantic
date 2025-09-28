@@ -40,6 +40,8 @@
 ### deadsnakes Python repository
     deb     https://ppa.launchpadcontent.net/deadsnakes/ppa/ubuntu jammy main
     deb-src https://ppa.launchpadcontent.net/deadsnakes/ppa/ubuntu jammy main
+ #- deb     https://ppa.launchpadcontent.net/deadsnakes/ppa/ubuntu mantic main
+ #- deb-src https://ppa.launchpadcontent.net/deadsnakes/ppa/ubuntu mantic main
 
 ### Webmin
     deb     https://download.webmin.com/download/repository sarge contrib
