@@ -3,7 +3,7 @@ Pin: release *
 Pin-Priority: 1
 
 
-Package: chromium-browser
+Package: chromium-browser chromium-browser-* chromium-codecs-* chromium-chromedriver
 Pin: release o=Ubuntu
 Pin-Priority: -1
 
