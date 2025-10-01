@@ -71,9 +71,9 @@
  #  deb     https://ppa.launchpadcontent.net/mozillateam/firefox-next/ubuntu noble main
  #  deb-src https://ppa.launchpadcontent.net/mozillateam/firefox-next/ubuntu noble main
 
-### Firefox (phd)
- #  deb     https://ppa.launchpadcontent.net/phd/firefox/ubuntu noble main
- #  deb-src https://ppa.launchpadcontent.net/phd/firefox/ubuntu noble main
+### Firefox (phd) (X)
+ #X deb     https://ppa.launchpadcontent.net/phd/firefox/ubuntu noble main
+ #X deb-src https://ppa.launchpadcontent.net/phd/firefox/ubuntu noble main
 
 ### Librewolf
     deb     https://repo.librewolf.net/ librewolf main

@@ -78,9 +78,9 @@
  #- deb     https://ppa.launchpadcontent.net/mozillateam/firefox-next/ubuntu plucky main
  #- deb-src https://ppa.launchpadcontent.net/mozillateam/firefox-next/ubuntu plucky main
 
-### Firefox (phd)
- #  deb     https://ppa.launchpadcontent.net/phd/firefox/ubuntu plucky main
- #  deb-src https://ppa.launchpadcontent.net/phd/firefox/ubuntu plucky main
+### Firefox (phd) (X)
+ #X deb     https://ppa.launchpadcontent.net/phd/firefox/ubuntu plucky main
+ #X deb-src https://ppa.launchpadcontent.net/phd/firefox/ubuntu plucky main
 
 ### Librewolf
     deb     https://repo.librewolf.net/ librewolf main

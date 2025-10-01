@@ -85,9 +85,9 @@
  #- deb     https://ppa.launchpadcontent.net/mozillateam/firefox-next/ubuntu questing main
  #- deb-src https://ppa.launchpadcontent.net/mozillateam/firefox-next/ubuntu questing main
 
-### Firefox (phd)
- #  deb     https://ppa.launchpadcontent.net/phd/firefox/ubuntu questing main
- #  deb-src https://ppa.launchpadcontent.net/phd/firefox/ubuntu questing main
+### Firefox (phd) (X)
+ #X deb     https://ppa.launchpadcontent.net/phd/firefox/ubuntu questing main
+ #X deb-src https://ppa.launchpadcontent.net/phd/firefox/ubuntu questing main
 
 ### Librewolf
     deb     https://repo.librewolf.net/ librewolf main

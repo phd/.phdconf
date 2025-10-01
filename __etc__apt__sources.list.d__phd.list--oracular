@@ -73,9 +73,9 @@
  #  deb     https://ppa.launchpadcontent.net/mozillateam/firefox-next/ubuntu oracular main
  #  deb-src https://ppa.launchpadcontent.net/mozillateam/firefox-next/ubuntu oracular main
 
-### Firefox (phd)
- #  deb     https://ppa.launchpadcontent.net/phd/firefox/ubuntu oracular main
- #  deb-src https://ppa.launchpadcontent.net/phd/firefox/ubuntu oracular main
+### Firefox (phd) (X)
+ #X deb     https://ppa.launchpadcontent.net/phd/firefox/ubuntu oracular main
+ #X deb-src https://ppa.launchpadcontent.net/phd/firefox/ubuntu oracular main
 
 ### Librewolf
     deb     https://repo.librewolf.net/ librewolf main

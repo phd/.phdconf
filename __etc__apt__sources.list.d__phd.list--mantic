@@ -73,9 +73,9 @@
  #  deb     https://ppa.launchpadcontent.net/mozillateam/firefox-next/ubuntu mantic main
  #  deb-src https://ppa.launchpadcontent.net/mozillateam/firefox-next/ubuntu mantic main
 
-### Firefox (phd)
- #  deb     https://ppa.launchpadcontent.net/phd/firefox/ubuntu mantic main
- #  deb-src https://ppa.launchpadcontent.net/phd/firefox/ubuntu mantic main
+### Firefox (phd) (X)
+ #X deb     https://ppa.launchpadcontent.net/phd/firefox/ubuntu mantic main
+ #X deb-src https://ppa.launchpadcontent.net/phd/firefox/ubuntu mantic main
 
 ### Librewolf
     deb     https://repo.librewolf.net/ librewolf main
