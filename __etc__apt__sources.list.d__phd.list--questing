@@ -52,7 +52,7 @@
  #- deb-src https://ppa.launchpadcontent.net/deadsnakes/ppa/ubuntu questing main
 
 ### Webmin
-    deb     https://download.webmin.com/download/repository sarge contrib
+    deb     https://download.webmin.com/download/newkey/repository stable contrib
 
 ### Conda
     deb     https://repo.anaconda.com/pkgs/misc/debrepo/conda stable main
