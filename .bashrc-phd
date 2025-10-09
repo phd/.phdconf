@@ -285,11 +285,6 @@ mkalias llh  'll -h'                                                            
 mkalias llh. 'll. -h'                                                                ls
 mkalias lllh 'lll -h'                                                                ls
 
-alias firstfile='ls -1v | head -n1'
-alias lastfile='ls -1vr | head -n1'
-alias oldestfile='ls -1tr | head -n1'
-alias newestfile='ls -1t | head -n1'
-
 alias cd..='cd ..'
 alias cd-='cd - &>/dev/null'
 alias ..='cd ..'
@@ -528,10 +523,10 @@ function cd {
     [ ! "${__CD_LS}" -eq '1' ] && return '0'
     if [ "${__PROMPT_INDENT}" -eq '1' ]; then
         echo "${B_GREEN}  ${B_NONE} $(colorpwd)$(__prompt_git_eval)"
-        LC_COLLATE='en_US.utf8' COLUMNS="$((${COLUMNS}-3))" ls --group-directories-first -C --color=always | sed -e "s,^,${B_GREEN} ${B_NONE}  ,"
+        LC_COLLATE='en_US.utf8' COLUMNS="$((${COLUMNS}-3))" command ls --group-directories-first -C --color=always | sed -e "s,^,${B_GREEN} ${B_NONE}  ,"
     else
         echo "=== $(pwd) ==="
-        LC_COLLATE='en_US.utf8' COLUMNS="$((${COLUMNS}-3))" ls --group-directories-first -C --color=always
+        LC_COLLATE='en_US.utf8' COLUMNS="$((${COLUMNS}-3))" command ls --group-directories-first -C --color=always
     fi
 }
 
@@ -549,6 +544,10 @@ function c {
 
 function CD {
     builtin cd "$@"
+}
+
+function LS {
+    command ls "$@"
 }
 
 function . {
@@ -652,6 +651,11 @@ function S {
     )
 }
 
+function firstfile  { command ls -1v  | head -n ${1:-1} | tail -n 1; }
+function lastfile   { command ls -1vr | head -n ${1:-1} | tail -n 1; }
+function oldestfile { command ls -1tr | head -n ${1:-1} | tail -n 1; }
+function newestfile { command ls -1t  | head -n ${1:-1} | tail -n 1; }
+
 function wgetr {
     wget --referer=${1:-} ${1:-}
 }
@@ -662,7 +666,7 @@ function slowcat {
 
 function kernels {
     echo "KERNELS:"
-    (builtin cd /boot; ls -1 vmlinu*-* | sort -V | decorate '     - ')
+    (builtin cd /boot; command ls -1 vmlinu*-* | sort -V | decorate '     - ')
     echo "CURRENT: $(uname -sr)"
 }
 
