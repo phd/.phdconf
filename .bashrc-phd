@@ -285,6 +285,11 @@ mkalias llh  'll -h'                                                            
 mkalias llh. 'll. -h'                                                                ls
 mkalias lllh 'lll -h'                                                                ls
 
+alias firstfile='ls -1v | head -n1'
+alias lastfile='ls -1vr | head -n1'
+alias oldestfile='ls -1tr | head -n1'
+alias newestfile='ls -1t | head -n1'
+
 alias cd..='cd ..'
 alias cd-='cd - &>/dev/null'
 alias ..='cd ..'
