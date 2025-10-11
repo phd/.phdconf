@@ -317,7 +317,6 @@ mkalias scrr 'screen -D -r' screen
 mkalias scrl 'screen -list' screen
 mkalias scrw 'screen -wipe' screen
 
-alias exit='clear; exit'
 alias logout='clear; logout'
 alias q='clear; exit'
 
@@ -587,6 +586,11 @@ function _IDLE {
     $OK &
 }
 function IDLE {
+    local output='/dev/null'
+    if [ "$1" = '-v' ]; then
+      output='/dev/stdout'
+      shift
+    fi
     local child=''
     case "$@" in
         ''|*[!0-9]*)
@@ -594,10 +598,12 @@ function IDLE {
             child="$!"
             ;;
     esac
-    renice    -n 19    "${child:-$@}" &>/dev/null
-    chrt   -p -i  0    "${child:-$@}" &>/dev/null
-    ionice    -c  3 -p "${child:-$@}" &>/dev/null
-    [ -n "${child}" ] && fg &>/dev/null
+    local error=0
+    renice    -n 19    "${child:-$@}" &>"${output}" || { echo 'IDLE: renice failed'; ((error+=1)) || true; }
+    chrt   -p -i  0    "${child:-$@}" &>"${output}" || { echo 'IDLE: chrt failed'  ; ((error+=2)) || true; }
+    ionice    -c  3 -p "${child:-$@}" &>"${output}" || { echo 'IDLE: ionice failed'; ((error+=4)) || true; }
+    [ -n "${child}" ] && fg &>"${output}" || true
+    return "${error}"
 }
 complete -F _command IDLE
 
