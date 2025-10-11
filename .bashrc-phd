@@ -168,6 +168,10 @@ function __prompt_flags {
     if [ -n "${__PRIO}" ]; then
         prompt_flags="${prompt_flags} ${C_MAGENTA}${__PRIO}${C_NONE}"
     fi
+    local cpus="$(CPUS -Q)"
+    if [ "${cpus}" != "$(CPUS -I)" ]; then
+        prompt_flags="${prompt_flags} ${C_MAGENTA}CPUS:${cpus}${C_NONE}"
+    fi
     if [ "${__NV_PRIME_RENDER_OFFLOAD}" = '1' ] && [ "${__GLX_VENDOR_LIBRARY_NAME}" = 'nvidia' ]; then
         prompt_flags="${prompt_flags} ${C_MAGENTA}nv${C_NONE}"
     fi
@@ -387,9 +391,9 @@ mkalias xargsn1b 'xargsn1 bash -c'         bash
 mkalias xargsib  'xargsi  bash -c'         bash
 mkalias xargsi1b 'xargsi1 bash -c'         bash
 
-alias reboot?='[ -f /var/run/reboot-required ] && echo YES || echo no'
-alias reboot!='sudo reboot'
-alias reboot?!='[ -f /var/run/reboot-required ] && (echo YES; sudo reboot || true) || echo no'
+alias 'reboot?'='[ -f /var/run/reboot-required ] && echo YES || echo no'
+alias 'reboot!'='sudo reboot'
+alias 'reboot?!'='[ -f /var/run/reboot-required ] && (echo YES; sudo reboot || true) || echo no'
 
 alias u+r='chmod u+r'
 alias u-r='chmod u-r'
@@ -585,9 +589,10 @@ function _PRIO {
     local OK="$@"
     $OK &
 }
-function PRIO {
-    local prio=''
+function PRIO { # [-v] (IDLE|NORM|HIGH|REAL) (PID or command)
     local output='/dev/null'
+    local prio=''
+    local params=''
     while true; do
         if [ "$1" = '-v' ]; then
             output='/dev/stdout'
@@ -626,17 +631,20 @@ function PRIO {
             return -1
     esac
     local child=''
-    case "$@" in
+    if [ -z "${params}" ]; then
+        params="$@"
+    fi
+    case "${params}" in
         ''|*[!0-9]*)
             local prio_disp=${prio/#NORM/}
-            __PRIO="${prio_disp}" SHLVL="$(($SHLVL+1))" _PRIO ${@:-bash}
+            __PRIO="${prio_disp}" SHLVL="$(($SHLVL+1))" _PRIO ${params:-bash}
             child="$!"
             ;;
     esac
     local ret=0
-    renice ${args_renice}    "${child:-$@}" &>"${output}" || { echo "PRIO(${prio}): renice failed"; ((ret+=1)) || true; }
-    chrt   ${args_chrt}      "${child:-$@}" &>"${output}" || { echo "PRIO(${prio}): chrt failed"  ; ((ret+=2)) || true; }
-    ionice ${args_ionice} -p "${child:-$@}" &>"${output}" || { echo "PRIO(${prio}): ionice failed"; ((ret+=4)) || true; }
+    renice ${args_renice}    "${child:-${params}}" &>"${output}" || { echo "PRIO(${prio}): renice failed"; ((ret+=1)) || true; }
+    chrt   ${args_chrt}      "${child:-${params}}" &>"${output}" || { echo "PRIO(${prio}): chrt failed"  ; ((ret+=2)) || true; }
+    ionice ${args_ionice} -p "${child:-${params}}" &>"${output}" || { echo "PRIO(${prio}): ionice failed"; ((ret+=4)) || true; }
     [ -n "${child}" ] && fg &>"${output}" || true
     return "${ret}"
 }
@@ -645,6 +653,72 @@ mkalias IDLE 'PRIO IDLE' PRIO
 mkalias NORM 'PRIO NORM' PRIO
 mkalias HIGH 'PRIO HIGH' PRIO
 mkalias REAL 'PRIO REAL' PRIO
+
+function CPUS { # [-q] [-Q] [-i] [-I] [-s] [-v] (CPUs or @) (PID or command)
+    has_command 'taskset' || return -1
+    local CPUS_ALL="0-$(($(nproc --all) - 1))"
+    if [ "${CPUS_ALL}" = '0-1' ]; then
+        CPUS_ALL='0,1'
+    fi
+    local output='/dev/null'
+    local cpus=''
+    local params=''
+    while true; do
+        if [ "$1" = '-q' ] || [ -z "$1" ]; then
+            echo    "All CPUs: ${CPUS_ALL}"
+            echo -n "Set CPUs: "
+            LANG=C taskset -cp "${2:-$$}" | awk -F: '{print $2}' | xargs
+            return 0
+        fi
+        if [ "$1" = '-Q' ]; then
+            LANG=C taskset -cp "${2:-$$}" | awk -F: '{print $2}' | xargs
+            return 0
+        fi
+        if [ "$1" = '-i' ] || [ -z "$1" ]; then
+            echo "All CPUs: ${CPUS_ALL}"
+            return 0
+        fi
+        if [ "$1" = '-I' ] || [ -z "$1" ]; then
+            echo "${CPUS_ALL}"
+            return 0
+        fi
+        if [ "$1" = '-s' ]; then
+            params="$$"
+            shift
+            continue
+        fi
+        if [ "$1" = '-v' ]; then
+            output='/dev/stdout'
+            shift
+            continue
+        fi
+        cpus="$1"
+        shift
+        break
+    done
+    if [ "${cpus}" = '@' ]; then
+        cpus="${CPUS_ALL}"
+    fi
+    local child=''
+    if [ -z "${params}" ]; then
+        params="$@"
+    fi
+    case "${params}" in
+        ''|*[!0-9]*)
+            SHLVL="$(($SHLVL+1))" _PRIO ${params:-bash}
+            child="$!"
+            ;;
+    esac
+    local ret=0
+    taskset -cp ${cpus} "${child:-${params}}" &>"${output}" || { echo "CPUS(${cpus}): taskset failed"; ((ret+=1)) || true; }
+    [ -n "${child}" ] && fg &>"${output}" || true
+    return "${ret}"
+}
+complete -F _command CPUS
+mkalias 'CPUS?'  'CPUS -q'   CPUS
+mkalias 'CPUS@'  'CPUS @'    CPUS
+mkalias 'CPUS!'  'CPUS -s'   CPUS
+mkalias 'CPUS@!' 'CPUS -s @' CPUS
 
 function F {
     find . -not -path '*/.*' -name "$@"
