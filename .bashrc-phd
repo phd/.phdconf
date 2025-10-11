@@ -165,8 +165,8 @@ function __prompt_flags {
     if [ "${HISTFILE}" = '/dev/null' ]; then
         prompt_flags="${prompt_flags} ${C_MAGENTA}h-${C_NONE}"
     fi
-    if [ "${__IDLE}" = '1' ]; then
-        prompt_flags="${prompt_flags} ${C_MAGENTA}IDLE${C_NONE}"
+    if [ -n "${__PRIO}" ]; then
+        prompt_flags="${prompt_flags} ${C_MAGENTA}${__PRIO}${C_NONE}"
     fi
     if [ "${__NV_PRIME_RENDER_OFFLOAD}" = '1' ] && [ "${__GLX_VENDOR_LIBRARY_NAME}" = 'nvidia' ]; then
         prompt_flags="${prompt_flags} ${C_MAGENTA}nv${C_NONE}"
@@ -581,31 +581,70 @@ function x {
     )
 }
 
-function _IDLE {
+function _PRIO {
     local OK="$@"
     $OK &
 }
-function IDLE {
+function PRIO {
+    local prio=''
     local output='/dev/null'
-    if [ "$1" = '-v' ]; then
-      output='/dev/stdout'
-      shift
-    fi
+    while true; do
+        if [ "$1" = '-v' ]; then
+            output='/dev/stdout'
+            shift
+            continue
+        fi
+        prio="$1"
+        shift
+        break
+    done
+    prio="${prio^^}"
+    local args_renice args_chrt args_ionice
+    case "${prio}" in
+        'IDLE')
+            args_renice='-n 19'
+            args_chrt='-p -i 0'
+            args_ionice='-c 3'
+            ;;
+        'NORM')
+            args_renice='-n 0'
+            args_chrt='-p -o 0'
+            args_ionice='-c 2 -n 4'
+            ;;
+        'HIGH')
+            args_renice='-n -20'
+            args_chrt='-p -o 0'
+            args_ionice='-c 2 -n 0'
+            ;;
+        'REAL')
+            args_renice='-n -20'
+            args_chrt='-p -f 99'
+            args_ionice='-c 1 -n 0'
+            ;;
+        *)
+            echo "Unknown priority: ${prio}"
+            return -1
+    esac
     local child=''
     case "$@" in
         ''|*[!0-9]*)
-            __IDLE=1 SHLVL="$(($SHLVL+1))" _IDLE ${@:-bash}
+            local prio_disp=${prio/#NORM/}
+            __PRIO="${prio_disp}" SHLVL="$(($SHLVL+1))" _PRIO ${@:-bash}
             child="$!"
             ;;
     esac
-    local error=0
-    renice    -n 19    "${child:-$@}" &>"${output}" || { echo 'IDLE: renice failed'; ((error+=1)) || true; }
-    chrt   -p -i  0    "${child:-$@}" &>"${output}" || { echo 'IDLE: chrt failed'  ; ((error+=2)) || true; }
-    ionice    -c  3 -p "${child:-$@}" &>"${output}" || { echo 'IDLE: ionice failed'; ((error+=4)) || true; }
+    local ret=0
+    renice ${args_renice}    "${child:-$@}" &>"${output}" || { echo "PRIO(${prio}): renice failed"; ((ret+=1)) || true; }
+    chrt   ${args_chrt}      "${child:-$@}" &>"${output}" || { echo "PRIO(${prio}): chrt failed"  ; ((ret+=2)) || true; }
+    ionice ${args_ionice} -p "${child:-$@}" &>"${output}" || { echo "PRIO(${prio}): ionice failed"; ((ret+=4)) || true; }
     [ -n "${child}" ] && fg &>"${output}" || true
-    return "${error}"
+    return "${ret}"
 }
-complete -F _command IDLE
+complete -F _command PRIO
+mkalias IDLE 'PRIO IDLE' PRIO
+mkalias NORM 'PRIO NORM' PRIO
+mkalias HIGH 'PRIO HIGH' PRIO
+mkalias REAL 'PRIO REAL' PRIO
 
 function F {
     find . -not -path '*/.*' -name "$@"
