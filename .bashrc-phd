@@ -1059,6 +1059,39 @@ function kn {
     fi
 }
 
+if ! has_command 'knock'; then
+    function knock {
+        local delay=100
+
+        if [ "$1" = '-d' ]; then
+            shift
+            delay="$1"
+            shift
+        fi
+
+        if [[ "$1" = '-'* ]]; then
+            echo "Unsupported option $1"
+            return 1
+        fi
+
+        local host="$1"
+        shift
+        local ports="$@"
+
+        local delay_ms="$(awk "BEGIN { printf \"%.3f\", ${delay} / 1000 }")"
+
+        nslookup "${host}" &>/dev/null || true
+
+        local port
+        for port in ${ports}; do
+            ( curl -s -o /dev/null --connect-timeout 2 --max-time 2 "telnet://${host}:${port}" & ) &>/dev/null
+            sleep "${delay_ms}"
+        done
+
+        wait
+    }
+fi
+
 if [ -e "${HOME}/.bashrc-ssh" ]; then
     source "${HOME}/.bashrc-ssh"
 fi
