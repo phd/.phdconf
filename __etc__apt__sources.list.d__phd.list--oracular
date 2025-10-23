@@ -21,6 +21,10 @@
     deb     https://ppa.launchpadcontent.net/graphics-drivers/ppa/ubuntu oracular main
     deb-src https://ppa.launchpadcontent.net/graphics-drivers/ppa/ubuntu oracular main
 
+### XLibre
+ #  deb     https://xlibre-deb.github.io/ubuntu/ noble main
+ #  deb-src https://xlibre-deb.github.io/ubuntu/ noble main
+
 ### Ubuntu X SWAT
  #- deb     https://ppa.launchpadcontent.net/ubuntu-x-swat/updates/ubuntu oracular main
  #- deb-src https://ppa.launchpadcontent.net/ubuntu-x-swat/updates/ubuntu oracular main

@@ -21,6 +21,10 @@
     deb     https://ppa.launchpadcontent.net/graphics-drivers/ppa/ubuntu plucky main
     deb-src https://ppa.launchpadcontent.net/graphics-drivers/ppa/ubuntu plucky main
 
+### XLibre
+ #  deb     https://xlibre-deb.github.io/ubuntu/ plucky main
+ #  deb-src https://xlibre-deb.github.io/ubuntu/ plucky main
+
 ### Ubuntu X SWAT
  #- deb     https://ppa.launchpadcontent.net/ubuntu-x-swat/updates/ubuntu plucky main
  #- deb-src https://ppa.launchpadcontent.net/ubuntu-x-swat/updates/ubuntu plucky main

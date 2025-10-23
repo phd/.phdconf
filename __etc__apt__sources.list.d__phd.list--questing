@@ -21,6 +21,10 @@
     deb     https://ppa.launchpadcontent.net/graphics-drivers/ppa/ubuntu questing main
     deb-src https://ppa.launchpadcontent.net/graphics-drivers/ppa/ubuntu questing main
 
+### XLibre
+ #  deb     https://xlibre-deb.github.io/ubuntu/ questing main
+ #  deb-src https://xlibre-deb.github.io/ubuntu/ questing main
+
 ### Ubuntu X SWAT
  #- deb     https://ppa.launchpadcontent.net/ubuntu-x-swat/updates/ubuntu questing main
  #- deb-src https://ppa.launchpadcontent.net/ubuntu-x-swat/updates/ubuntu questing main
