@@ -1078,17 +1078,17 @@ if ! has_command 'knock'; then
         shift
         local ports="$@"
 
-        local delay_ms="$(awk "BEGIN { printf \"%.3f\", ${delay} / 1000 }")"
+        local delay_s="$(awk "BEGIN { printf \"%.3f\", ${delay} / 1000 }")"
 
         nslookup "${host}" &>/dev/null || true
 
-        local port
-        for port in ${ports}; do
-            ( curl -s -o /dev/null --connect-timeout 2 --max-time 2 "telnet://${host}:${port}" & ) &>/dev/null
-            sleep "${delay_ms}"
-        done
-
-        wait
+        curl -s -o /dev/null                            \
+             --connect-timeout "${delay_s}"             \
+             --max-time "${delay_s}"                    \
+             --retry 0                                  \
+             --                                         \
+             $(printf "telnet://${host}:%s/ " ${ports}) \
+             &>/dev/null
     }
 fi
 
