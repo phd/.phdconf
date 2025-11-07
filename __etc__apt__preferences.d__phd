@@ -2,6 +2,10 @@ Package: snapd
 Pin: release *
 Pin-Priority: 1
 
+Package: coreutils-from-uutils
+Pin: release *
+Pin-Priority: -1
+
 
 Package: chromium-browser chromium-browser-* chromium-codecs-* chromium-chromedriver
 Pin: release o=Ubuntu
