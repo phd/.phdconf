@@ -37,7 +37,7 @@ COMMAND="$@"
 
 # Names
 NETLIM='1'
-while ip netns | grep -q "^netlim${NETLIM}ns0 "; do
+while ip netns | grep -q "^netlim${NETLIM}ns0"; do
     ((NETLIM++))
 done
 NS_NAME="netlim${NETLIM}ns0"
