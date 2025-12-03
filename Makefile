@@ -91,7 +91,7 @@ endef
 
 default: home
 
-all: home root etc apt niced
+all: home root etc apt alternatives niced
 
 home:
 	$(call link                , ${DIR}                                          , ${HOME}/.phdconf                     )
@@ -164,6 +164,11 @@ ifneq ($(shell id -u), 0)
 else
 	sudo -H apt-get -y install crudini curl
 endif
+
+alternatives:
+	[ -e /usr/bin/sudo.ws ] && sudo update-alternatives --set sudo /usr/bin/sudo.ws || true
+	sudo apt-get -y install coreutils-from-gnu    || true
+	sudo apt-get -y purge   coreutils-from-uutils || true
 
 niced_install:
 	sudo -H apt-get -y install git python3 forkstat
