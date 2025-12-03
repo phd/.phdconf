@@ -65,8 +65,8 @@ ip netns exec "${NS_NAME}"   ip link set lo up
 ip netns exec "${NS_NAME}"   ip link set "${VETH_NS}" up
 
 # Assign unique IP addresses
-OCTAL_2=$((250 + NETLIM / 250))
-OCTAL_3=$((NETLIM % 250))
+OCTAL_2=$((250 + NETLIM / 256))
+OCTAL_3=$((NETLIM % 256))
 HOST_IP="10.${OCTAL_2}.${OCTAL_3}.1/24"
 NS_IP="10.${OCTAL_2}.${OCTAL_3}.2/24"
 ip addr  add  "${HOST_IP}" dev "${VETH_HOST}"
@@ -75,12 +75,13 @@ ip netns exec "${NS_NAME}" ip addr add "${NS_IP}" dev "${VETH_NS}"
 # Default route inside namespace
 ip netns exec "${NS_NAME}" ip route add default via "${HOST_IP%/*}" dev "${VETH_NS}"
 
-# Configure DNS inside namespace (fix for systemd-resolved)
+# Configure DNS inside namespace (systemd-resolved or /etc/resolv.conf)
 mkdir -p "/etc/netns/${NS_NAME}"
-cat <<EOF > "/etc/netns/${NS_NAME}/resolv.conf"
-nameserver 1.1.1.1
-nameserver 8.8.8.8
-EOF
+if [ -e '/run/systemd/resolve/resolv.conf' ]; then
+    ln -sfT '/run/systemd/resolve/resolv.conf' "/etc/netns/${NS_NAME}/resolv.conf"
+else
+    ln -sfT '/etc/resolv.conf' "/etc/netns/${NS_NAME}/resolv.conf"
+fi
 
 # Enable NAT for Internet access
 GATEWAY=$(ip route get '1.1.1.1' | grep -Po '(?<=dev )[^ ]+' | head -n1)
