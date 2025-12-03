@@ -1,0 +1,111 @@
+#!/bin/bash -e
+
+#
+# netlim
+#
+# Copyright (C) 2025  Piotr Henryk Dabrowski <phd@phd.re>
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 3 of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this program; if not, see
+# <https://www.gnu.org/licenses/>.
+#
+
+# Usage: netlim [ingress_kbps=0] [egress_kbps=0] [command=bash]
+
+# Run with sudo or root
+if [ "${EUID}" -ne 0 ]; then
+    echo "You must be root to do this."
+    exit 1
+fi
+
+# Arguments
+INGRESS_KBPS="${1:-0}"
+shift
+EGRESS_KBPS="${1:-0}"
+shift
+COMMAND="$@"
+
+# Names
+NETLIM='1'
+while ip netns | grep -q "^netlim${NETLIM}ns0 "; do
+    ((NETLIM++))
+done
+NS_NAME="netlim${NETLIM}ns0"
+VETH_HOST="netlim${NETLIM}"
+VETH_NS="netlim${NETLIM}veth0"
+IFB_NAME="netlim${NETLIM}ifb0"
+
+# Cleanup fuction
+function cleanup {
+    tc qdisc del dev "${VETH_HOST}" root      2>/dev/null || true
+    tc qdisc del dev "${VETH_HOST}" ingress   2>/dev/null || true
+    tc qdisc del dev "${IFB_NAME}"  root      2>/dev/null || true
+    ip link  set dev "${IFB_NAME}"  down      2>/dev/null || true
+    ip link  delete  "${IFB_NAME}"  type ifb  2>/dev/null || true
+    ip link  delete  "${VETH_HOST}" type veth 2>/dev/null || true
+    ip netns delete  "${NS_NAME}"             2>/dev/null || true
+}
+trap cleanup EXIT
+
+# Create namespace and veth pair
+ip netns add  "${NS_NAME}"
+ip link  add  "${VETH_HOST}" type veth peer name "${VETH_NS}" netns "${NS_NAME}"
+ip link  set  "${VETH_HOST}" up
+ip netns exec "${NS_NAME}"   ip link set lo up
+ip netns exec "${NS_NAME}"   ip link set "${VETH_NS}" up
+
+# Assign unique IP addresses
+OCTAL_2=$((250 + NETLIM / 250))
+OCTAL_3=$((NETLIM % 250))
+HOST_IP="10.${OCTAL_2}.${OCTAL_3}.1/24"
+NS_IP="10.${OCTAL_2}.${OCTAL_3}.2/24"
+ip addr  add  "${HOST_IP}" dev "${VETH_HOST}"
+ip netns exec "${NS_NAME}" ip addr add "${NS_IP}" dev "${VETH_NS}"
+
+# Default route inside namespace
+ip netns exec "${NS_NAME}" ip route add default via "${HOST_IP%/*}" dev "${VETH_NS}"
+
+# Configure DNS inside namespace (fix for systemd-resolved)
+mkdir -p "/etc/netns/${NS_NAME}"
+cat <<EOF > "/etc/netns/${NS_NAME}/resolv.conf"
+nameserver 1.1.1.1
+nameserver 8.8.8.8
+EOF
+
+# Enable NAT for Internet access
+GATEWAY=$(ip route get '1.1.1.1' | grep -Po '(?<=dev )[^ ]+' | head -n1)
+iptables -t nat -A POSTROUTING -s "${HOST_IP%/*}/24" -o "${GATEWAY}" -j MASQUERADE
+
+# Traffic control (HTB + IFB)
+modprobe ifb
+ip link add     "${IFB_NAME}" type ifb
+ip link set dev "${IFB_NAME}" up
+
+# Redirect ingress traffic from host/namespace to IFB
+tc qdisc  add dev "${VETH_HOST}" ingress
+tc filter add dev "${VETH_HOST}" parent ffff: protocol ip u32 match u32 0 0 action mirred egress redirect dev "${IFB_NAME}"
+
+# Ingress shaping (download to namespace)
+tc qdisc add dev "${VETH_HOST}" root handle 1: htb default 10
+if [ "${INGRESS_KBPS}" -gt 0 ]; then
+    tc class add dev "${VETH_HOST}" parent 1: classid 1:10 htb rate "${INGRESS_KBPS}kbit" ceil "${INGRESS_KBPS}kbit"
+fi
+
+# Egress shaping (upload from namespace)
+tc qdisc add dev "${IFB_NAME}" root handle 1: htb default 10
+if [ "${EGRESS_KBPS}" -gt 0 ]; then
+    tc class add dev "${IFB_NAME}" parent 1: classid 1:10 htb rate "${EGRESS_KBPS}kbit" ceil "${EGRESS_KBPS}kbit"
+fi
+
+# Launch interactive shell as original user, preserving SHLVL
+__NETLIM="${NETLIM}" ip netns exec "${NS_NAME}" sudo -E -u "${SUDO_USER:-${USER}}" ${COMMAND:-bash}

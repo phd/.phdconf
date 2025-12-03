@@ -158,28 +158,33 @@ fi
 function __prompt_flags {
     local prompt_flags=''
     if [ "${DISPLAY}" != ':0' ] && [[ "${DISPLAY}" = *':'* ]]; then
-        prompt_flags="${prompt_flags} ${C_MAGENTA}${DISPLAY}${C_NONE}"
+        prompt_flags+=" ${C_MAGENTA}${DISPLAY}${C_NONE}"
     fi
     test -o history || \
-        prompt_flags="${prompt_flags} ${C_MAGENTA}H-${C_NONE}"
+        prompt_flags+=" ${C_MAGENTA}H-${C_NONE}"
     if [ "${HISTFILE}" = '/dev/null' ]; then
-        prompt_flags="${prompt_flags} ${C_MAGENTA}h-${C_NONE}"
+        prompt_flags+=" ${C_MAGENTA}h-${C_NONE}"
     fi
     if [ -n "${__PRIO}" ]; then
-        prompt_flags="${prompt_flags} ${C_MAGENTA}${__PRIO}${C_NONE}"
+        prompt_flags+=" ${C_MAGENTA}${__PRIO}${C_NONE}"
     fi
     local cpus="$(CPUS -Q)"
     if [ "${cpus}" != "$(CPUS -I)" ]; then
-        prompt_flags="${prompt_flags} ${C_MAGENTA}CPUS:${cpus}${C_NONE}"
+        prompt_flags+=" ${C_MAGENTA}CPUS:${cpus}${C_NONE}"
+    fi
+    if [ -n "${__NETLIM}" ] || [ -n "${__NETLIM_INGRESS}" ] || [ -n "${__NETLIM_EGRESS}" ]; then
+        local ig="${__NETLIM_INGRESS/#0/}"
+        local eg="${__NETLIM_EGRESS/#0/}"
+        prompt_flags+=" ${C_MAGENTA}netlim${__NETLIM}:[${ig:--}/${eg:--}]kbps${C_NONE}"
     fi
     if [ "${__NV_PRIME_RENDER_OFFLOAD}" = '1' ] && [ "${__GLX_VENDOR_LIBRARY_NAME}" = 'nvidia' ]; then
-        prompt_flags="${prompt_flags} ${C_MAGENTA}nv${C_NONE}"
+        prompt_flags+=" ${C_MAGENTA}nv${C_NONE}"
     fi
     if [ "${__GL_SYNC_TO_VBLANK}" = '1' ] && [ "${vblank_mode}" -ge '2' ]; then
-        prompt_flags="${prompt_flags} ${C_MAGENTA}vsync+${C_NONE}"
+        prompt_flags+=" ${C_MAGENTA}vsync+${C_NONE}"
     fi
     if [ "${__GL_SYNC_TO_VBLANK}" = '0' ] && [ "${vblank_mode}" = '0' ]; then
-        prompt_flags="${prompt_flags} ${C_MAGENTA}vsync-${C_NONE}"
+        prompt_flags+=" ${C_MAGENTA}vsync-${C_NONE}"
     fi
     echo "${prompt_flags}"
 }
@@ -585,11 +590,12 @@ function x {
     )
 }
 
-function _PRIO {
+function __BG {
     local OK="$@"
     $OK &
 }
-function PRIO { # [-v] (IDLE|NORM|HIGH|REAL) (PID or command)
+
+function PRIO { # [-v] (IDLE|NORM|HIGH|REAL) [pid|command=bash]
     local output='/dev/null'
     local prio=''
     local params=''
@@ -637,7 +643,7 @@ function PRIO { # [-v] (IDLE|NORM|HIGH|REAL) (PID or command)
     case "${params}" in
         ''|*[!0-9]*)
             local prio_disp=${prio/#NORM/}
-            __PRIO="${prio_disp}" SHLVL="$(($SHLVL+1))" _PRIO ${params:-bash}
+            __PRIO="${prio_disp}" SHLVL="$(($SHLVL+1))" __BG ${params:-bash}
             child="$!"
             ;;
     esac
@@ -649,12 +655,12 @@ function PRIO { # [-v] (IDLE|NORM|HIGH|REAL) (PID or command)
     return "${ret}"
 }
 complete -F _command PRIO
-mkalias IDLE 'PRIO IDLE' PRIO
-mkalias NORM 'PRIO NORM' PRIO
-mkalias HIGH 'PRIO HIGH' PRIO
-mkalias REAL 'PRIO REAL' PRIO
+mkalias IDLE 'PRIO IDLE' PRIO # [pid|command=bash]
+mkalias NORM 'PRIO NORM' PRIO # [pid|command=bash]
+mkalias HIGH 'PRIO HIGH' PRIO # [pid|command=bash]
+mkalias REAL 'PRIO REAL' PRIO # [pid|command=bash]
 
-function CPUS { # [-q] [-Q] [-i] [-I] [-s] [-v] (CPUs or @) (PID or command)
+function CPUS { # [-q] [-Q] [-i] [-I] [-s] [-v] (CPUs|@) [pid|command=bash]
     has_command 'taskset' || return -1
     local CPUS_ALL="0-$(($(nproc --all) - 1))"
     if [ "${CPUS_ALL}" = '0-1' ]; then
@@ -705,7 +711,7 @@ function CPUS { # [-q] [-Q] [-i] [-I] [-s] [-v] (CPUs or @) (PID or command)
     fi
     case "${params}" in
         ''|*[!0-9]*)
-            SHLVL="$(($SHLVL+1))" _PRIO ${params:-bash}
+            SHLVL="$(($SHLVL+1))" __BG ${params:-bash}
             child="$!"
             ;;
     esac
@@ -715,10 +721,25 @@ function CPUS { # [-q] [-Q] [-i] [-I] [-s] [-v] (CPUs or @) (PID or command)
     return "${ret}"
 }
 complete -F _command CPUS
-mkalias 'CPUS?'  'CPUS -q'   CPUS
-mkalias 'CPUS@'  'CPUS @'    CPUS
-mkalias 'CPUS!'  'CPUS -s'   CPUS
-mkalias 'CPUS@!' 'CPUS -s @' CPUS
+mkalias 'CPUS?'  'CPUS -q'   CPUS # query available CPUs and current setting
+mkalias 'CPUS@'  'CPUS @'    CPUS # reset to all CPUs
+mkalias 'CPUS!'  'CPUS -s'   CPUS # set for this shell
+mkalias 'CPUS@!' 'CPUS -s @' CPUS # reset to all CPUs, for this shell
+
+function NETLIM { # (INGRESS=0[/EGRESS=0]) [command=bash]
+    local gress="$1"
+    shift
+    local params="$@"
+    local ingress="${gress%%/*}"
+    local egress="${gress#*/}"
+    [[ "${egress}" == "${gress}" ]] && egress=""
+    ingress="${ingress:-0}"
+    egress="${egress:-0}"
+    local ret=0
+    __NETLIM_INGRESS="${ingress}" __NETLIM_EGRESS="${egress}" sudo -E "${__PHDCONF_PATH}/bin/netlim" "${ingress}" "${egress}" "${params}"
+    ret="$?"
+    return "${ret}"
+}
 
 function F {
     find . -not -path '*/.*' -name "$@"
