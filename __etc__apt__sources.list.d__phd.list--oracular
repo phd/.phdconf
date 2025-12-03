@@ -42,8 +42,6 @@
  #  deb-src http://mirror.ppa.trinitydesktop.org/trinity/deb/trinity-r14.1.x oracular main deps
 
 ### deadsnakes Python repository
-    deb     https://ppa.launchpadcontent.net/deadsnakes/ppa/ubuntu noble main
-    deb-src https://ppa.launchpadcontent.net/deadsnakes/ppa/ubuntu noble main
  #- deb     https://ppa.launchpadcontent.net/deadsnakes/ppa/ubuntu oracular main
  #- deb-src https://ppa.launchpadcontent.net/deadsnakes/ppa/ubuntu oracular main
 
