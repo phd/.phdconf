@@ -662,7 +662,7 @@ mkalias REAL 'PRIO REAL' PRIO # [pid|command=bash]
 
 function CPUS { # [-q] [-Q] [-i] [-I] [-s] [-v] (CPUs|@) [pid|command=bash]
     has_command 'taskset' || return -1
-    local CPUS_ALL="0-$(($(nproc --all) - 1))"
+    local CPUS_ALL="$(<'/sys/devices/system/cpu/online')"
     if [ "${CPUS_ALL}" = '0-1' ]; then
         CPUS_ALL='0,1'
     fi
