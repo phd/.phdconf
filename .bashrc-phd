@@ -1060,6 +1060,7 @@ function kn {
     while [ -z "${HOST}" ]; do
         read -e -p 'Hostname: ' HOST
     done
+    (nslookup "${HOST}" &>/dev/null &) &>/dev/null
     local PORTS=''
     local ports='?'
     while [ -n "${ports}" ]; do
