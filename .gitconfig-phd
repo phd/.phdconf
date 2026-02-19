@@ -38,18 +38,18 @@
 
     ru                   = remote update
 
-    f                    = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { echo Fetching... && git fetch $@ && git status; }; _"
-    fa                   = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git f --all"
-    ft                   = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git f --tags"
-    fat                  = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git f --all --tags"
-    fo                   = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git f   origin"
-    fao                  = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git fa  origin"
-    fto                  = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git ft  origin"
-    fato                 = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git fat origin"
-    fu                   = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git f   upstream"
-    fau                  = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git fa  upstream"
-    ftu                  = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git ft  upstream"
-    fatu                 = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git fat upstream"
+    f                    = "!: git fetch; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { echo Fetching... && git fetch $@ && git status; }; _"
+    fa                   = "!: git f    ; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git f --all"
+    ft                   = "!: git f    ; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git f --tags"
+    fat                  = "!: git f    ; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git f --all --tags"
+    fo                   = "!: git f    ; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git f   origin"
+    fao                  = "!: git fa   ; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git fa  origin"
+    fto                  = "!: git ft   ; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git ft  origin"
+    fato                 = "!: git fat  ; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git fat origin"
+    fu                   = "!: git f    ; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git f   upstream"
+    fau                  = "!: git fa   ; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git fa  upstream"
+    ftu                  = "!: git ft   ; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git ft  upstream"
+    fatu                 = "!: git fat  ; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git fat upstream"
 
     pullr                = pull --rebase
 
@@ -125,7 +125,7 @@
     ri400                = rebase -i HEAD~400
     ri450                = rebase -i HEAD~450
     ri500                = rebase -i HEAD~500
-    rimax                = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { git rebase -i \"HEAD~$(( $(git count) - 1 ))\"; }; _"
+    rimax                = "!: git -; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { git rebase -i \"HEAD~$(( $(git count) - 1 ))\"; }; _"
     rc                   = rebase --continue
     ra                   = rebase --abort
     rdate                = rebase --committer-date-is-author-date
@@ -141,29 +141,29 @@
     caamdn               = commit -a --amend --date=now
     cd                   = commit    --amend --date=now
     cu                   = commit -a --amend --date=now
-    camdc                = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { export GIT_COMMITTER_DATE=\"$1\"; shift; git cam   \"$GIT_COMMITTER_DATE\" $@; }; _"
-    camdb                = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { export GIT_COMMITTER_DATE=\"$1\"; shift; git camd  \"$GIT_COMMITTER_DATE\" $@; }; _"
-    caamdc               = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { export GIT_COMMITTER_DATE=\"$1\"; shift; git caam  \"$GIT_COMMITTER_DATE\" $@; }; _"
-    caamdb               = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { export GIT_COMMITTER_DATE=\"$1\"; shift; git caamd \"$GIT_COMMITTER_DATE\" $@; }; _"
-    camdcn               = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { git camdc  \"$(date +'%Y-%m-%d %H:%M:%S')\" $@; }; _"
-    camdbn               = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { git camdb  \"$(date +'%Y-%m-%d %H:%M:%S')\" $@; }; _"
-    caamdcn              = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { git caamdc \"$(date +'%Y-%m-%d %H:%M:%S')\" $@; }; _"
-    caamdbn              = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { git caamdb \"$(date +'%Y-%m-%d %H:%M:%S')\" $@; }; _"
+    camdc                = "!: git cam   ; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { export GIT_COMMITTER_DATE=\"$1\"; shift; git cam   \"$GIT_COMMITTER_DATE\" $@; }; _"
+    camdb                = "!: git camd  ; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { export GIT_COMMITTER_DATE=\"$1\"; shift; git camd  \"$GIT_COMMITTER_DATE\" $@; }; _"
+    caamdc               = "!: git caam  ; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { export GIT_COMMITTER_DATE=\"$1\"; shift; git caam  \"$GIT_COMMITTER_DATE\" $@; }; _"
+    caamdb               = "!: git caamd ; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { export GIT_COMMITTER_DATE=\"$1\"; shift; git caamd \"$GIT_COMMITTER_DATE\" $@; }; _"
+    camdcn               = "!: git camdc ; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { git camdc  \"$(date +'%Y-%m-%d %H:%M:%S')\" $@; }; _"
+    camdbn               = "!: git camdb ; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { git camdb  \"$(date +'%Y-%m-%d %H:%M:%S')\" $@; }; _"
+    caamdcn              = "!: git caamdc; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { git caamdc \"$(date +'%Y-%m-%d %H:%M:%S')\" $@; }; _"
+    caamdbn              = "!: git caamdb; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { git caamdb \"$(date +'%Y-%m-%d %H:%M:%S')\" $@; }; _"
 
     cleandfx             = clean -dfx
     clean-dfx            = clean -dfx
 
-    stash-staged-test    = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git diff-index --cached HEAD --quiet -- && echo "No staged changes to save"   && exit 1 || exit 0"
-    stash-unstaged-test  = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git diff-files --quiet                  && echo "No unstaged changes to save" && exit 1 || exit 0"
-    stash-staged         = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git stash-staged-test && git stash -S"
-    stash-unstaged       = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git stash-unstaged-test && git stash-staged && (git stash; git stash pop --index 'stash@{1}') || git stash"
+    stash-staged-test    = "!: git -; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git diff-index --cached HEAD --quiet -- && echo "No staged changes to save"   && exit 1 || exit 0"
+    stash-unstaged-test  = "!: git -; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git diff-files --quiet                  && echo "No unstaged changes to save" && exit 1 || exit 0"
+    stash-staged         = "!: git -; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git stash-staged-test && git stash -S"
+    stash-unstaged       = "!: git -; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git stash-unstaged-test && git stash-staged && (git stash; git stash pop --index 'stash@{1}') || git stash"
     stash-working        = stash-unstaged
 
     d                    = diff
     dn                   = diff --name-only
     dw                   = diff --color-words=.
     dm                   = diff --color-moved=plain
-    dc                   = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { git diff --check $@ | cut -d: -f1 | sort -u; }; _"
+    dc                   = "!: git diff; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { git diff --check $@ | cut -d: -f1 | sort -u; }; _"
 
     ds                   = d --staged
     d0                   = d
@@ -275,18 +275,18 @@
     dc8-                 = dc HEAD~8
     dc9-                 = dc HEAD~9
 
-    l-work               = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git diff --name-only                 | xargs -r -L1 realpath --relative-to=$_DIR"
-    l-staged             = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git diff --name-only --cached        | xargs -r -L1 realpath --relative-to=$_DIR"
-    l-conflicts          = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git diff --name-only --diff-filter=U | xargs -r -L1 realpath --relative-to=$_DIR"
+    l-work               = "!: git -; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git diff --name-only                 | xargs -r -L1 realpath --relative-to=$_DIR"
+    l-staged             = "!: git -; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git diff --name-only --cached        | xargs -r -L1 realpath --relative-to=$_DIR"
+    l-conflicts          = "!: git -; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git diff --name-only --diff-filter=U | xargs -r -L1 realpath --relative-to=$_DIR"
     lg-work              = diff --name-only
     lg-staged            = diff --name-only --cached
     lg-conflicts         = diff --name-only --diff-filter=U
-    l-all                = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git ls  && git l"
-    lg-all               = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git lgs && git lg"
-    l-commit             = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { git diff-tree -r --no-commit-id --name-only $1 | xargs -r -L1 realpath --relative-to=$_DIR; }; _"
-    lg-commit            = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { git diff-tree -r --no-commit-id --name-only $1                                            ; }; _"
-    l                    = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { [ -z $1 ] && git l-work  || git l-commit  $1; }; _"
-    lg                   = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { [ -z $1 ] && git lg-work || git lg-commit $1; }; _"
+    l-all                = "!: git -; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git ls  && git l"
+    lg-all               = "!: git -; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git lgs && git lg"
+    l-commit             = "!: git diff-tree; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { git diff-tree -r --no-commit-id --name-only $1 | xargs -r -L1 realpath --relative-to=$_DIR; }; _"
+    lg-commit            = "!: git diff-tree; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { git diff-tree -r --no-commit-id --name-only $1                                            ; }; _"
+    l                    = "!: git l-commit ; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { [ -z $1 ] && git l-work  || git l-commit  $1; }; _"
+    lg                   = "!: git lg-commit; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { [ -z $1 ] && git lg-work || git lg-commit $1; }; _"
     ls                   = l-staged
     la                   = l-all
     lc                   = l-conflicts
@@ -316,44 +316,44 @@
     lg8                  = lg-commit HEAD~7
     lg9                  = lg-commit HEAD~8
 
-    action               = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; bash -i -c '__git_ps1 %s\\|CLEAN | cut -d\\| -f2 | sed -E \"s,[^A-Za-z-],.,g\" | cut -d. -f1'"
-    what                 = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; bash -i -c '__git_ps1 %s\\|CLEAN | cut -d\\| -f2 | sed -E \"s,[^A-Za-z-],.,g\" | cut -d. -f1'"
-    w                    = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; bash -i -c '__git_ps1 %s\\|CLEAN | cut -d\\| -f2 | sed -E \"s,[^A-Za-z-],.,g\" | cut -d. -f1'"
+    action               = "!: git -; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; bash -i -c '__git_ps1 %s\\|CLEAN | cut -d\\| -f2 | sed -E \"s,[^A-Za-z-],.,g\" | cut -d. -f1'"
+    what                 = "!: git -; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; bash -i -c '__git_ps1 %s\\|CLEAN | cut -d\\| -f2 | sed -E \"s,[^A-Za-z-],.,g\" | cut -d. -f1'"
+    w                    = "!: git -; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; bash -i -c '__git_ps1 %s\\|CLEAN | cut -d\\| -f2 | sed -E \"s,[^A-Za-z-],.,g\" | cut -d. -f1'"
 
-    continue                = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git continue-$(git action)"
-    continue-CLEAN          = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo 'Nothing to continue.'"
-    continue-CHERRY-PICKING = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git cherry-pick --continue && git cherry-pick --continue"
-    continue-REVERTING      = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git revert      --continue && git revert      --continue"
-    continue-REBASE-i       = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git rebase      --continue && git rebase      --continue"
-    continue-REBASE-m       = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git rebase      --continue && git rebase      --continue"
-    continue-REBASE         = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git rebase      --continue && git rebase      --continue"
-    continue-AM             = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git rebase      --continue && git rebase      --continue"
-    continue-AMREBASE       = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git rebase      --continue && git rebase      --continue"
-    continue-MERGING        = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git merge       --continue && git merge       --continue"
-    continue-BISECTING      = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo 'Bisecting does not support --continue.'; exit 1"
+    continue                = "!: git -; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git continue-$(git action)"
+    continue-CLEAN          = "!: git -; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo 'Nothing to continue.'"
+    continue-CHERRY-PICKING = "!: git -; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git cherry-pick --continue && git cherry-pick --continue"
+    continue-REVERTING      = "!: git -; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git revert      --continue && git revert      --continue"
+    continue-REBASE-i       = "!: git -; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git rebase      --continue && git rebase      --continue"
+    continue-REBASE-m       = "!: git -; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git rebase      --continue && git rebase      --continue"
+    continue-REBASE         = "!: git -; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git rebase      --continue && git rebase      --continue"
+    continue-AM             = "!: git -; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git rebase      --continue && git rebase      --continue"
+    continue-AMREBASE       = "!: git -; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git rebase      --continue && git rebase      --continue"
+    continue-MERGING        = "!: git -; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git merge       --continue && git merge       --continue"
+    continue-BISECTING      = "!: git -; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo 'Bisecting does not support --continue.'; exit 1"
 
     cont                    = continue
 
-    abort                = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git abort-$(git action)"
-    abort-CLEAN          = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo 'Nothing to abort.'"
-    abort-CHERRY-PICKING = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git cherry-pick --abort && git cherry-pick --abort"
-    abort-REVERTING      = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git revert      --abort && git revert      --abort"
-    abort-REBASE-i       = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git rebase      --abort && git rebase      --abort"
-    abort-REBASE-m       = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git rebase      --abort && git rebase      --abort"
-    abort-REBASE         = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git rebase      --abort && git rebase      --abort"
-    abort-AM             = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git rebase      --abort && git rebase      --abort"
-    abort-AMREBASE       = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git rebase      --abort && git rebase      --abort"
-    abort-MERGING        = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git merge       --abort && git merge       --abort"
-    abort-BISECTING      = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git bisect        reset && git bisect        reset"
+    abort                = "!: git -; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; git abort-$(git action)"
+    abort-CLEAN          = "!: git -; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo 'Nothing to abort.'"
+    abort-CHERRY-PICKING = "!: git -; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git cherry-pick --abort && git cherry-pick --abort"
+    abort-REVERTING      = "!: git -; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git revert      --abort && git revert      --abort"
+    abort-REBASE-i       = "!: git -; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git rebase      --abort && git rebase      --abort"
+    abort-REBASE-m       = "!: git -; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git rebase      --abort && git rebase      --abort"
+    abort-REBASE         = "!: git -; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git rebase      --abort && git rebase      --abort"
+    abort-AM             = "!: git -; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git rebase      --abort && git rebase      --abort"
+    abort-AMREBASE       = "!: git -; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git rebase      --abort && git rebase      --abort"
+    abort-MERGING        = "!: git -; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git merge       --abort && git merge       --abort"
+    abort-BISECTING      = "!: git -; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; echo git bisect        reset && git bisect        reset"
 
     abort-stash-pop      = reset --merge
 
-    conf                 = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; nano .git/config"
+    conf                 = "!: git -; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; nano .git/config"
 
-    init2                = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { cd \"${_DIR}\"; [ -d '.git'                        ] && echo 'Already initialized!' && exit 1; git init $@; git commit --allow-empty -m 'init'   ; git branch 'init'; }; _"
-    commit-init2         = "!export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { cd \"${_DIR}\"; [ -n \"$(git rev-list -n1 --all)\" ] && echo 'Already initialized!' && exit 1;              git commit --allow-empty -m 'init' $@; git branch 'init'; }; _"
+    init2                = "!: git init  ; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { cd \"${_DIR}\"; [ -d '.git'                        ] && echo 'Already initialized!' && exit 1; git init $@; git commit --allow-empty -m 'init'   ; git branch 'init'; }; _"
+    commit-init2         = "!: git commit; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { cd \"${_DIR}\"; [ -n \"$(git rev-list -n1 --all)\" ] && echo 'Already initialized!' && exit 1;              git commit --allow-empty -m 'init' $@; git branch 'init'; }; _"
 
-    find-repos           = "!bash -i -c '(trap \"echo && builtin exit 0\" SIGINT; shopt -s nullglob; G=\"/*\"; while true; do find . -path \".$G\" -not -path \"*/.*/*\" -exec false {} '+' -quit && break; echo -n .$G/.git | xargs -n1 -r dirname; G=\"$G/*\"; done)'"
+    find-repos           = "!: git -; bash -i -c '(trap \"echo && builtin exit 0\" SIGINT; shopt -s nullglob; G=\"/*\"; while true; do find . -path \".$G\" -not -path \"*/.*/*\" -exec false {} '+' -quit && break; echo -n .$G/.git | xargs -n1 -r dirname; G=\"$G/*\"; done)'"
 
 [init]
     defaultBranch = master
