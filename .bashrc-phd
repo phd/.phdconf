@@ -806,8 +806,12 @@ function slowcat {
 
 function kernels {
     echo "KERNELS:"
-    (builtin cd /boot; command ls -1 vmlinu*-* | sort -V | decorate '     - ')
-    echo "CURRENT: $(uname -sr)"
+    local kernel="$(uname -r)"
+    while read image; do
+        local prefix
+        [[ "${image}" == *"-${kernel}" ]] && prefix='+' || prefix='-'
+        echo "  ${prefix} ${image}"
+    done < <(builtin cd /boot; command ls -1 vmlinu*-* | sort -V)
 }
 
 function __ap-up {
