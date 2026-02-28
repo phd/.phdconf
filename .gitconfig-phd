@@ -16,6 +16,8 @@
     cp                   = cherry-pick
     cpc                  = cherry-pick --continue
     cpa                  = cherry-pick --abort
+    cherry-pick-branch   = "!: git cherry-pick; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { git cherry-pick $(git merge-base HEAD $1)..$1; }; _"
+    cpb                  = cherry-pick-branch
 
     log1                 = log --oneline
 
