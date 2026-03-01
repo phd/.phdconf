@@ -1,5 +1,5 @@
 ###=========================#
-###  Ubuntu 25.10 Questing  #
+###  Ubuntu 26.04 Resolute  #
 ###=========================#
 
 ###===========#
@@ -7,46 +7,55 @@
 ###===========#
 
 ### DDEBS
-    deb     http://ddebs.ubuntu.com questing         main restricted universe multiverse
-    deb     http://ddebs.ubuntu.com questing-updates main restricted universe multiverse
+    deb     http://ddebs.ubuntu.com resolute         main restricted universe multiverse
+    deb     http://ddebs.ubuntu.com resolute-updates main restricted universe multiverse
 
 ### Liquorix kernel
-    deb     https://ppa.launchpadcontent.net/damentz/liquorix/ubuntu questing main
-    deb-src https://ppa.launchpadcontent.net/damentz/liquorix/ubuntu questing main
+    deb     https://ppa.launchpadcontent.net/damentz/liquorix/ubuntu resolute main
+    deb-src https://ppa.launchpadcontent.net/damentz/liquorix/ubuntu resolute main
 
 ### XanMod kernel
     deb     https://deb.xanmod.org releases main
 
 ### graphics-drivers
-    deb     https://ppa.launchpadcontent.net/graphics-drivers/ppa/ubuntu questing main
-    deb-src https://ppa.launchpadcontent.net/graphics-drivers/ppa/ubuntu questing main
+    deb     https://ppa.launchpadcontent.net/graphics-drivers/ppa/ubuntu resolute main
+    deb-src https://ppa.launchpadcontent.net/graphics-drivers/ppa/ubuntu resolute main
 
 ### XLibre
  #  deb     https://xlibre-deb.github.io/ubuntu/ questing main
  #  deb-src https://xlibre-deb.github.io/ubuntu/ questing main
+ #- deb     https://xlibre-deb.github.io/ubuntu/ resolute main
+ #- deb-src https://xlibre-deb.github.io/ubuntu/ resolute main
 
 ### Ubuntu X SWAT
-    deb     https://ppa.launchpadcontent.net/ubuntu-x-swat/updates/ubuntu questing main
-    deb-src https://ppa.launchpadcontent.net/ubuntu-x-swat/updates/ubuntu questing main
+ #  deb     https://ppa.launchpadcontent.net/ubuntu-x-swat/updates/ubuntu questing main
+ #  deb-src https://ppa.launchpadcontent.net/ubuntu-x-swat/updates/ubuntu questing main
+ #- deb     https://ppa.launchpadcontent.net/ubuntu-x-swat/updates/ubuntu resolute main
+ #- deb-src https://ppa.launchpadcontent.net/ubuntu-x-swat/updates/ubuntu resolute main
 
 ### kubuntu-ppa backports
     deb     https://ppa.launchpadcontent.net/kubuntu-ppa/backports/ubuntu       questing main
     deb     https://ppa.launchpadcontent.net/kubuntu-ppa/backports/ubuntu       questing main/debug
     deb-src https://ppa.launchpadcontent.net/kubuntu-ppa/backports/ubuntu       questing main
+ #- deb     https://ppa.launchpadcontent.net/kubuntu-ppa/backports/ubuntu       resolute main
+ #- deb     https://ppa.launchpadcontent.net/kubuntu-ppa/backports/ubuntu       resolute main/debug
+ #- deb-src https://ppa.launchpadcontent.net/kubuntu-ppa/backports/ubuntu       resolute main
     deb     https://ppa.launchpadcontent.net/kubuntu-ppa/backports-extra/ubuntu oracular main
     deb     https://ppa.launchpadcontent.net/kubuntu-ppa/backports-extra/ubuntu oracular main/debug
     deb-src https://ppa.launchpadcontent.net/kubuntu-ppa/backports-extra/ubuntu oracular main
- #- deb     https://ppa.launchpadcontent.net/kubuntu-ppa/backports-extra/ubuntu questing main
- #- deb     https://ppa.launchpadcontent.net/kubuntu-ppa/backports-extra/ubuntu questing main/debug
- #- deb-src https://ppa.launchpadcontent.net/kubuntu-ppa/backports-extra/ubuntu questing main
+ #- deb     https://ppa.launchpadcontent.net/kubuntu-ppa/backports-extra/ubuntu resolute main
+ #- deb     https://ppa.launchpadcontent.net/kubuntu-ppa/backports-extra/ubuntu resolute main/debug
+ #- deb-src https://ppa.launchpadcontent.net/kubuntu-ppa/backports-extra/ubuntu resolute main
 
 ### Trinity TDE3 desktop
  #  deb     http://mirror.ppa.trinitydesktop.org/trinity/deb/trinity-r14.1.x questing main deps
  #  deb-src http://mirror.ppa.trinitydesktop.org/trinity/deb/trinity-r14.1.x questing main deps
+ #- deb     http://mirror.ppa.trinitydesktop.org/trinity/deb/trinity-r14.1.x resolute main deps
+ #- deb-src http://mirror.ppa.trinitydesktop.org/trinity/deb/trinity-r14.1.x resolute main deps
 
 ### deadsnakes Python repository
- #- deb     https://ppa.launchpadcontent.net/deadsnakes/ppa/ubuntu questing main
- #- deb-src https://ppa.launchpadcontent.net/deadsnakes/ppa/ubuntu questing main
+ #- deb     https://ppa.launchpadcontent.net/deadsnakes/ppa/ubuntu resolute main
+ #- deb-src https://ppa.launchpadcontent.net/deadsnakes/ppa/ubuntu resolute main
 
 ### Webmin
     deb     https://download.webmin.com/download/newkey/repository stable contrib
@@ -65,24 +74,24 @@
     deb     https://dl.google.com/linux/chrome/deb/ stable main
 
 ### Chromium Browser (phd, Mint packages)
-    deb     https://freeshell.de/phd/chromium/questing /
+    deb     https://freeshell.de/phd/chromium/resolute /
 
 ### Firefox (mozilla.org)
  #  deb     https://packages.mozilla.org/apt mozilla main
 
 ### Firefox & Thunderbird (Mozilla Team)
-    deb     https://ppa.launchpadcontent.net/mozillateam/ppa/ubuntu questing main
-    deb-src https://ppa.launchpadcontent.net/mozillateam/ppa/ubuntu questing main
+    deb     https://ppa.launchpadcontent.net/mozillateam/ppa/ubuntu resolute main
+    deb-src https://ppa.launchpadcontent.net/mozillateam/ppa/ubuntu resolute main
 
 ### Firefox Beta (Mozilla Team)
  #  deb     https://ppa.launchpadcontent.net/mozillateam/firefox-next/ubuntu oracular main
  #  deb-src https://ppa.launchpadcontent.net/mozillateam/firefox-next/ubuntu oracular main
- #- deb     https://ppa.launchpadcontent.net/mozillateam/firefox-next/ubuntu questing main
- #- deb-src https://ppa.launchpadcontent.net/mozillateam/firefox-next/ubuntu questing main
+ #- deb     https://ppa.launchpadcontent.net/mozillateam/firefox-next/ubuntu resolute main
+ #- deb-src https://ppa.launchpadcontent.net/mozillateam/firefox-next/ubuntu resolute main
 
 ### Firefox (phd) (X)
- #X deb     https://ppa.launchpadcontent.net/phd/firefox/ubuntu questing main
- #X deb-src https://ppa.launchpadcontent.net/phd/firefox/ubuntu questing main
+ #X deb     https://ppa.launchpadcontent.net/phd/firefox/ubuntu resolute main
+ #X deb-src https://ppa.launchpadcontent.net/phd/firefox/ubuntu resolute main
 
 ### Librewolf
     deb     https://repo.librewolf.net/ librewolf main
@@ -97,11 +106,16 @@
 ### LibreOffice
     deb     https://ppa.launchpadcontent.net/libreoffice/ppa/ubuntu questing main
     deb-src https://ppa.launchpadcontent.net/libreoffice/ppa/ubuntu questing main
+ #- deb     https://ppa.launchpadcontent.net/libreoffice/ppa/ubuntu resolute main
+ #- deb-src https://ppa.launchpadcontent.net/libreoffice/ppa/ubuntu resolute main
 
 ### Wine
     deb     https://dl.winehq.org/wine-builds/ubuntu/ questing main
     deb-src https://dl.winehq.org/wine-builds/ubuntu/ questing main
- #- deb     https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/xUbuntu_25.10/ ./
+ #- deb     https://dl.winehq.org/wine-builds/ubuntu/ resolute main
+ #- deb-src https://dl.winehq.org/wine-builds/ubuntu/ resolute main
+ #  deb     https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/xUbuntu_25.10/ ./
+ #- deb     https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/xUbuntu_26.04/ ./
 
 ###===================#
 ###  OTHER SOFTWARE:  #
@@ -109,6 +123,7 @@
 
 ### VirtualBox
     deb     https://download.virtualbox.org/virtualbox/debian questing contrib
+ #- deb     https://download.virtualbox.org/virtualbox/debian resolute contrib
 
 ### Steam
     deb     https://repo.steampowered.com/steam/ stable steam
@@ -116,13 +131,15 @@
 
 ### TeXmacs
  #  deb     https://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/ mantic universe
- #- deb     https://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/ questing universe
+ #- deb     https://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/ resolute universe
     deb     https://download.opensuse.org/repositories/home:/slowphil:/texmacs-devel/xUbuntu_24.04/ /
- #- deb     https://download.opensuse.org/repositories/home:/slowphil:/texmacs-devel/xUbuntu_25.10/ /
+ #- deb     https://download.opensuse.org/repositories/home:/slowphil:/texmacs-devel/xUbuntu_26.04/ /
 
 ### IntelliJ IDEA
     deb     https://ppa.launchpadcontent.net/mmk2410/intellij-idea/ubuntu questing main
     deb-src https://ppa.launchpadcontent.net/mmk2410/intellij-idea/ubuntu questing main
+ #- deb     https://ppa.launchpadcontent.net/mmk2410/intellij-idea/ubuntu resolute main
+ #- deb-src https://ppa.launchpadcontent.net/mmk2410/intellij-idea/ubuntu resolute main
 
 ### VS Codium
  #  deb     https://download.vscodium.com/debs vscodium main
@@ -149,14 +166,18 @@
 ### google-drive-ocamlfuse
     deb     https://ppa.launchpadcontent.net/alessandro-strada/ppa/ubuntu questing main
     deb-src https://ppa.launchpadcontent.net/alessandro-strada/ppa/ubuntu questing main
+ #- deb     https://ppa.launchpadcontent.net/alessandro-strada/ppa/ubuntu resolute main
+ #- deb-src https://ppa.launchpadcontent.net/alessandro-strada/ppa/ubuntu resolute main
 
 ### Cryptomator
  #  deb     https://ppa.launchpadcontent.net/sebastian-stenzel/cryptomator/ubuntu questing main
  #  deb-src https://ppa.launchpadcontent.net/sebastian-stenzel/cryptomator/ubuntu questing main
+ #- deb     https://ppa.launchpadcontent.net/sebastian-stenzel/cryptomator/ubuntu resolute main
+ #- deb-src https://ppa.launchpadcontent.net/sebastian-stenzel/cryptomator/ubuntu resolute main
 
 ### mkusb
- #  deb     https://ppa.launchpadcontent.net/mkusb/ppa/ubuntu questing main
- #  deb-src https://ppa.launchpadcontent.net/mkusb/ppa/ubuntu questing main
+ #  deb     https://ppa.launchpadcontent.net/mkusb/ppa/ubuntu resolute main
+ #  deb-src https://ppa.launchpadcontent.net/mkusb/ppa/ubuntu resolute main
 
 ### ROS
  #  deb     https://packages.ros.org/ros/ubuntu              focal main
