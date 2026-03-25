@@ -1069,6 +1069,7 @@ function kn {
     local ports='?'
     while [ -n "${ports}" ]; do
         read -e -p 'Ports: ' -s ports
+        ports=$(tr -c '0-9\n' ' ' <<< "${ports}")
         PORTS="${PORTS} ${ports}"
     done
     PORTS=$(trim "${PORTS}")
