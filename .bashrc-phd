@@ -1071,6 +1071,7 @@ function kn {
         read -e -p 'Ports: ' -s ports
         ports=$(tr -c '0-9\n' ' ' <<< "${ports}")
         PORTS="${PORTS} ${ports}"
+        [ "${ports: -1}" = ' ' ] && break
     done
     PORTS=$(trim "${PORTS}")
     if [ -n "${PORTS}" ]; then
