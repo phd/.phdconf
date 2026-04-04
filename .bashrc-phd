@@ -9,7 +9,7 @@
 #
 # .bashrc-phd
 #
-# Copyright (C) 2010-2025  Piotr Henryk Dabrowski <phd@phd.re>
+# Copyright (C) 2010-2026  Piotr Henryk Dabrowski <phd@phd.re>
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -312,7 +312,7 @@ alias ~='cd ~'
 alias c~='cd ~'
 alias cd~='cd ~'
 alias -- -='cd -'
-alias cdw='__run_with_witch cd'
+alias cdw='__run_with_which cd'
 
 mkalias s  'sudo su' sudo
 mkalias sk 'sudo -k' sudo
@@ -346,15 +346,15 @@ mkalias KW  'x kwrite'                  kwrite
 mkalias KD  'x kdevelop'                kdevelop
 mkalias C   'x codium'                  codium
 mkalias I   'x intellij-idea-community' intellij-idea-community
-mkalias ew  '__run_with_witch  e'       "${__EDITOR}"
-mkalias sew '__run_with_witch se'       "${__EDITOR}"
-mkalias Ew  '__run_with_witch  E'       "${__XEDITOR}"
-mkalias EEw '__run_with_witch EE'       "${__XEDITOR2}"
-mkalias Kw  '__run_with_witch  K'       kate
-mkalias KWw '__run_with_witch KW'       kwrite
-mkalias KDw '__run_with_witch KD'       kdevelop
-mkalias Cw  '__run_with_witch  C'       codium
-mkalias Iw  '__run_with_witch  I'       intellij-idea-community
+mkalias ew  '__run_with_which  e'       "${__EDITOR}"
+mkalias sew '__run_with_which se'       "${__EDITOR}"
+mkalias Ew  '__run_with_which  E'       "${__XEDITOR}"
+mkalias EEw '__run_with_which EE'       "${__XEDITOR2}"
+mkalias Kw  '__run_with_which  K'       kate
+mkalias KWw '__run_with_which KW'       kwrite
+mkalias KDw '__run_with_which KD'       kdevelop
+mkalias Cw  '__run_with_which  C'       codium
+mkalias Iw  '__run_with_which  I'       intellij-idea-community
 
 alias err='tee /dev/stderr'
 alias out='tee /dev/tty'
@@ -502,7 +502,7 @@ mkalias axel30 'axel -n 30'                                                     
 
 # which colormake &>/dev/null && alias make='colormake'
 
-function __run_with_witch {
+function __run_with_which {
     local task="${@:1:$#-1}" # all args but last
     local which="${@: -1}" # last arg
     eval "${task} $(which ${which})"
