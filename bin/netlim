@@ -3,7 +3,7 @@
 #
 # netlim
 #
-# Copyright (C) 2025  Piotr Henryk Dabrowski <phd@phd.re>
+# Copyright (C) 2025-2026  Piotr Henryk Dabrowski <phd@phd.re>
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -48,21 +48,33 @@ IFB_NAME="netlim${NETLIM}ifb0"
 # Cleanup fuction
 function cleanup {
     tc qdisc del dev "${VETH_HOST}" root      2>/dev/null || true
+    sleep 0.1
     tc qdisc del dev "${VETH_HOST}" ingress   2>/dev/null || true
+    sleep 0.1
     tc qdisc del dev "${IFB_NAME}"  root      2>/dev/null || true
+    sleep 0.1
     ip link  set dev "${IFB_NAME}"  down      2>/dev/null || true
+    sleep 0.1
     ip link  delete  "${IFB_NAME}"  type ifb  2>/dev/null || true
+    sleep 0.1
     ip link  delete  "${VETH_HOST}" type veth 2>/dev/null || true
+    sleep 0.1
     ip netns delete  "${NS_NAME}"             2>/dev/null || true
+    sleep 0.1
 }
 trap cleanup EXIT
 
 # Create namespace and veth pair
 ip netns add  "${NS_NAME}"
+sleep 0.1
 ip link  add  "${VETH_HOST}" type veth peer name "${VETH_NS}" netns "${NS_NAME}"
+sleep 0.1
 ip link  set  "${VETH_HOST}" up
+sleep 0.1
 ip netns exec "${NS_NAME}"   ip link set lo up
+sleep 0.1
 ip netns exec "${NS_NAME}"   ip link set "${VETH_NS}" up
+sleep 0.1
 
 # Assign unique IP addresses
 OCTAL_2=$((250 + NETLIM / 256))
@@ -70,10 +82,13 @@ OCTAL_3=$((NETLIM % 256))
 HOST_IP="10.${OCTAL_2}.${OCTAL_3}.1/24"
 NS_IP="10.${OCTAL_2}.${OCTAL_3}.2/24"
 ip addr  add  "${HOST_IP}" dev "${VETH_HOST}"
+sleep 0.1
 ip netns exec "${NS_NAME}" ip addr add "${NS_IP}" dev "${VETH_NS}"
+sleep 0.1
 
 # Default route inside namespace
 ip netns exec "${NS_NAME}" ip route add default via "${HOST_IP%/*}" dev "${VETH_NS}"
+sleep 0.1
 
 # Configure DNS inside namespace (systemd-resolved or /etc/resolv.conf)
 mkdir -p "/etc/netns/${NS_NAME}"
@@ -82,31 +97,43 @@ if [ -e '/run/systemd/resolve/resolv.conf' ]; then
 else
     ln -sfT '/etc/resolv.conf' "/etc/netns/${NS_NAME}/resolv.conf"
 fi
+sleep 0.1
 
 # Enable NAT for Internet access
 GATEWAY=$(ip route get '1.1.1.1' | grep -Po '(?<=dev )[^ ]+' | head -n1)
 iptables -t nat -A POSTROUTING -s "${HOST_IP%/*}/24" -o "${GATEWAY}" -j MASQUERADE
+sleep 0.1
 
 # Traffic control (HTB + IFB)
 modprobe ifb
+sleep 0.1
 ip link add     "${IFB_NAME}" type ifb
+sleep 0.1
 ip link set dev "${IFB_NAME}" up
+sleep 0.1
 
 # Redirect ingress traffic from host/namespace to IFB
 tc qdisc  add dev "${VETH_HOST}" ingress
+sleep 0.1
 tc filter add dev "${VETH_HOST}" parent ffff: protocol ip u32 match u32 0 0 action mirred egress redirect dev "${IFB_NAME}"
+sleep 0.1
 
 # Ingress shaping (download to namespace)
 tc qdisc add dev "${VETH_HOST}" root handle 1: htb default 10
+sleep 0.1
 if [ "${INGRESS_KBPS}" -gt 0 ]; then
     tc class add dev "${VETH_HOST}" parent 1: classid 1:10 htb rate "${INGRESS_KBPS}kbit" ceil "${INGRESS_KBPS}kbit"
+    sleep 0.1
 fi
 
 # Egress shaping (upload from namespace)
 tc qdisc add dev "${IFB_NAME}" root handle 1: htb default 10
+sleep 0.1
 if [ "${EGRESS_KBPS}" -gt 0 ]; then
     tc class add dev "${IFB_NAME}" parent 1: classid 1:10 htb rate "${EGRESS_KBPS}kbit" ceil "${EGRESS_KBPS}kbit"
+    sleep 0.1
 fi
 
 # Launch interactive shell as original user, preserving SHLVL
 __NETLIM="${NETLIM}" ip netns exec "${NS_NAME}" sudo -E -u "${SUDO_USER:-${USER}}" ${COMMAND:-bash}
+sleep 0.1
