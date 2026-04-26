@@ -3,7 +3,7 @@
 #
 # netlim
 #
-# Copyright (C) 2025  Piotr Henryk Dabrowski <phd@phd.re>
+# Copyright (C) 2025-2026  Piotr Henryk Dabrowski <phd@phd.re>
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -75,14 +75,6 @@ ip netns exec "${NS_NAME}" ip addr add "${NS_IP}" dev "${VETH_NS}"
 # Default route inside namespace
 ip netns exec "${NS_NAME}" ip route add default via "${HOST_IP%/*}" dev "${VETH_NS}"
 
-# Configure DNS inside namespace (systemd-resolved or /etc/resolv.conf)
-mkdir -p "/etc/netns/${NS_NAME}"
-if [ -e '/run/systemd/resolve/resolv.conf' ]; then
-    ln -sfT '/run/systemd/resolve/resolv.conf' "/etc/netns/${NS_NAME}/resolv.conf"
-else
-    ln -sfT '/etc/resolv.conf' "/etc/netns/${NS_NAME}/resolv.conf"
-fi
-
 # Enable NAT for Internet access
 GATEWAY=$(ip route get '1.1.1.1' | grep -Po '(?<=dev )[^ ]+' | head -n1)
 iptables -t nat -A POSTROUTING -s "${HOST_IP%/*}/24" -o "${GATEWAY}" -j MASQUERADE
@@ -108,5 +100,21 @@ if [ "${EGRESS_KBPS}" -gt 0 ]; then
     tc class add dev "${IFB_NAME}" parent 1: classid 1:10 htb rate "${EGRESS_KBPS}kbit" ceil "${EGRESS_KBPS}kbit"
 fi
 
+# Forward DNS requests from inside the namespace (systemd-resolved or /etc/resolv.conf)
+RESOLV_CONF='/etc/resolv.conf'
+if [ -e '/run/systemd/resolve/resolv.conf' ]; then
+    RESOLV_CONF='/run/systemd/resolve/resolv.conf'
+fi
+read -r _ NAMESERVER _ < <(grep -m 1 '^nameserver' "${RESOLV_CONF}")
+# echo "NAMESERVER=${NAMESERVER}"
+(ip netns exec "${NS_NAME}" sudo dnsmasq --no-daemon --no-resolv --server="${NAMESERVER}" &) &>/dev/null
+# ip netns exec "${NS_NAME}" sudo iptables -t nat -A OUTPUT -p udp --dport 53 -j DNAT --to "${NAMESERVER}:53"
+# ip netns exec "${NS_NAME}" sudo iptables -t nat -A OUTPUT -p tcp --dport 53 -j DNAT --to "${NAMESERVER}:53"
+
 # Launch interactive shell as original user, preserving SHLVL
 __NETLIM="${NETLIM}" ip netns exec "${NS_NAME}" sudo -E -u "${SUDO_USER:-${USER}}" ${COMMAND:-bash}
+
+# Terminate all child processes: dnsmasq
+pkill -P $$ || true
+
+exit 0
