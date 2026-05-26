@@ -15,7 +15,7 @@
     deb-src https://ppa.launchpadcontent.net/damentz/liquorix/ubuntu questing main
 
 ### XanMod kernel
-    deb     https://deb.xanmod.org releases main
+    deb     https://deb.xanmod.org questing main
 
 ### graphics-drivers
     deb     https://ppa.launchpadcontent.net/graphics-drivers/ppa/ubuntu questing main
