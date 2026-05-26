@@ -110,8 +110,7 @@
     deb-src https://repo.steampowered.com/steam/ stable steam
 
 ### TeXmacs
- #  deb     https://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/ mantic   universe
- #- deb     https://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/ oracular universe
+ #  deb     https://ftp.texmacs.org/TeXmacs/tmftp/repos/apt/ oracular universe
     deb     https://download.opensuse.org/repositories/home:/slowphil:/texmacs-devel/xUbuntu_24.04/ /
  #- deb     https://download.opensuse.org/repositories/home:/slowphil:/texmacs-devel/xUbuntu_24.10/ /
 
