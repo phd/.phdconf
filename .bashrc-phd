@@ -868,7 +868,12 @@ function ssha {
     eval `ssh-agent`
     (
         shopt -s extglob nullglob
-        ssh-add ~/.ssh/id_!(*.pub) ~/.ssh/*.pem
+        for key in ~/.ssh/id_!(*.pub) ~/.ssh/*.pem; do
+            [ -e "${key}" ] || continue
+            read -rp "Add ${key}? [Y/n] " reply
+            [[ ${reply:-Y} =~ ^[Yy] ]] && ssh-add "${key}"
+        done
+        true
     )
 }
 alias sshal='ssh-add -l'
