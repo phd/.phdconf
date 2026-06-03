@@ -866,7 +866,10 @@ function gitk {
 
 function ssha {
     eval `ssh-agent`
-    ssh-add ~/.ssh/*.pem ~/.ssh/*_rsa
+    (
+        shopt -s extglob nullglob
+        ssh-add ~/.ssh/id_!(*.pub) ~/.ssh/*.pem
+    )
 }
 alias sshal='ssh-add -l'
 alias sshak='eval `ssh-agent -k`'
