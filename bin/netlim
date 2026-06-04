@@ -30,9 +30,9 @@ fi
 
 # Arguments
 INGRESS_KBPS="${1:-0}"
-shift
+shift || true
 EGRESS_KBPS="${1:-0}"
-shift
+shift || true
 COMMAND="$@"
 
 # Names
@@ -56,6 +56,9 @@ function cleanup {
     ip netns delete  "${NS_NAME}"             2>/dev/null || true
 }
 trap cleanup EXIT
+
+# Enable IP forwarding
+sysctl -w net.ipv4.ip_forward=1
 
 # Create namespace and veth pair
 ip netns add  "${NS_NAME}"
@@ -112,7 +115,7 @@ read -r _ NAMESERVER _ < <(grep -m 1 '^nameserver' "${RESOLV_CONF}")
 # ip netns exec "${NS_NAME}" sudo iptables -t nat -A OUTPUT -p tcp --dport 53 -j DNAT --to "${NAMESERVER}:53"
 
 # Launch interactive shell as original user, preserving SHLVL
-__NETLIM="${NETLIM}" ip netns exec "${NS_NAME}" sudo -E -u "${SUDO_USER:-${USER}}" ${COMMAND:-bash}
+__NETLIM="${NETLIM}" ip netns exec "${NS_NAME}" sudo -E -u "${SUDO_USER:-${USER}}" ${COMMAND:-bash} || true
 
 # Terminate all child processes: dnsmasq
 pkill -P $$ || true
