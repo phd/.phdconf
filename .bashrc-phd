@@ -96,7 +96,7 @@ export GREP_COLORS='ms=01;37;42'
 source "${__PHDCONF_PATH}/.profile-phd"
 
 function mkalias { alias -- "$1"="$2"; } # fallback
-source "${__PHDCONF_PATH}/mkalias.sh" || true
+source "${__PHDCONF_PATH}/bin/mkalias.sh" || true
 
 function has_command {
     command -v "$@" &>/dev/null
