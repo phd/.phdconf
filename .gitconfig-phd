@@ -14,10 +14,15 @@
     re                   = restore
 
     cp                   = cherry-pick
+    cp-continue          = cherry-pick --continue
     cpc                  = cherry-pick --continue
     cpa                  = cherry-pick --abort
+    cp-abort             = cherry-pick --abort
     cherry-pick-branch   = "!: git cherry-pick; export _DIR=${_DIR:-${GIT_PREFIX:-.}}; _() { git cherry-pick $(git merge-base HEAD $1)..$1; }; _"
+    cp-branch            = cherry-pick-branch
     cpb                  = cherry-pick-branch
+    cp-skip              = cherry-pick --skip
+    cps                  = cherry-pick --skip
 
     log1                 = log --oneline
 
