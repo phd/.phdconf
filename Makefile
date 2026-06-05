@@ -125,7 +125,7 @@ ifneq ($(shell id -u), 0)
 	sudo -H make $@
 else
 	$(call link             , ${DIR}                                                                 , /etc/.phdconf                                )
-	$(call link             , /etc/.phdconf/__etc__ssh__sshd_config.d__phd                           , /etc/ssh/sshd_config.d/phd                   )
+	$(call link             , /etc/.phdconf/__etc__ssh__sshd_config.d__phd.conf                      , /etc/ssh/sshd_config.d/phd.conf              )
 	$(call patch_diff       , /etc/.phdconf/diff/__etc__updatedb.conf.diff                           , /etc/updatedb.conf                           )
 	$(call link             , /etc/.phdconf/__etc__reniced.conf                                      , /etc/reniced.conf                            )
 	$(call copy             , /etc/.phdconf/copy/__etc__systemd__system__reniced.service             , /etc/systemd/system/reniced.service          )
