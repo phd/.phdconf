@@ -85,6 +85,8 @@ T_CURSOR_OFF=$'\e[?25l'
 T_CURSOR_ON=$'\e[?25h'
 __NL=$'\n'
 
+shopt -s extglob
+
 __PHDCONF_PATH="$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
 
 # Bash completion colors:
