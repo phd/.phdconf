@@ -118,6 +118,7 @@ read -r _ NAMESERVER _ < <(grep -m 1 '^nameserver' "${RESOLV_CONF}")
 __NETLIM="${NETLIM}" ip netns exec "${NS_NAME}" sudo -E -u "${SUDO_USER:-${USER}}" ${COMMAND:-bash} || true
 
 # Terminate all child processes: dnsmasq
+ip netns pids "${NS_NAME}" | xargs -r kill
 pkill -P $$ || true
 
 exit 0
