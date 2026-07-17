@@ -91,7 +91,7 @@ endef
 
 default: home
 
-all: home root etc apt alternatives niced
+all: home root etc apt alternatives secure-boot niced
 
 home:
 	$(call link                , ${DIR}                                          , ${HOME}/.phdconf                     )
@@ -124,18 +124,18 @@ etc: install
 ifneq ($(shell id -u), 0)
 	sudo -H make $@
 else
-	$(call link             , ${DIR}                                                                 , /etc/.phdconf                                )
-	$(call link             , /etc/.phdconf/__etc__ssh__sshd_config.d__phd.conf                      , /etc/ssh/sshd_config.d/phd.conf              )
-	$(call patch_diff       , /etc/.phdconf/diff/__etc__updatedb.conf.diff                           , /etc/updatedb.conf                           )
-	$(call link             , /etc/.phdconf/__etc__reniced.conf                                      , /etc/reniced.conf                            )
-	$(call copy             , /etc/.phdconf/copy/__etc__systemd__system__reniced.service             , /etc/systemd/system/reniced.service          )
-	$(call systemctl_disable,                                                                          reniced.service                              )
-	$(call rm               ,                                                                          /etc/cron.d/reniced                          )
-	$(call rm               ,                                                                          /lib/systemd/system/reniced.service          )
+	$(call link             , ${DIR}                                                    , /etc/.phdconf                      )
+	$(call link             , /etc/.phdconf/__etc__ssh__sshd_config.d__phd.conf         , /etc/ssh/sshd_config.d/phd.conf    )
+	$(call patch_diff       , /etc/.phdconf/diff/__etc__updatedb.conf.diff              , /etc/updatedb.conf                 )
+	$(call link             , /etc/.phdconf/__etc__reniced.conf                         , /etc/reniced.conf                  )
+	$(call copy             , /etc/.phdconf/copy/__etc__systemd__system__reniced.service, /etc/systemd/system/reniced.service)
+	$(call systemctl_disable,                                                             reniced.service                    )
+	$(call rm               ,                                                             /etc/cron.d/reniced                )
+	$(call rm               ,                                                             /lib/systemd/system/reniced.service)
 	sudo -H crudini --set /etc/bluetooth/main.conf General Experimental true || true
 endif
 
-apt: install
+apt: install apt-keys
 ifneq ($(shell id -u), 0)
 	sudo -H make $@
 else
@@ -152,11 +152,14 @@ else
 	$(call create_immutable,                                                                          /etc/apt/sources.list.d/steam-beta.sources   )
 	$(call create_immutable,                                                                          /etc/apt/sources.list.d/google-chrome.list   )
 	$(call create_immutable,                                                                          /etc/apt/sources.list.d/google-chrome.sources)
-	$(call exec            , /etc/.phdconf/exec/apt-keys.sh                                                                                        )
 endif
 
 apt-keys:
-	$(call exec            , /etc/.phdconf/exec/apt-keys.sh                                                                                        )
+ifneq ($(shell id -u), 0)
+	sudo -H make $@
+else
+	$(call exec, /etc/.phdconf/exec/apt-keys.sh)
+endif
 
 install:
 ifneq ($(shell id -u), 0)
@@ -169,6 +172,15 @@ alternatives:
 	[ -e /usr/bin/sudo.ws ] && sudo update-alternatives --set sudo /usr/bin/sudo.ws || true
 	sudo apt-get -y install coreutils-from-gnu    || true
 	sudo apt-get -y purge   coreutils-from-uutils || true
+
+secure-boot:
+ifneq ($(shell id -u), 0)
+	sudo -H make $@
+else
+	sudo -H apt-get -y install libnss3-tools pesign
+	$(call link, /etc/.phdconf/__etc__kernel__postinst.d__zz-sign-custom-kernels, /etc/kernel/postinst.d/zz-sign-custom-kernels)
+	$(call exec, /etc/.phdconf/exec/new-secure-boot-key.sh                                                                     )
+endif
 
 niced_install:
 	sudo -H apt-get -y install git python3 forkstat

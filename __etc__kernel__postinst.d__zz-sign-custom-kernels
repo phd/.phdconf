@@ -1,0 +1,35 @@
+#!/bin/bash
+set -e
+
+VERSION="$1"
+
+case "${VERSION}" in
+    *xanmod*)
+        ;;
+    *liquorix*)
+        ;;
+    *)
+        exit 0
+        ;;
+esac
+
+IMAGE="vmlinuz-${VERSION}"
+
+echo "Signing custom kernel ${IMAGE} with \"phdconf Secure Boot key\"..."
+
+tmpdir="$(mktemp -d)"
+
+pesign \
+    --force \
+    --certificate "phdconf Secure Boot key" \
+    --in "/boot/${IMAGE}" \
+    --sign \
+    --out "${tmpdir}/${IMAGE}.signed"
+
+mv "${tmpdir}/${IMAGE}.signed" "/boot/${IMAGE}"
+
+rmdir "${tmpdir}"
+
+echo "Custom kernel signed."
+
+exit 0
