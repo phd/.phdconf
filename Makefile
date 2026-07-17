@@ -120,10 +120,11 @@ home:
 root:
 	sudo -H make home
 
-etc: install
+etc:
 ifneq ($(shell id -u), 0)
 	sudo -H make $@
 else
+	make install
 	$(call link             , ${DIR}                                                    , /etc/.phdconf                      )
 	$(call link             , /etc/.phdconf/__etc__ssh__sshd_config.d__phd.conf         , /etc/ssh/sshd_config.d/phd.conf    )
 	$(call patch_diff       , /etc/.phdconf/diff/__etc__updatedb.conf.diff              , /etc/updatedb.conf                 )
@@ -135,10 +136,12 @@ else
 	sudo -H crudini --set /etc/bluetooth/main.conf General Experimental true || true
 endif
 
-apt: install apt-keys
+apt:
 ifneq ($(shell id -u), 0)
 	sudo -H make $@
 else
+	make install
+	make apt-keys
 	$(call link            , ${DIR}                                                                 , /etc/.phdconf                                )
 	$(call link            , /etc/.phdconf/__etc__apt__preferences.d__phd                           , /etc/apt/preferences.d/phd                   )
 	$(call link            , /etc/.phdconf/__etc__apt__apt.conf.d__99phd                            , /etc/apt/apt.conf.d/99phd                    )
