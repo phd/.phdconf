@@ -135,6 +135,9 @@
 ### Microsoft Teams
  #  deb     https://packages.microsoft.com/repos/ms-teams stable main
 
+### Spotify
+ #  deb     https://repository.spotify.com/ stable non-free
+
 ### NVIDIA Jetson
     deb     https://repo.download.nvidia.com/jetson/common       r36.4 main
     deb     https://repo.download.nvidia.com/jetson/x86_64/jammy r36.4 main
