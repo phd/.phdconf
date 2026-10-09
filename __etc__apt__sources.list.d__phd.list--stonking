@@ -64,6 +64,9 @@
  #- deb     https://ppa.launchpadcontent.net/deadsnakes/ppa/ubuntu stonking main
  #- deb-src https://ppa.launchpadcontent.net/deadsnakes/ppa/ubuntu stonking main
 
+### Node.js (NodeSource.com) ###
+    deb     https://deb.nodesource.com/node_22.x/ nodistro main
+
 ### Webmin
     deb     https://download.webmin.com/download/newkey/repository stable contrib
 
