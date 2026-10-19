@@ -254,7 +254,7 @@ function __history_reload {
     history -c
     history -r
 }
-PROMPT_COMMAND="__has_last_command && __history_append ${PROMPT_COMMAND:+;} ${PROMPT_COMMAND}"
+PS0="${PS0}"'$(__history_append)'
 alias h='history'                   # print history
 alias hh='__history_reload'         # reload common history from all shells
 alias hhh='e "$HISTFILE"'           # edit Bash history
